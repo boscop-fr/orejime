@@ -1,202 +1,154 @@
-import {test, expect, type BrowserContext} from '@playwright/test';
+import {test, expect} from '@playwright/test';
+import {Config} from '../src/ui';
+import {OrejimePage} from './OrejimePage';
 
 test.describe('Orejime', () => {
-	const getConsentsFromCookies = async (context: BrowserContext) => {
-		const cookies = await context.cookies();
-		const orejimeCookie = cookies.find(({name}) => name === 'eu-consent');
-
-		// `js-cookie` encodes cookie values
-		const decodedValue = orejimeCookie!.value
-			.replace(/%22/gi, '"')
-			.replace(/%2C/gi, ',');
-
-		return JSON.parse(decodedValue);
+	const BaseConfig: Partial<Config> = {
+		privacyPolicyUrl: 'https://example.org/privacy',
+		purposes: [
+			{
+				id: 'mandatory',
+				title: 'Mandatory',
+				cookies: ['mandatory'],
+				isMandatory: true
+			},
+			{
+				id: 'group',
+				title: 'Group',
+				purposes: [
+					{
+						id: 'child-1',
+						title: 'First child',
+						cookies: ['child-1']
+					},
+					{
+						id: 'child-2',
+						title: 'Second child',
+						cookies: ['child-2']
+					}
+				]
+			}
+		]
 	};
 
-	test.beforeEach(async ({page}) => {
-		await page.goto('/');
+	let orejimePage: OrejimePage;
+
+	test.beforeEach(async ({page, context}) => {
+		orejimePage = new OrejimePage(page, context);
+		await orejimePage.load(BaseConfig);
 	});
 
-	test('should show a notice', async ({page}) => {
-		const notice = page.locator('.orejime-Banner');
-		await expect(notice).toBeVisible();
+	test('should show a banner', async () => {
+		await expect(orejimePage.banner).toBeVisible();
 	});
 
-	test('should navigate to the notice first', async ({page}) => {
-		const firstButton = page.locator('.orejime-Banner-saveButton');
-		await expect(firstButton).toBeVisible();
+	test('should navigate to the banner first', async () => {
+		await expect(orejimePage.firstFocusableElementFromBanner).toBeFocused();
 	});
 
-	test('should accept all purposes from the notice', async ({
-		page,
-		context
-	}) => {
-		await page.locator('.orejime-Banner-saveButton').click();
-		const notice = page.locator('.orejime-Banner');
-		await expect(notice).not.toBeVisible();
+	test('should accept all purposes from the banner', async () => {
+		await orejimePage.acceptAllFromBanner();
+		await expect(orejimePage.banner).not.toBeVisible();
 
-		const consents = await getConsentsFromCookies(context);
-
-		expect(consents).toEqual(
-			expect.objectContaining({
-				'mandatory': true,
-				'inline-tracker': true,
-				'external-tracker': true
-			})
-		);
-	});
-
-	test('should decline all purposes from the notice', async ({
-		page,
-		context
-	}) => {
-		await page.locator('.orejime-Banner-declineButton').click();
-		const notice = page.locator('.orejime-Banner');
-		await expect(notice).not.toBeVisible();
-
-		const consents = await getConsentsFromCookies(context);
-
-		expect(consents).toEqual(
-			expect.objectContaining({
-				'mandatory': true,
-				'inline-tracker': false,
-				'external-tracker': false
-			})
-		);
-	});
-
-	test('should open a modal', async ({page}) => {
-		await page.locator('.orejime-Banner-learnMoreButton').click();
-		const notice = page.locator('.orejime-Banner');
-		await expect(notice).toBeVisible();
-
-		const modal = page.locator('.orejime-Modal');
-		await expect(modal).toBeVisible();
-		await expect(notice).toBeVisible();
-	});
-
-	test('should close the modal via the close button', async ({page}) => {
-		await page.locator('.orejime-Banner-learnMoreButton').click();
-		const modal = page.locator('.orejime-Modal');
-		await expect(modal).toBeVisible();
-
-		await page.locator('.orejime-Modal-closeButton').click();
-		await expect(modal).toHaveCount(0);
-
-		const notice = page.locator('.orejime-Banner');
-		await expect(notice).toBeVisible();
-	});
-
-	test('should close the modal via the overlay', async ({page}) => {
-		await page.locator('.orejime-Banner-learnMoreButton').click();
-		const modal = page.locator('.orejime-Modal');
-		await expect(modal).toBeVisible();
-
-		// We're clicking in a corner to avoid clicking on the
-		// modal itself, which has no effect.
-		await page.locator('.orejime-ModalOverlay').click({
-			position: {
-				x: 1,
-				y: 1
-			}
+		orejimePage.expectConsents({
+			'mandatory': true,
+			'child-1': true,
+			'child-2': true
 		});
-
-		await expect(modal).toHaveCount(0);
-
-		const notice = page.locator('.orejime-Banner');
-		await expect(notice).toBeVisible();
 	});
 
-	test('should close the modal via `Escape` key', async ({page}) => {
-		await page.locator('.orejime-Banner-learnMoreButton').click();
-		const modal = page.locator('.orejime-Modal');
-		await expect(modal).toBeVisible();
+	test('should decline all purposes from the banner', async () => {
+		await orejimePage.declineAllFromBanner();
+		await expect(orejimePage.banner).not.toBeVisible();
 
-		await page.keyboard.press('Escape');
-		await expect(modal).toHaveCount(0);
-
-		const notice = page.locator('.orejime-Banner');
-		await expect(notice).toBeVisible();
+		orejimePage.expectConsents({
+			'mandatory': true,
+			'child-1': false,
+			'child-2': false
+		});
 	});
 
-	test('should move focus after closing the modal', async ({page}) => {
-		const openModalButton = page.locator('.orejime-Banner-learnMoreButton');
-		openModalButton.click();
+	test('should open a modal', async () => {
+		await orejimePage.openModalFromBanner();
 
-		const modal = page.locator('.orejime-Modal');
-		await expect(modal).toBeVisible();
-
-		await page.keyboard.press('Escape');
-		await expect(openModalButton).toBeFocused();
+		await expect(orejimePage.banner).toBeVisible();
+		await expect(orejimePage.modal).toBeVisible();
 	});
 
-	test('should accept all purposes from the modal', async ({
-		page,
-		context
-	}) => {
-		await page.locator('.orejime-Banner-learnMoreButton').click();
-		await page.locator('.orejime-PurposeToggles-enableAll').click();
+	test('should close the modal via the close button', async () => {
+		await orejimePage.openModalFromBanner();
+		await expect(orejimePage.modal).toBeVisible();
 
-		const checkbox = page.locator('#orejime-purpose-inline-tracker');
-		await expect(checkbox).toBeChecked();
-
-		const mandatoryCheckbox = page.locator('#orejime-purpose-mandatory');
-		await expect(mandatoryCheckbox).toBeChecked();
-
-		await page.locator('.orejime-Modal-saveButton').click();
-		const consents = await getConsentsFromCookies(context);
-
-		expect(consents).toEqual(
-			expect.objectContaining({
-				'mandatory': true,
-				'inline-tracker': true,
-				'external-tracker': true
-			})
-		);
-
-		const notice = page.locator('.orejime-Banner');
-		await expect(notice).not.toBeVisible();
+		await orejimePage.closeModalByClickingButton();
+		await expect(orejimePage.modal).toHaveCount(0);
+		await expect(orejimePage.banner).toBeVisible();
 	});
 
-	test('should decline all purposes from the modal', async ({
-		page,
-		context
-	}) => {
-		await page.locator('.orejime-Banner-learnMoreButton').click();
-		await page.locator('.orejime-PurposeToggles-enableAll').click();
-		await page.locator('.orejime-PurposeToggles-disableAll').click();
+	test('should close the modal via the overlay', async () => {
+		await orejimePage.openModalFromBanner();
+		await expect(orejimePage.modal).toBeVisible();
 
-		const checkbox = page.locator('#orejime-purpose-inline-tracker');
+		await orejimePage.closeModalByClickingOutside();
+		await expect(orejimePage.modal).toHaveCount(0);
+		await expect(orejimePage.banner).toBeVisible();
+	});
+
+	test('should close the modal via `Escape` key', async () => {
+		await orejimePage.openModalFromBanner();
+		await expect(orejimePage.modal).toBeVisible();
+
+		await orejimePage.closeModalByPressingEscape();
+		await expect(orejimePage.modal).toHaveCount(0);
+		await expect(orejimePage.banner).toBeVisible();
+	});
+
+	test('should move focus after closing the modal', async () => {
+		await orejimePage.openModalFromBanner();
+		await expect(orejimePage.modal).toBeVisible();
+
+		await orejimePage.closeModalByPressingEscape();
+		await expect(orejimePage.leanMoreBannerButton).toBeFocused();
+	});
+
+	test('should accept all purposes from the modal', async () => {
+		await orejimePage.openModalFromBanner();
+		await orejimePage.enableAllFromModal();
+		await expect(orejimePage.purposeCheckbox('child-1')).toBeChecked();
+		await expect(orejimePage.purposeCheckbox('mandatory')).toBeChecked();
+		await orejimePage.saveFromModal();
+
+		orejimePage.expectConsents({
+			'mandatory': true,
+			'child-1': true,
+			'child-2': true
+		});
+	});
+
+	test('should decline all purposes from the modal', async () => {
+		await orejimePage.openModalFromBanner();
+		await orejimePage.enableAllFromModal();
+		await orejimePage.disableAllFromModal();
+		await expect(orejimePage.purposeCheckbox('child-1')).not.toBeChecked();
+		await expect(orejimePage.purposeCheckbox('mandatory')).toBeChecked();
+		await orejimePage.saveFromModal();
+
+		orejimePage.expectConsents({
+			'mandatory': true,
+			'child-1': false,
+			'child-2': false
+		});
+	});
+
+	test('should sync grouped purposes', async () => {
+		await orejimePage.openModalFromBanner();
+
+		const checkbox = orejimePage.purposeCheckbox('child-1');
 		await expect(checkbox).not.toBeChecked();
 
-		const mandatoryCheckbox = page.locator('#orejime-purpose-mandatory');
-		await expect(mandatoryCheckbox).toBeChecked();
-
-		await page.locator('.orejime-Modal-saveButton').click();
-		const consents = await getConsentsFromCookies(context);
-
-		expect(consents).toEqual(
-			expect.objectContaining({
-				'mandatory': true,
-				'inline-tracker': false,
-				'external-tracker': false
-			})
-		);
-
-		const notice = page.locator('.orejime-Banner');
-		await expect(notice).not.toBeVisible();
-	});
-
-	test('should sync grouped purposes', async ({page}) => {
-		await page.locator('.orejime-Banner-learnMoreButton').click();
-
-		const checkbox = page.locator('#orejime-purpose-inline-tracker');
-		await expect(checkbox).not.toBeChecked();
-
-		const checkbox2 = page.locator('#orejime-purpose-external-tracker');
+		const checkbox2 = orejimePage.purposeCheckbox('child-2');
 		await expect(checkbox2).not.toBeChecked();
 
-		const groupCheckbox = page.locator('#orejime-purpose-group');
+		const groupCheckbox = orejimePage.purposeCheckbox('group');
 		await groupCheckbox.check();
 		await expect(groupCheckbox).toBeChecked();
 		await expect(checkbox).toBeChecked();
