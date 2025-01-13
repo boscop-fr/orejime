@@ -17,7 +17,7 @@ export default {
 		description: "Hier kunt u de informatie bekijken en aanpassen die we over u verzamelen.\nLees ons privacybeleid voor meer informatie {privacyPolicy}.",
 		privacyPolicyLabel: "privacybeleid",
 		close: "Sluiten",
-		closeTitle: null,
+		closeTitle: "Sluit voorkeuren",
 		globalPreferences: "Voorkeuren voor alle services",
 		acceptAll: "Alles aanvaarden",
 		declineAll: "Alles weigeren",

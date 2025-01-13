@@ -17,7 +17,7 @@ export default {
 		description: "Aici puteți vedea și personaliza informațiile pe care le colectăm despre dvs.\nPentru a afla mai multe, vă rugăm să citiți {privacyPolicy}.",
 		privacyPolicyLabel: "politica privacy",
 		close: "Aproape",
-		closeTitle: null,
+		closeTitle: "Închideți preferințele",
 		globalPreferences: "Preferințe pentru toate serviciile",
 		acceptAll: "Accepta totul",
 		declineAll: "Refuză toate",

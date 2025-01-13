@@ -19,7 +19,7 @@ export default {
 			'Ici, vous pouvez voir et personnaliser les informations que nous collectons sur vous.\nPour en savoir plus, merci de lire notre {privacyPolicy}.\n',
 		privacyPolicyLabel: 'politique de confidentialité',
 		close: 'Fermer',
-		closeTitle: null,
+		closeTitle: 'Fermer les préférences',
 		globalPreferences: 'Préférences pour tous les services',
 		acceptAll: 'Tout accepter',
 		declineAll: 'Tout refuser',

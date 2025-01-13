@@ -17,7 +17,7 @@ export default {
 		description: "Här kan du se och anpassa vilken information vi samlar om dig.\nFör att veta mer, läs vår {privacyPolicy}.",
 		privacyPolicyLabel: "Integritetspolicy",
 		close: "Stäng",
-		closeTitle: null,
+		closeTitle: "Nära preferenser",
 		globalPreferences: "Preferenser för alla tjänster",
 		acceptAll: "Acceptera alla",
 		declineAll: "Tacka nej till alla",

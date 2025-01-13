@@ -17,7 +17,7 @@ export default {
 		description: "Siit saate vaadata ja hallata teavet, mida me teie kohta kogume.\nLisateabe saamiseks lugege palun meie {privacyPolicy}",
 		privacyPolicyLabel: "privaatsustingimused",
 		close: "Sulge",
-		closeTitle: null,
+		closeTitle: "Sule eelistused",
 		globalPreferences: "Eelistused kõigile teenustele",
 		acceptAll: "Nõustu kõigi rakendustega",
 		declineAll: "Keela kõik rakendused",

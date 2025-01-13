@@ -17,7 +17,7 @@ export default {
 	  description: "Aquí puede ver y personalizar la información que recopilamos sobre usted.\nPara obtener más información, lea nuestra {privacyPolicy}.",
 	  privacyPolicyLabel: "política de confidencialidad",
 	  close: "Cerrar",
-	  closeTitle: null,
+	  closeTitle: "Cerrar preferencias",
 	  globalPreferences: "Preferencias para todos los servicios",
 	  acceptAll: "Aceptar todas las apps",
 	  declineAll: "Rechazar todas las apps",

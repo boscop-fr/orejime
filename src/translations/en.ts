@@ -19,7 +19,7 @@ export default {
 			'Here you can see and customize the information that we collect about you.\nTo learn more, please read our {privacyPolicy}.\n',
 		privacyPolicyLabel: 'privacy policy',
 		close: 'Close',
-		closeTitle: null,
+		closeTitle: 'Close preferences',
 		globalPreferences: 'Global preferences',
 		acceptAll: 'Accept all apps',
 		declineAll: 'Decline all apps',

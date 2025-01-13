@@ -17,7 +17,7 @@ export default {
 		description: "Qui puoi vedere e scegliere le informazioni che raccogliamo su di te.\nPer saperne di più, leggi la nostra {privacyPolicy}.",
 		privacyPolicyLabel: "policy privacy",
 		close: "Chiudere",
-		closeTitle: null,
+		closeTitle: "Chiudi preferenze",
 		globalPreferences: "Preferenze globali",
 		acceptAll: "Accettare tutto",
 		declineAll: "Rifiuta tutto",
