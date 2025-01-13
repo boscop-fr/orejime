@@ -17,7 +17,7 @@ export default {
 		description: "Aquí podeu veure i personalitzar la informació que recopilem sobre vosaltres.\nPer saber-ne més, llegiu la nostre {privacyPolicy}.",
 		privacyPolicyLabel: "política de privacitat",
 		close: "Tancar",
-		closeTitle: null,
+		closeTitle: "Tanca les preferències",
 		globalPreferences: "Preferències per a tots els serveis",
 		acceptAll: "Acceptar-ho tot",
 		declineAll: "Rebutja tot",

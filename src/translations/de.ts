@@ -17,7 +17,7 @@ export default {
 		description: "Hier können Sie einsehen und anpassen, welche persönlichen Daten gespeichert werden.\nBitte lesen Sie unsere {privacyPolicy} um weitere Details zu erfahren.",
 		privacyPolicyLabel: "Datenschutzerklärung",
 		close: "Schließen",
-		closeTitle: null,
+		closeTitle: "Einstellungen schließen",
 		globalPreferences: "globale Vorlieben",
 		acceptAll: "Alle Einstellungen akzeptieren",
 		declineAll: "Alle Einstellungen ablehnen",

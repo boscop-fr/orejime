@@ -17,7 +17,7 @@ export default {
 		description: "Itt láthatod és testreszabhatod az rólad gyűjtött információkat.\nTovábbi információért kérjük, olvassd el az {privacyPolicy}.",
 		privacyPolicyLabel: "adatvédelmi irányelveinket",
 		close: "Elvet",
-		closeTitle: null,
+		closeTitle: "Beállítások bezárása",
 		globalPreferences: "Preferenciák az összes szolgáltatáshoz",
 		acceptAll: "Fogadj el mindent",
 		declineAll: "Elutasít minden",

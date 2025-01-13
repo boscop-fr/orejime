@@ -17,7 +17,7 @@ export default {
 		description: "Voit tarkastella ja muokata sinusta keräämiämme tietoja.\nVoit lukea lisätietoja {privacyPolicy}.",
 		privacyPolicyLabel: "tietosuojasivultamme",
 		close: "Sulje",
-		closeTitle: null,
+		closeTitle: "Sulje asetukset",
 		globalPreferences: "Kaikkien palvelujen asetukset",
 		acceptAll: "Hyväksyä kaikki",
 		declineAll: "Hylkää kaikki",

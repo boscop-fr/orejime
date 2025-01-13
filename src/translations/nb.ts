@@ -17,7 +17,7 @@ export default {
 		description: "Her kan du se og velge hvilken informasjon vi samler inn om deg.\nFor å lære mer, vennligst les vår {privacyPolicy}.",
 		privacyPolicyLabel: "personvernerklæring",
 		close: "Lukk",
-		closeTitle: null,
+		closeTitle: "Lukk preferanser",
 		globalPreferences: "Preferanser for alle tjenester",
 		acceptAll: "Godta alt",
 		declineAll: "Avslå alt",
