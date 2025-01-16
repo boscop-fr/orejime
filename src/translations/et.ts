@@ -6,18 +6,18 @@ export default {
 		description: "Me kogume ja töötleme teie isikuandmeid järgmistel eesmärkidel: {purposes}.\nLisateabe saamiseks lugege palun meie {privacyPolicy}",
 		privacyPolicyLabel: "privaatsustingimused",
 		accept: "Nõustu",
-		acceptTitle: "Nõustu küpsistega",
+		acceptTitle: "Aktsepteeri kõik küpsised",
 		decline: "Keeldu",
-		declineTitle: null,
+		declineTitle: "Keelata kõik valikulised küpsised",
 		configure: "Lisateave",
-		configureTitle: null
+		configureTitle: "Vali küpsised"
 	},
 	modal: {
 		title: "Isikuandmete kogumine",
 		description: "Siit saate vaadata ja hallata teavet, mida me teie kohta kogume.\nLisateabe saamiseks lugege palun meie {privacyPolicy}",
 		privacyPolicyLabel: "privaatsustingimused",
 		close: "Sulge",
-		closeTitle: null,
+		closeTitle: "Sule eelistused",
 		globalPreferences: "Eelistused kõigile teenustele",
 		acceptAll: "Nõustu kõigi rakendustega",
 		declineAll: "Keela kõik rakendused",

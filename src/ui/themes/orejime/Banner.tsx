@@ -86,6 +86,7 @@ const Banner: BannerComponent = ({
 						<button
 							className="orejime-Button orejime-Button--decline orejime-Banner-button orejime-Banner-declineButton"
 							type="button"
+							title={t.banner.declineTitle}
 							onClick={onDeclineRequest}
 						>
 							{t.banner.decline}
@@ -95,6 +96,7 @@ const Banner: BannerComponent = ({
 						<button
 							type="button"
 							className="orejime-Button orejime-Button--info orejime-Banner-learnMoreButton"
+							title={t.banner.configureTitle}
 							onClick={onConfigRequest}
 						>
 							{t.banner.configure}

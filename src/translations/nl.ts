@@ -6,18 +6,18 @@ export default {
 		description: "Wij verzamelen en verwerken uw persoonlijke gegevens voor de volgende doeleinden: {purposes}.\nLees ons privacybeleid voor meer informatie {privacyPolicy}.",
 		privacyPolicyLabel: "privacybeleid",
 		accept: "Aanvaarden",
-		acceptTitle: null,
+		acceptTitle: "Alle cookies accepteren",
 		decline: "Afwijzen",
-		declineTitle: null,
+		declineTitle: "Alle optionele cookies weigeren",
 		configure: "Lees meer",
-		configureTitle: null
+		configureTitle: "Cookies kiezen"
 	},
 	modal: {
 		title: "Informatie die we verzamelen",
 		description: "Hier kunt u de informatie bekijken en aanpassen die we over u verzamelen.\nLees ons privacybeleid voor meer informatie {privacyPolicy}.",
 		privacyPolicyLabel: "privacybeleid",
 		close: "Sluiten",
-		closeTitle: null,
+		closeTitle: "Sluit voorkeuren",
 		globalPreferences: "Voorkeuren voor alle services",
 		acceptAll: "Alles aanvaarden",
 		declineAll: "Alles weigeren",

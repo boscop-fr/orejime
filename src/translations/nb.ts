@@ -6,18 +6,18 @@ export default {
 		description: "Vi samler inn og prosesserer din personlige informasjon av følgende årsaker: {purposes}.\nFor å lære mer, vennligst les vår {privacyPolicy}.",
 		privacyPolicyLabel: "personvernerklæring",
 		accept: "Akseptere",
-		acceptTitle: null,
+		acceptTitle: "Godta alle informasjonskapsler",
 		decline: "Avslå",
-		declineTitle: null,
+		declineTitle: "Avslå alle valgfrie informasjonskapsler",
 		configure: "Lær mer",
-		configureTitle: null
+		configureTitle: "Velg informasjonskapsler"
 	},
 	modal: {
 		title: "Informasjon vi samler inn",
 		description: "Her kan du se og velge hvilken informasjon vi samler inn om deg.\nFor å lære mer, vennligst les vår {privacyPolicy}.",
 		privacyPolicyLabel: "personvernerklæring",
 		close: "Lukk",
-		closeTitle: null,
+		closeTitle: "Lukk preferanser",
 		globalPreferences: "Preferanser for alle tjenester",
 		acceptAll: "Godta alt",
 		declineAll: "Avslå alt",

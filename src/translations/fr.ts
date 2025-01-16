@@ -7,11 +7,11 @@ export default {
 			'Nous collectons et traitons vos informations personnelles dans le but suivant : {purposes}.\nPour en savoir plus, merci de lire notre {privacyPolicy}.\n',
 		privacyPolicyLabel: 'politique de confidentialité',
 		accept: 'Accepter',
-		acceptTitle: 'Accepter les cookies',
+		acceptTitle: 'Accepter tous les cookies',
 		decline: 'Refuser',
-		declineTitle: null,
+		declineTitle: 'Refuser tous les cookies optionnels',
 		configure: 'En savoir plus',
-		configureTitle: null
+		configureTitle: 'Choisir les cookies'
 	},
 	modal: {
 		title: 'Les informations que nous collectons',
@@ -19,7 +19,7 @@ export default {
 			'Ici, vous pouvez voir et personnaliser les informations que nous collectons sur vous.\nPour en savoir plus, merci de lire notre {privacyPolicy}.\n',
 		privacyPolicyLabel: 'politique de confidentialité',
 		close: 'Fermer',
-		closeTitle: null,
+		closeTitle: 'Fermer les préférences',
 		globalPreferences: 'Préférences pour tous les services',
 		acceptAll: 'Tout accepter',
 		declineAll: 'Tout refuser',

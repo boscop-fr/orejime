@@ -6,18 +6,18 @@ export default {
 		description: "Colectăm și procesăm informațiile dvs. personale în următoarele scopuri: {purposes}.\nPentru a afla mai multe, vă rugăm să citiți {privacyPolicy}.",
 		privacyPolicyLabel: "politica privacy",
 		accept: "Accepta",
-		acceptTitle: null,
+		acceptTitle: "Acceptați toate modulele cookie",
 		decline: "Renunță",
-		declineTitle: null,
+		declineTitle: "Refuzați toate modulele cookie opționale",
 		configure: "Află mai multe",
-		configureTitle: null
+		configureTitle: "Alegeți modulele cookie"
 	},
 	modal: {
 		title: "Informațiile pe care le colectăm",
 		description: "Aici puteți vedea și personaliza informațiile pe care le colectăm despre dvs.\nPentru a afla mai multe, vă rugăm să citiți {privacyPolicy}.",
 		privacyPolicyLabel: "politica privacy",
 		close: "Aproape",
-		closeTitle: null,
+		closeTitle: "Închideți preferințele",
 		globalPreferences: "Preferințe pentru toate serviciile",
 		acceptAll: "Accepta totul",
 		declineAll: "Refuză toate",

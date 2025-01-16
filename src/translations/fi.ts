@@ -6,18 +6,18 @@ export default {
 		description: "Keräämme ja käsittelemme henkilötietoja seuraaviin tarkoituksiin: {purposes}.\nVoit lukea lisätietoja {privacyPolicy}.",
 		privacyPolicyLabel: "tietosuojasivultamme",
 		accept: "Hyväksy",
-		acceptTitle: null,
+		acceptTitle: "Hyväksy kaikki evästeet",
 		decline: "Hylkää",
-		declineTitle: null,
+		declineTitle: "Hylkää kaikki valinnaiset evästeet",
 		configure: "Lue lisää",
-		configureTitle: null
+		configureTitle: "Valitse evästeet"
 	},
 	modal: {
 		title: "Keräämämme tiedot",
 		description: "Voit tarkastella ja muokata sinusta keräämiämme tietoja.\nVoit lukea lisätietoja {privacyPolicy}.",
 		privacyPolicyLabel: "tietosuojasivultamme",
 		close: "Sulje",
-		closeTitle: null,
+		closeTitle: "Sulje asetukset",
 		globalPreferences: "Kaikkien palvelujen asetukset",
 		acceptAll: "Hyväksyä kaikki",
 		declineAll: "Hylkää kaikki",

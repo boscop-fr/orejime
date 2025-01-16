@@ -8,16 +8,16 @@ export default {
 		accept: "Akzeptieren",
 		acceptTitle: "Cookies akzeptieren",
 		decline: "Ablehnen",
-		declineTitle: null,
+		declineTitle: "optionalen Cookies ablehnen",
 		configure: "Mehr erfahren",
-		configureTitle: null
+		configureTitle: "Cookies auswählen"
 	},
 	modal: {
 		title: "Informationen zur Privatsphäre",
 		description: "Hier können Sie einsehen und anpassen, welche persönlichen Daten gespeichert werden.\nBitte lesen Sie unsere {privacyPolicy} um weitere Details zu erfahren.",
 		privacyPolicyLabel: "Datenschutzerklärung",
 		close: "Schließen",
-		closeTitle: null,
+		closeTitle: "Einstellungen schließen",
 		globalPreferences: "globale Vorlieben",
 		acceptAll: "Alle Einstellungen akzeptieren",
 		declineAll: "Alle Einstellungen ablehnen",
