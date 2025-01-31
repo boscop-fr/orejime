@@ -1,7 +1,7 @@
 {
   "name": "orejime",
   "version": "2.3.1",
-  "description": "An easy to use consent manager that focuses on accessibility. A fork of Klaro!.",
+  "description": "A lightweight and accessible consent manager",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/empreinte-digitale/orejime.git"
@@ -43,7 +43,10 @@
     "stats": "rspack build --analyze",
     "prepublishOnly": "npm run test && npm run build"
   },
-  "author": "Emmanuel Pelletier <e.pelletier@empreintedigitale.fr>",
+  "contributors": [
+    "Emmanuel Pelletier",
+    "Félix Girault <felix.girault@boscop.fr>"
+  ],
   "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/empreinte-digitale/orejime/issues"
