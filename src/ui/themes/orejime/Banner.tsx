@@ -6,7 +6,6 @@ import {BannerComponent} from '../../components/types/Banner';
 
 const Banner: BannerComponent = ({
 	isHidden,
-	isForced,
 	needsUpdate,
 	purposeTitles,
 	privacyPolicyUrl,
@@ -18,12 +17,7 @@ const Banner: BannerComponent = ({
 	const t = useTranslations();
 
 	return (
-		<div
-			aria-hidden={isHidden}
-			className={`orejime-Banner${
-				isForced ? ' orejime-Banner--forced' : ''
-			}`}
-		>
+		<div aria-hidden={isHidden} className="orejime-Banner">
 			<div className="orejime-Banner-body">
 				{logo && (
 					<div className="orejime-Banner-logoContainer">
