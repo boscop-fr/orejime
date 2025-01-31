@@ -207,7 +207,8 @@ $orejime-breakpoint-notice: 990px !default;
 
 .orejime-Modal-title {
     display: block;
-    margin: 0 0 var(--orejime-space-s) 0;
+    margin: 0 0 var(--orejime-space-m) 0;
+    line-height: 1;
     font-size: 2em;
     font-weight: bold;
 }
