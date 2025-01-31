@@ -3,7 +3,6 @@ import {ImageDescriptor} from '../../types';
 
 export interface BannerProps {
 	isHidden: boolean;
-	isForced?: boolean;
 	needsUpdate: boolean;
 	purposeTitles: string[];
 	privacyPolicyUrl: string;

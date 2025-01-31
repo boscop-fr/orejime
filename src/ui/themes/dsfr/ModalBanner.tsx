@@ -15,7 +15,7 @@ const ModalBanner: ModalBannerComponent = ({...props}) => {
 			className="fr-modal fr-modal--opened"
 			label={t.banner.title}
 		>
-			<Banner {...props} isForced />
+			<Banner {...props} />
 		</Dialog>
 	);
 };
