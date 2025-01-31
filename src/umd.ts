@@ -1,6 +1,7 @@
 import setup, {type OrejimeInstance} from './setup';
 import type {Config, Translations} from './ui';
 import {type Theme} from './ui/components/types/Theme';
+import {deepMerge} from './ui/utils/objects';
 
 export type OrejimeConstructor = (config: Partial<UmdConfig>) => Promise<OrejimeInstance>;
 
@@ -37,11 +38,17 @@ const init: OrejimeConstructor = (config) =>
 		importTheme(config.theme),
 		importTranslations(config.lang)
 	]).then(([theme, translations]) => {
-		const orejime = setup({
-			...config,
-			theme,
-			translations
-		});
+		const orejime = setup(
+			deepMerge(
+				{
+					translations
+				},
+				{
+					...config,
+					theme
+				}
+			)
+		);
 
 		// As Orejime is loaded asynchronously, we're
 		// emitting an event to let potential listeners
