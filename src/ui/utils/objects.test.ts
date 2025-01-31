@@ -11,7 +11,13 @@ test('deepMerge', () => {
 				does: 'work',
 				too: [1, 2, 3]
 			}
-		]
+		],
+		object: {
+			key: 'value',
+			nested: {
+				key: 'value'
+			}
+		}
 	};
 
 	const y = {
@@ -27,7 +33,13 @@ test('deepMerge', () => {
 			{
 				really: 'yes'
 			}
-		]
+		],
+		object: {
+			key: 'override',
+			nested: {
+				key: 'override'
+			}
+		}
 	};
 
 	expect(deepMerge(x, y as object)).toEqual({
@@ -35,6 +47,7 @@ test('deepMerge', () => {
 			bar: 3,
 			baz: 4
 		},
+		quux: 5,
 		array: [
 			{
 				does: 'work',
@@ -48,6 +61,11 @@ test('deepMerge', () => {
 				really: 'yes'
 			}
 		],
-		quux: 5
+		object: {
+			key: 'override',
+			nested: {
+				key: 'override'
+			}
+		}
 	});
 });
