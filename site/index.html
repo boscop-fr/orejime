@@ -1,0 +1,420 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<title>
+			Orejime - Easy to use consent manager that focuses on accessibility
+		</title>
+
+		<link
+			rel="stylesheet"
+			href="https://boscop.fr/wp-content/themes/boscop/dist/app.css"
+		/>
+
+		<link rel="stylesheet" href="./assets/style.css" />
+	</head>
+
+	<body>
+		<div class="Surface Theme--primary">
+			<div class="Container">
+				<div class="Header">
+					<header class="Header-banner" role="banner">
+						<img
+							class="Header-logo"
+							src="https://boscop.fr/wp-content/themes/boscop/dist/design-system/logo-horizontal-borderless.svg"
+							alt="boscop"
+						/>
+					</header>
+				</div>
+
+				<div class="Section Section--padding-l">
+					<h1>Orejime</h1>
+
+					<p class="TextHighlight Tagline">
+						<em>A lightweight and accessible consent manager.</em>
+					</p>
+
+					<p>
+						Within less than 15kB, Orejime packs a wide array of features
+						while complying with
+						<abbr title="General Data Protection Regulation">GDPR</abbr>
+						and
+						<abbr title="Web Content Accessibility Guidelines">WCAG</abbr>
+						(via the french transposition of the norm, the
+						<abbr
+							lang="fr"
+							title="Référentiel général d'amélioration de l'accessibilité"
+							>RGAA</abbr
+						>).
+					</p>
+
+					<ul class="ButtonList">
+						<li>
+							<a class="Button" href="#features">Explore features</a>
+						</li>
+						<li>
+							<a
+								class="Button"
+								href="https://github.com/boscop-fr/orejime"
+								title="Read the docs on GitHub"
+							>
+								Read the docs
+							</a>
+						</li>
+						<li>
+							<a class="Button" href="#support">Get support</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<main class="Section Section--padding-xl" role="main">
+			<div class="Container">
+				<div class="RichText">
+					<h2 id="features">Features</h2>
+
+					<p>
+						Here you'll find usage examples of Orejime for common use
+						cases.
+						<br />
+						Each example presents the configuration needed to set it up (
+						<a href="https://github.com/boscop-fr/orejime">
+							read the docs
+						</a>
+						to learn more).
+					</p>
+
+					<h3>Purposes</h3>
+
+					<p>
+						The base building blocks of Orejime are
+						<em>purposes</em>
+						.
+						<br />
+						Those are meant to group vendors having the same function
+						(i.e. analytics, social media and so on).
+					</p>
+
+					<p>
+						Each purpose has a title and an optional description to
+						provide further details to the user.
+						<br />
+						They can be made mandatory, in which case they couldn't be
+						disabled but would still be shown (think of technical cookies
+						that are required for a website to function properly).
+					</p>
+
+					<details open>
+						<summary>Example</summary>
+						<iframe
+							data-src="./features/purposes.html"
+							title="Example of basic purposes"
+							loading="lazy"
+						></iframe>
+					</details>
+
+					<h3>Grouping</h3>
+
+					<p>
+						Purposes can be grouped together as to let the user consent
+						either to the group as a whole, or to each individual purpose.
+					</p>
+
+					<details>
+						<summary>Example</summary>
+						<iframe
+							data-src="./features/grouping.html"
+							title="Example of grouped purposes"
+							loading="lazy"
+						></iframe>
+					</details>
+
+					<h3>Internationalization</h3>
+
+					<p>
+						Orejime is available in many languages (mainly european as of
+						now).
+						<br />
+						Each and every text translation can be overriden to fit your
+						needs.
+					</p>
+
+					<details>
+						<summary>Example</summary>
+						<iframe
+							data-src="./features/i18n.html"
+							title="Example of internationalization"
+							loading="lazy"
+						></iframe>
+					</details>
+
+					<h3 id="styling">Styling</h3>
+
+					<p>
+						Orejime provides default styles that are easily customizable,
+						either via CSS variables, or by overriding the styles with
+						plain CSS.
+					</p>
+
+					<details>
+						<summary>Example</summary>
+						<iframe
+							data-src="./features/styling.html"
+							title="Example of styling"
+							loading="lazy"
+						></iframe>
+					</details>
+
+					<p class="Notice Theme--warning">
+						<strong>Warning:</strong>
+						<br />
+						Keep in mind that when changing the styles, you must ensure
+						that the resulting color combinations are contrasting enough
+						so the interface remains accessible to all.
+					</p>
+
+					<h3>Themes</h3>
+
+					<p>
+						Orejime comes in different flavors.
+						<br />
+						As of now: the default one, and one for the design system of
+						the french state, as shown in the following example.
+					</p>
+
+					<details>
+						<summary>Example</summary>
+						<iframe
+							data-src="./features/dsfr.html"
+							title="Example of the DSFR theme"
+							loading="lazy"
+						></iframe>
+					</details>
+
+					<p class="Notice Theme--info">
+						<strong>Note:</strong>
+						<br />
+						Themes are meant to integrate Orejime to specific environments
+						where its interface can't be adapted with CSS only.
+						<br />
+						You should never have to implement a theme yourself, as
+						<a href="#styling">styling</a>
+						should cover your needs.
+					</p>
+
+					<h3>Accessibility</h3>
+
+					<p>
+						Orejime is built with accessibility in mind, as it is the main
+						reason why it was created in the first place.
+						<br />
+						It is tested thoroughly against the RGAA and thus also
+						complies to the WCAG.
+					</p>
+
+					<h3>Ecodesign & performance</h3>
+
+					<p>
+						Consent Management Platforms are present everywhere, and
+						they're probably here to stay. This means that, at scale, they
+						contribute to a lot of network use, processing power and so
+						on.
+						<br />
+						Orejime is optimized as much as it can be to reduce the weight
+						it imposes on the web platform. This also guarantees that it
+						will not impede your website's performance.
+					</p>
+
+					<h2>They're using Orejime</h2>
+
+					<p>We're proud to help those services comply with the GDPR:</p>
+				</div>
+
+				<ul class="LogoList">
+					<% for (service in services) { %>
+					<li>
+						<a
+							href="<%= service.url %>"
+							title="<%= service.name %>"
+							lang="<%= service.lang %>"
+						>
+							<img
+								src="./assets/<%= service.logo %>"
+								alt="<%= service.name %>"
+								loading="lazy"
+							/>
+						</a>
+					</li>
+					<% } %>
+				</ul>
+
+				<div class="RichText">
+					<p>
+						<br />
+						<br />
+						<a href="https://github.com/boscop-fr/orejime/discussions/97">
+							You're using Orejime? Tell us!
+						</a>
+					</p>
+
+					<h2 id="support">Need a hand?</h2>
+
+					<p>
+						Orejime is maintained by our software engineering team at
+						Boscop.
+						<br />
+						Reach out to us, we can provide support for you to set Orejime
+						up on your website.
+					</p>
+
+					<form method="POST" name="support" data-netlify="true">
+						<label for="SupportForm-name">Your name</label>
+						<input
+							id="SupportForm-name"
+							type="text"
+							name="name"
+							required
+						/>
+
+						<label for="SupportForm-email">
+							Your email address (i.e. company@example.org)
+						</label>
+						<input
+							id="SupportForm-email"
+							type="email"
+							name="email"
+							required
+						/>
+
+						<label for="SupportForm-message">Your message</label>
+						<textarea
+							id="SupportForm-message"
+							name="message"
+							rows="5"
+							required
+						></textarea>
+
+						<button class="Button" type="submit">Get support</button>
+					</form>
+
+					<h2>Upgrading Orejime</h2>
+
+					<h3>Migrating from V2 to V3</h3>
+
+					<p>
+						With version 3, Orejime is moving away from its initial
+						implementation to lay a more robust ground for future
+						developments.
+						<br />
+						This has a slight impact on the way it is configured, as many
+						options and translations were renamed for clarity.
+					</p>
+
+					<p>
+						To ease the transition, we're providing a tool to migrate you
+						old configuration to the latest format.
+						<br />
+						Paste your current configuration below to get an up-to-date
+						version.
+					</p>
+
+					<p class="Notice Theme--warning">
+						<strong>Warning:</strong>
+						<br />
+						Be sure to paste an Orejime config and not arbitrary
+						JavaScript code, as it will be evaluated in your browser in
+						order to be migrated.
+					</p>
+
+					<form class="MigrationForm MigrationForm--2-to-3">
+						<label for="MigrationForm-config">Configuration</label>
+						<textarea
+							id="MigrationForm-config"
+							class="MigrationForm-input"
+							name="config"
+							rows="10"
+							placeholder="{ appElement: '#app', apps: [] }"
+							required
+						></textarea>
+
+						<button class="Button" type="submit">
+							Migrate my configuration
+						</button>
+
+						<pre
+							class="MigrationForm-output Tile Theme--primary is-hidden"
+						></pre>
+					</form>
+				</div>
+			</div>
+		</main>
+
+		<footer
+			class="Footer Section Section--padding-l Surface Theme--tertiary"
+			role="contentinfo"
+		>
+			<div class="Container">
+				<p lang="fr">
+					<strong><a href="https://boscop.fr">Boscop</a></strong>
+					| Numérique engagé
+				</p>
+			</div>
+		</footer>
+
+		<!-- Lazy loading of feature examples. -->
+		<script>
+			function loadFeatureExample(details) {
+				if (!details.open) {
+					return;
+				}
+
+				const iframe = details.querySelector('iframe');
+
+				if (iframe && iframe.dataset.src) {
+					iframe.setAttribute('src', iframe.dataset.src);
+					delete iframe.dataset.src;
+				}
+			}
+
+			document.addEventListener(
+				'toggle',
+				(event) => {
+					loadFeatureExample(event.target);
+				},
+				true
+			);
+
+			document.querySelectorAll('details[open]').forEach(loadFeatureExample);
+		</script>
+
+		<!-- Migration form. -->
+		<script>
+			const migrationForm = document.querySelector('.MigrationForm--2-to-3');
+
+			migrationForm.addEventListener('submit', (event) => {
+				event.preventDefault();
+
+				const input = migrationForm.querySelector('.MigrationForm-input');
+				const output = migrationForm.querySelector('.MigrationForm-output');
+
+				try {
+					input.setCustomValidity('');
+					output.innerText = window.orejimeMigrateV2ToV3(input.value);
+				} catch (e) {
+					input.setCustomValidity(
+						e instanceof SyntaxError
+							? `There seems to be a syntax error in your configuration`
+							: `Sorry, an error happened while migrating your configuration`
+					);
+				}
+
+				input.reportValidity();
+				output.classList.remove('is-hidden');
+			});
+		</script>
+	</body>
+</html>

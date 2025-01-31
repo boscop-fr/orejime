@@ -333,7 +333,7 @@ See the [consent manager component](https://www.systeme-de-design.gouv.fr/compos
 
 A major overhaul of the configuration took place in this version, as to clarify naming and align more with the GDPR vocabulary.
 
-If you were already using version 2, a tool to migrate your current configuration is available here : https://orejime.empreintedigitale.fr/migration.
+If you were already using version 2, a tool to migrate your current configuration is available here : https://orejime.boscop.fr/migration.
 
 ## Development
 
@@ -352,7 +352,7 @@ This project is licensed under a BSD-3 license.
 
 Orejime started as a fork of [Klaro!](https://github.com/KIProtect/klaro). A lot of stuff changed since. A few were integrated in the original project, but eventually some big bricks changed and it became difficult, or sometimes not even necessary, to push those changes in.
 
-Orejime is maintained by [<span lang="fr">Empreinte Digitale</span>  (French)](http://empreintedigitale.fr).
+Orejime is maintained by [<span lang="fr">Boscop</span>  (French)](http://boscop.fr).
 
 ### What does "Orejime" mean?
 

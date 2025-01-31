@@ -2,31 +2,31 @@
 
 ## 2.2.1
 
-- fix: typo in Occitan translations (https://github.com/empreinte-digitale/orejime/pull/84)
+- fix: typo in Occitan translations (https://github.com/boscop-fr/orejime/pull/84)
 
 ## 2.2.0
 
-- feature: Consent exemption (https://github.com/empreinte-digitale/orejime/pull/82)
-- feature: Occitan translations (https://github.com/empreinte-digitale/orejime/pull/83)
-- fix: cross-platform build scripts (https://github.com/empreinte-digitale/orejime/pull/77)
+- feature: Consent exemption (https://github.com/boscop-fr/orejime/pull/82)
+- feature: Occitan translations (https://github.com/boscop-fr/orejime/pull/83)
+- fix: cross-platform build scripts (https://github.com/boscop-fr/orejime/pull/77)
 
 ## 2.1.1
 
-- fix: string formatting (https://github.com/empreinte-digitale/orejime/pull/71)
-- internal: code formatting with prettier (https://github.com/empreinte-digitale/orejime/pull/69)
+- fix: string formatting (https://github.com/boscop-fr/orejime/pull/71)
+- internal: code formatting with prettier (https://github.com/boscop-fr/orejime/pull/69)
 
 ## 2.1.0
 
-- feature: translation of category names and descriptions (https://github.com/empreinte-digitale/orejime/pull/67)
+- feature: translation of category names and descriptions (https://github.com/boscop-fr/orejime/pull/67)
 
 ## 2.0.3
 
-- fix: focus trap in consent modal (https://github.com/empreinte-digitale/orejime/pull/62)
+- fix: focus trap in consent modal (https://github.com/boscop-fr/orejime/pull/62)
 
 ## 2.0.2
 
-- doc: Added doc on unpkg versions (https://github.com/empreinte-digitale/orejime/pull/61)
-- fix: Updated default "powered by" URL (https://github.com/empreinte-digitale/orejime/pull/58)
+- doc: Added doc on unpkg versions (https://github.com/boscop-fr/orejime/pull/61)
+- fix: Updated default "powered by" URL (https://github.com/boscop-fr/orejime/pull/58)
 
 ## 2.0.1
 
@@ -35,33 +35,33 @@
 
 ## 2.0.0
 
-- fix: translation of app titles (https://github.com/empreinte-digitale/orejime/issues/42)
-- fix: title of accept button (https://github.com/empreinte-digitale/orejime/issues/45)
-- demo: redesign of the demo page (https://github.com/empreinte-digitale/orejime/pull/46)
-- feature: cookie domain configuration (https://github.com/empreinte-digitale/pull/issues/38)
-- feature: providing Sass variables for breakpoints (https://github.com/empreinte-digitale/pull/issues/36)
-- feature: categories (https://github.com/empreinte-digitale/pull/issues/22)
-- breaking change: removed implicit consent (https://github.com/empreinte-digitale/orejime/pull/50)
+- fix: translation of app titles (https://github.com/boscop-fr/orejime/issues/42)
+- fix: title of accept button (https://github.com/boscop-fr/orejime/issues/45)
+- demo: redesign of the demo page (https://github.com/boscop-fr/orejime/pull/46)
+- feature: cookie domain configuration (https://github.com/boscop-fr/pull/issues/38)
+- feature: providing Sass variables for breakpoints (https://github.com/boscop-fr/pull/issues/36)
+- feature: categories (https://github.com/boscop-fr/pull/issues/22)
+- breaking change: removed implicit consent (https://github.com/boscop-fr/orejime/pull/50)
 
 ## 1.2.3
 
-- fix: Allowing HTML in item descriptions (https://github.com/empreinte-digitale/orejime/issues/18)
+- fix: Allowing HTML in item descriptions (https://github.com/boscop-fr/orejime/issues/18)
 
 ## 1.2.2
 
-- fix: import of nl translations (https://github.com/empreinte-digitale/orejime/pull/27)
-- fix: hiding batch actions when all apps are required (https://github.com/empreinte-digitale/pull/issues/28)
+- fix: import of nl translations (https://github.com/boscop-fr/orejime/pull/27)
+- fix: hiding batch actions when all apps are required (https://github.com/boscop-fr/pull/issues/28)
 
 ## 1.2.1
 
-- doc: capitalization of nationalities and languages (https://github.com/empreinte-digitale/orejime/issues/16)
+- doc: capitalization of nationalities and languages (https://github.com/boscop-fr/orejime/issues/16)
 - doc: improved example markup (attributes were missing from `<script />` tags)
 - translations: updates to `nl` translations
 - internal: node-sass update
 
 ## 1.2.0
 
-- new feature: Ability to customize cookie serialization (https://github.com/empreinte-digitale/orejime/issues/13)
+- new feature: Ability to customize cookie serialization (https://github.com/boscop-fr/orejime/issues/13)
 
 ## 1.1.1
 
@@ -69,13 +69,13 @@ nothing different from 1.1.0, this is just to make npm bypass a problem...
 
 ## 1.1.0
 
-- fix the UMD build, now the Orejime object is actually exported correctly and everything works according to the documentation (see https://github.com/empreinte-digitale/orejime/issues/7)
-- fix the Orejime ES6/CommonJS module, now you can consume it as described in the documentation (see https://github.com/empreinte-digitale/orejime/issues/8), thanks @ambroisemaupate
+- fix the UMD build, now the Orejime object is actually exported correctly and everything works according to the documentation (see https://github.com/boscop-fr/orejime/issues/7)
+- fix the Orejime ES6/CommonJS module, now you can consume it as described in the documentation (see https://github.com/boscop-fr/orejime/issues/8), thanks @ambroisemaupate
 - new feature: notice: add possibility to set the notice as mandatory via the "mustNotice" option, behaves like the "mustConsent" option
 - new feature: notice: add possibility to define a title via translations
 - new feature: notice: add possibility to show a logo via the "logo" config
 - new feature: notice: add possibility to show a text with the privacy policy link via translations, like in the modal
-- fix the possibility to deny required apps (see https://github.com/empreinte-digitale/orejime/issues/9), thanks @RomainTweaks
+- fix the possibility to deny required apps (see https://github.com/boscop-fr/orejime/issues/9), thanks @RomainTweaks
 - fix modal "enable all" button: let the user click the button as soon as one app is not enabled
 - behavior change: automatic loading of orejime by checking the presence of `window.orejimeConfig` now only works with the UMD build, not in a module context.
 - added a debug mode you can activate via the config, for now only used for logging missing translations

@@ -11,7 +11,7 @@ const PoweredByLink = ({className}: PoweredByLinkProps) => {
 		<a
 			className={className}
 			title={`${t.misc.poweredBy} (${t.misc.newWindowTitle})`}
-			href="https://orejime.empreintedigitale.fr"
+			href="https://orejime.boscop.fr"
 			target="_blank"
 		>
 			{t.misc.poweredBy}

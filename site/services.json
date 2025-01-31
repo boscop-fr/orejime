@@ -1,0 +1,86 @@
+[
+	{
+		"name": "Service-Public.fr",
+		"url": "https://www.service-public.fr/",
+		"logo": "logo-service-public.png",
+		"lang": "fr"
+	},
+	{
+		"name": "Sénat",
+		"url": "https://www.senat.fr/",
+		"logo": "logo-senat.svg",
+		"lang": "fr"
+	},
+	{
+		"name": "Vie publique",
+		"url": "https://www.vie-publique.fr/",
+		"logo": "logo-vie-publique.svg",
+		"lang": "fr"
+	},
+	{
+		"name": "Défenseur des droits",
+		"url": "https://www.defenseurdesdroits.fr/",
+		"logo": "logo-defenseur-des-droits.svg",
+		"lang": "fr"
+	},
+	{
+		"name": "Collectivité européenne d'Alsace",
+		"url": "https://www.alsace.eu/",
+		"logo": "logo-alsace.svg",
+		"lang": "fr"
+	},
+	{
+		"name": "Les Catacombes de Paris",
+		"url": "https://www.catacombes.paris.fr/",
+		"logo": "logo-catacombes-paris.svg",
+		"lang": "fr"
+	},
+	{
+		"name": "SOS Méditerranée",
+		"url": "https://www.sosmediterranee.org/",
+		"logo": "logo-sos-mediterranee.svg",
+		"lang": "en"
+	},
+	{
+		"name": "Student at work",
+		"url": "https://studentatwork.be/en/index.html",
+		"logo": "logo-student-at-work.png",
+		"lang": "en"
+	},
+	{
+		"name": "CHU de Liège",
+		"url": "https://www.chuliege.be/",
+		"logo": "logo-chu-liege.svg",
+		"lang": "fr"
+	},
+	{
+		"name": "Autorité de protection des données",
+		"url": "https://www.autoriteprotectiondonnees.be/citoyen",
+		"logo": "logo-autorite-protection-donnees.svg",
+		"lang": "fr"
+	},
+	{
+		"name": "Syndicat national de l'édition",
+		"url": "https://www.sne.fr/",
+		"logo": "logo-sne.png",
+		"lang": "fr"
+	},
+	{
+		"name": "Établissement Public Foncier d'Occitanie",
+		"url": "https://www.epf-occitanie.fr/",
+		"logo": "logo-epf-occitanie.png",
+		"lang": "fr"
+	},
+	{
+		"name": "Luxembourg",
+		"url": "https://luxembourg.public.lu/en.html",
+		"logo": "logo-luxembourg-city.svg",
+		"lang": "en"
+	},
+	{
+		"name": "The Luxembourg Government",
+		"url": "https://gouvernement.lu/en.html",
+		"logo": "logo-luxembourg-gov.png",
+		"lang": "en"
+	}
+]

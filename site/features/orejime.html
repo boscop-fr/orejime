@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html class="ExamplePage" lang="en">
+	<head>
+		<title>Orejime</title>
+
+		<link
+			rel="stylesheet"
+			href="https://boscop.fr/wp-content/themes/boscop/dist/app.css"
+		/>
+
+		<link rel="stylesheet" href="../assets/style.css" />
+	</head>
+
+	<body>
+		<% if (css) { %>
+		<!--
+			This is after the <head> so the styles injected
+			by rspack don't take precedence over it.
+		-->
+		<style>
+			<%= css.code %>
+		</style>
+		<% } %>
+
+		<main class="ExampleMain" role="main">
+			<div class="ExampleCode">
+				<% if (css) { %> <%= css.highlightedCode %> <% } %> <% if (!css &&
+				js) { %> <%= js.highlightedCode %> <% } %>
+			</div>
+
+			<div class="orejime-Env">
+				<button class="ExampleReset orejime-Button">
+					Reset example
+				</button>
+			</div>
+		</main>
+
+		<% if (js) { %>
+		<script>
+			<%= js.code %>
+		</script>
+		<% } %>
+
+		<script>
+			document
+				.querySelector('.ExampleReset')
+				.addEventListener('click', function () {
+					window.orejime.manager.clearConsents();
+				});
+		</script>
+	</body>
+</html>
