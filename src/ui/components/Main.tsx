@@ -1,10 +1,8 @@
-import React, {
-	forwardRef,
-	ForwardedRef,
+import {
 	useImperativeHandle,
 	useEffect,
 	useRef
-} from 'react';
+} from 'preact/hooks';
 import {
 	useBannerState,
 	useConfig,
@@ -17,11 +15,17 @@ import StubManagerProvider from './StubManagerProvider';
 import GlobalConsentContainer from './GlobalConsentContainer';
 import {findFirstFocusableChild} from '../utils/dom';
 
-export interface MainHandle {
+export interface MainApi {
 	openModal: () => void;
 }
 
-const Main = (_: any, ref: ForwardedRef<MainHandle>) => {
+interface MainProps {
+	apiRef: {
+		current: MainApi
+	}
+}
+
+const Main = ({apiRef}: MainProps) => {
 	const config = useConfig();
 	const manager = useManager();
 	const isBannerOpen = useBannerState();
@@ -31,7 +35,7 @@ const Main = (_: any, ref: ForwardedRef<MainHandle>) => {
 	const BannerComponent = config.forceBanner ? ModalBanner : Banner;
 
 	// makes openModal() available from the outside
-	useImperativeHandle(ref, () => ({
+	useImperativeHandle(apiRef, () => ({
 		openModal
 	}));
 
@@ -90,4 +94,4 @@ const Main = (_: any, ref: ForwardedRef<MainHandle>) => {
 	);
 };
 
-export default forwardRef(Main);
+export default Main;

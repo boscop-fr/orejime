@@ -1,4 +1,3 @@
-import React from 'react';
 import {useManager, useTheme} from '../utils/hooks';
 
 const GlobalConsentContainer = () => {

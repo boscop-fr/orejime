@@ -1,4 +1,3 @@
-import React from 'react';
 import {useTranslations} from '../../utils/hooks';
 import {GlobalConsentComponent} from '../../components/types/GlobalConsent';
 

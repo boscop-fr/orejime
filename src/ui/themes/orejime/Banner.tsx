@@ -1,4 +1,3 @@
-import React from 'react';
 import {imageAttributes} from '../../utils/config';
 import {useTranslations} from '../../utils/hooks';
 import {template} from '../../utils/template';

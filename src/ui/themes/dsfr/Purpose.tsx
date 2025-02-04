@@ -1,5 +1,6 @@
-import React, {FC, useState} from 'react';
-import type {CSSProperties} from 'react';
+import {FunctionComponent} from 'preact';
+import {useState} from 'preact/hooks';
+import type {CSSProperties} from 'preact';
 import {ConsentState} from '../../components/types/ConsentState';
 import type {PurposeProps} from '../../components/types/Purpose';
 import {useTranslations} from '../../utils/hooks';
@@ -8,7 +9,7 @@ interface DsfrPurposeProps extends PurposeProps {
 	isGlobal: boolean;
 }
 
-type DsfrPurposeComponent = FC<DsfrPurposeProps>;
+type DsfrPurposeComponent = FunctionComponent<DsfrPurposeProps>;
 
 const Purpose: DsfrPurposeComponent = ({
 	id,

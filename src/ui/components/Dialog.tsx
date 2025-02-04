@@ -1,9 +1,4 @@
-import React, {
-	useEffect,
-	useId,
-	useLayoutEffect,
-	useState
-} from 'react';
+import {useEffect, useId, useLayoutEffect, useState} from 'preact/hooks';
 import MicroModal from 'micromodal';
 
 interface DialogProps {

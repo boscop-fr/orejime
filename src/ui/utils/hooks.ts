@@ -1,4 +1,4 @@
-import {useContext, useEffect, useRef, useState} from 'react';
+import {useContext, useEffect, useRef, useState} from 'preact/hooks';
 import Context from '../components/Context';
 import {
 	acceptedConsents,

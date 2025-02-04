@@ -1,6 +1,6 @@
-import type React from 'react';
+import {JSX} from 'preact';
 
-type TemplatePart = string | React.JSX.Element;
+type TemplatePart = string | JSX.Element;
 
 interface TemplateVars {
 	[name: string]: TemplatePart;

@@ -1,4 +1,3 @@
-import React from 'react';
 import Dialog from '../../components/Dialog';
 import Banner from './Banner';
 import {useTranslations} from '../../utils/hooks';

@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FunctionComponent} from 'preact';
 
 export interface GlobalConsentProps {
 	isEnabled: boolean;
@@ -7,4 +7,4 @@ export interface GlobalConsentProps {
 	declineAll: () => void;
 }
 
-export type GlobalConsentComponent = FC<GlobalConsentProps>;
+export type GlobalConsentComponent = FunctionComponent<GlobalConsentProps>;

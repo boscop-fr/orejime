@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {ComponentChildren, FunctionComponent} from 'preact';
 
 export interface ModalProps {
 	isForced: boolean;
@@ -6,7 +6,7 @@ export interface ModalProps {
 	privacyPolicyUrl: string;
 	onClose: () => void;
 	onSave: () => void;
-	children: React.ReactNode;
+	children: ComponentChildren;
 }
 
-export type ModalComponent = FC<ModalProps>;
+export type ModalComponent = FunctionComponent<ModalProps>;

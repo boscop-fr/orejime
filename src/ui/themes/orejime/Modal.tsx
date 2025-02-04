@@ -1,4 +1,3 @@
-import React from 'react';
 import {Close} from './Icons';
 import Dialog from '../../components/Dialog';
 import {template} from '../../utils/template';

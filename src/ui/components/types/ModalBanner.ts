@@ -1,6 +1,6 @@
-import {FC} from 'react';
+import {FunctionComponent} from 'preact';
 import {BannerProps} from './Banner';
 
 export interface ModalBannerProps extends BannerProps {}
 
-export type ModalBannerComponent = FC<ModalBannerProps>;
+export type ModalBannerComponent = FunctionComponent<ModalBannerProps>;
