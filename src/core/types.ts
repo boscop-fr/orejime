@@ -1,3 +1,5 @@
+import {GoogleConsentModePurposeOptions} from './GoogleConsentModeConsentsEffect';
+
 export type PurposeCookieProps = [
 	pattern: RegExp,
 	path: string,
@@ -13,6 +15,7 @@ export interface Purpose {
 	runsOnce?: boolean;
 	default?: boolean;
 	cookies: PurposeCookie[];
+	googleConsentMode?: GoogleConsentModePurposeOptions;
 }
 
 export type ConsentsMap = {[id: Purpose['id']]: boolean};
