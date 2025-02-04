@@ -34,16 +34,13 @@ That way you can ensure you will not be impacted by a change of API or a potenti
 
 #### Via npm
 
-Orejime 🍪 is a React lib. Make sure you already installed react and react-dom, then:
+Orejime only distributes built files via npm ([learn why](./adr/001-distribution-formats.md)).
 
 ```
 npm install orejime
 ```
 
-The CSS is located in `node_modules/orejime/dist/orejime.css`. Import it directly in your JS thanks to webpack, or install it any way you are used to in your project.
-You can also directly consume the Sass file if you prefer, located in the same folder.
-
-Note: if you don't have a React environment but still want to use npm in order to easily get the latest version of Orejime, the already-built JS file is located in `node_modules/orejime/dist/orejime.js`.
+You'll find the required JS and CSS files in the `dist` folder (namely `orejime.js` & `orejime.css`).
 
 #### Old browser support
 
@@ -277,8 +274,6 @@ Now that you included the JS, the CSS, configured existing third-party scripts a
 
 When including the script, the lib checks if the `window.orejimeConfig` variable exists. If it does, a new Orejime instance is created in `window.orejime`.
 
-:warning: **Note : Orejime doesn't have this behavior when using it as a module.**
-
 #### Manually
 
 ```js
@@ -290,43 +285,8 @@ Orejime.init(orejimeConfig);
 
 #### As a module
 
-If you're using Orejime within a bundler like webpack or vite, you have to provide actual themes and translations. This allows the bundler to perform better tree shaking as dependencies are explicitly stated.
-
-For example, with the `orejime` theme and english translations:
-
-```ts
-import {orejime, orejimeTheme, en} from 'orejime';
-
-const instance = orejime({
-    lang: 'en',
-    translations: en,
-    theme: orejimeTheme,
-    privacyPolicyUrl: 'http://example.org/privacy-policy',
-    purposes: [{
-        id: 'analytics',
-        title: 'Analytics',
-        cookies: []
-    }]
-})
-```
-
-If you want full control over the UI, you might want to use only the [consent manager](`./src/core/Manager.ts`), which is the core of Orejime. You can then use it with vanilla JS or your framework of choice.
-
-```ts
-import {manager} from 'orejime';
-
-const instance = manager([
-    {
-        id: 'analytics',
-        title: 'Analytics',
-        cookies: []
-    }
-]);
-
-console.log(instance.getConsent('analytics')); // false
-instance.setConsent('analytics', true);
-console.log(instance.getConsent('analytics')); // true
-```
+Previously, Orejime could be imported as any other module and bundled into application code.
+With version 3, we're abandonning this functionality to provide a standalone build only ([learn why](./adr/001-distribution-formats.md)).
 
 ### Theming
 
