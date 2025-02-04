@@ -1,6 +1,7 @@
 import CookieConsentsRepository from './CookieConsentsRepository';
 import CookiesConsentsEffect from './CookiesConsentsEffect';
 import DomConsentsEffect from './DomConsentsEffect';
+import GoogleConsentModeConsentsEffect from './GoogleConsentModeConsentsEffect';
 import Manager from './Manager';
 import {CookieOptions, Purpose} from './types';
 import updatePurposeElements from './utils/updatePurposeElements';
@@ -12,6 +13,11 @@ type SetupOptions = {
 export default (purposes: Purpose[], options: SetupOptions) => {
 	const domEffect = new DomConsentsEffect(purposes, updatePurposeElements);
 	const cookiesEffect = new CookiesConsentsEffect(purposes);
+	const googleConsentModeEffect =
+		'gtag' in window
+			? new GoogleConsentModeConsentsEffect(purposes, window.gtag)
+			: null;
+
 	const repository = new CookieConsentsRepository(options?.cookie);
 	const manager = new Manager(purposes, repository.read());
 	const consents = manager.getAllConsents();
@@ -19,6 +25,7 @@ export default (purposes: Purpose[], options: SetupOptions) => {
 	manager.on('update', (diff, all) => {
 		domEffect.apply(diff);
 		cookiesEffect.apply(diff);
+		googleConsentModeEffect?.apply(all);
 		repository.write(all);
 	});
 
