@@ -1,7 +1,7 @@
-import React, {FC} from 'react';
+import  {ComponentChildren, FunctionComponent} from 'preact';
 
 export interface PurposeListProps {
-	children?: React.ReactNode[];
+	children?: ComponentChildren;
 }
 
-export type PurposeListComponent = FC<PurposeListProps>;
+export type PurposeListComponent = FunctionComponent<PurposeListProps>;

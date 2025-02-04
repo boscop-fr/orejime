@@ -1,4 +1,3 @@
-import React from 'react';
 import type {PurposeList as PurposeListType} from '../types';
 import PurposeGroupContainer from './PurposeGroupContainer';
 import PurposeContainer from './PurposeContainer';

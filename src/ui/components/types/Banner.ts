@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FunctionComponent} from 'preact';
 import {ImageDescriptor} from '../../types';
 
 export interface BannerProps {
@@ -12,4 +12,4 @@ export interface BannerProps {
 	onConfigure: () => void;
 }
 
-export type BannerComponent = FC<BannerProps>;
+export type BannerComponent = FunctionComponent<BannerProps>;

@@ -1,31 +1,31 @@
-import React, {createRef} from 'react';
-import {createRoot} from 'react-dom/client';
+import {createRef, render} from 'preact';
 import {Manager} from '../core';
 import Context from './components/Context';
-import Main, {MainHandle} from './components/Main';
+import Main, {MainApi} from './components/Main';
 import type {Config} from './types';
 import {getRootElement} from './utils/dom';
 import {once} from './utils/functions';
 
 export default (config: Config, manager: Manager) => {
 	const element = getRootElement(config.orejimeElement);
-	const appRef = createRef<MainHandle>();
+	const apiRef = createRef<MainApi>();
 	const show = once(() => {
-		createRoot(element).render(
+		render(
 			<Context.Provider
 				value={{
 					config,
 					manager
 				}}
 			>
-				<Main ref={appRef} />
-			</Context.Provider>
+				<Main apiRef={apiRef} />
+			</Context.Provider>,
+			element
 		);
 	});
 
 	const openModal = () => {
 		show();
-		appRef.current!.openModal();
+		apiRef.current!.openModal();
 	};
 
 	return {

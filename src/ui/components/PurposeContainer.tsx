@@ -1,4 +1,3 @@
-import React from 'react';
 import {useConsent, useTheme} from '../utils/hooks';
 import {ConsentState} from './types/ConsentState';
 import {PurposeProps} from './types/Purpose';

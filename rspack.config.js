@@ -37,9 +37,16 @@ module.exports = {
 					options: {
 						jsc: {
 							externalHelpers: true,
+							preserveAllComments: false,
 							parser: {
 								syntax: 'typescript',
 								tsx: true
+							},
+							transform: {
+								react: {
+									runtime: 'automatic',
+									importSource: 'preact'
+								}
 							}
 						}
 					}
@@ -61,14 +68,7 @@ module.exports = {
 		]
 	},
 	resolve: {
-		extensions: ['.js', '.ts', '.tsx'],
-		alias: {
-			react: 'preact/compat',
-			'react-dom': 'preact/compat',
-			'react-lifecycles-compat': fullPath(
-				'src/stubs/react-lifecycles-compat.js'
-			)
-		}
+		extensions: ['.js', '.ts', '.tsx']
 	},
 	optimization: {
 		// Prevents rspack from splitting anything more than

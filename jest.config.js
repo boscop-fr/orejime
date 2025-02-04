@@ -3,9 +3,5 @@ module.exports = {
 	transform: {
 		'^.+\\.(t|j)sx?$': '@swc/jest',
 	},
-	testEnvironment: 'jsdom',
-	moduleNameMapper: {
-		'^react$': 'preact/compat',
-		'^react-dom$': 'preact/compat'
-	}
+	testEnvironment: 'jsdom'
 };

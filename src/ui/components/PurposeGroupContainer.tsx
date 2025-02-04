@@ -1,10 +1,10 @@
-import React from 'react';
+import {ComponentChildren} from 'preact';
 import {PurposeGroup as PurposeGroupType} from '../types';
 import {useConsentGroup, useTheme} from '../utils/hooks';
 import {ConsentState} from './types/ConsentState';
 
 interface PurposeGroupProps extends PurposeGroupType {
-	children: React.ReactNode;
+	children: ComponentChildren;
 }
 
 const PurposeGroup = ({purposes, children, ...props}: PurposeGroupProps) => {

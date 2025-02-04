@@ -1,4 +1,3 @@
-import React from 'react';
 import {useTranslations} from '../../utils/hooks';
 import Dialog from '../../components/Dialog';
 import type {ModalBannerComponent} from '../../components/types/ModalBanner';

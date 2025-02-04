@@ -1,4 +1,5 @@
-import React, {Children, useEffect, useRef} from 'react';
+import {toChildArray} from 'preact';
+import {useEffect, useRef} from 'preact/hooks';
 import {useTranslations} from '../../utils/hooks';
 import {ConsentState} from '../../components/types/ConsentState';
 import {PurposeComponent} from '../../components/types/Purpose';
@@ -84,7 +85,7 @@ const Purpose: PurposeComponent = ({
 				/>
 			) : null}
 
-			{Children.count(children) ? (
+			{toChildArray(children).length ? (
 				<div
 					className="orejime-Purpose-children"
 					role="group"

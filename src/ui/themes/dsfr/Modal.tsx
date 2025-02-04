@@ -1,4 +1,3 @@
-import React from 'react';
 import {useTranslations} from '../../utils/hooks';
 import {template} from '../../utils/template';
 import Dialog from '../../components/Dialog';

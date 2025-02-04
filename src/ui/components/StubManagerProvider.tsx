@@ -1,8 +1,9 @@
-import React, {useContext, useRef} from 'react';
+import {ComponentChildren} from 'preact';
+import {useContext, useRef} from 'preact/hooks';
 import Context from './Context';
 
 interface StubManagerProviderProps {
-	children: (commit: () => void) => React.JSX.Element;
+	children: (commit: () => void) => ComponentChildren;
 	onCommit: () => void;
 }
 

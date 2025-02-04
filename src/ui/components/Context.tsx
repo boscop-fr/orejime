@@ -1,4 +1,4 @@
-import {createContext} from 'react';
+import {createContext} from 'preact';
 import {Manager} from '../../core';
 import type {Config} from '../types';
 
