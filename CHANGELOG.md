@@ -1,5 +1,26 @@
 # CHANGELOG
 
+## 3.0.0
+
+- feature: Added themes (default & DSFR for now)
+- feature: Filled missing translations
+- feature: Improved default styles
+- demo: Redesigned the homepage
+- breaking: Removed automatic language switching
+  (https://github.com/boscop-fr/orejime/pull/85/commits/4cc3472297c96d81f840ad8f1beb6902c9d045ea)
+- breaking: Using clearer vocabulary (options and translations)
+- breaking: Allowing one instance only
+- internal: Split core functionality and UX
+- internal: Using Rspack
+- internal: Using Typescript
+- internal: Using Micromodal in lieu of react-modal
+- breaking: Removed react app reference
+- breaking: Removed ESM and CJS builds
+  ([decision record](./adr/001-distribution-formats.md))
+- internal: Removed preact compat
+- internal: Added end-to-end tests
+- internal: Code formatting
+
 ## 2.2.1
 
 - fix: typo in Occitan translations
