@@ -1,44 +1,55 @@
 const backupName = (attribute: string) => {
 	const name = `orejime-${attribute}`;
-	const camelCased = name.replace(
-		/[-_](.)/g,
-		(_, char) => char.toUpperCase()
-	);
+	const camelCased = name.replace(/[-_](.)/g, (_, char) => char.toUpperCase());
 
 	return camelCased;
-}
+};
 
-const backupAttribute = <T extends HTMLElement>(element: T, name: string) => {
-	if (element.getAttribute(name) && !element.dataset?.[name]) {
+// Stores an attribute in the element's dataset if it doesn't
+// already have a default value.
+const backupAttribute = <T extends HTMLElement>(
+	element: T,
+	name: string,
+	defaultValue?: string
+) => {
+	const value = element.getAttribute(name);
+
+	if (value && value !== defaultValue && !element.dataset?.[name]) {
 		element.dataset[name] = element.getAttribute(name);
 		element.removeAttribute(name);
 	}
 };
 
-const restoreAttribute = (element: HTMLElement, name: string) => {
-	if (element.dataset?.[name]) {
-		element.setAttribute(name, element.dataset[name]);
+// Restores an attribute to its saved value, or a default
+// one if none exists.
+const restoreAttribute = (
+	element: HTMLElement,
+	name: string,
+	defaultValue?: string
+) => {
+	const value = element.dataset?.[name] || defaultValue;
+
+	if (value) {
+		element.setAttribute(name, value);
 		delete element.dataset[name];
 	}
 };
 
 const updateScriptElement = (element: HTMLScriptElement, consent: boolean) => {
 	if (!consent) {
-		backupAttribute(element, 'type');
+		backupAttribute(element, 'type', 'orejime');
 		backupAttribute(element, 'src');
-		element.type = 'opt-in';
+		element.type = 'orejime';
 		return;
 	}
 
-	// we create a new script instead of updating the node in
-	// place, as the script won't start correctly otherwise
+	// We're creating a new script instead of updating the
+	// node in place, as the script won't load correctly
+	// otherwise.
 	const clone = element.cloneNode(true) as typeof element;
-	restoreAttribute(clone, 'type');
+	restoreAttribute(clone, 'type', 'text/javascript');
 	restoreAttribute(clone, 'src');
-
-	const parent = element.parentElement;
-	parent?.insertBefore(clone, element);
-	parent?.removeChild(element);
+	element.replaceWith(clone);
 };
 
 const updateDomElement = (element: HTMLElement, consent: boolean) => {

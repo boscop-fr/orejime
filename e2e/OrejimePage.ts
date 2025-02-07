@@ -8,7 +8,7 @@ export class OrejimePage {
 		public readonly context: BrowserContext
 	) {}
 
-	async load(config: Partial<Config>) {
+	async load(config: Partial<Config>, scripts: string) {
 		await this.page.route('/', async (route) => {
 			await route.fulfill({
 				body: `
@@ -25,6 +25,7 @@ export class OrejimePage {
 								window.orejimeConfig = ${JSON.stringify(config)}
 							</script>
 							<script src="orejime.js"></script>
+							${scripts}
 						</body>
 					</html>
 				`
@@ -110,5 +111,18 @@ export class OrejimePage {
 		const cookies = await this.context.cookies();
 		const {value} = cookies.find((cookie) => cookie.name === name)!;
 		return JSON.parse(Cookie.converter.read(value, name));
+	}
+
+	async expectScriptAttributes(
+		purposeId: string,
+		attributes: Record<string, string>
+	) {
+		const script = await this.page.locator(
+			`script[data-purpose="${purposeId}"]`
+		);
+
+		for (const k in attributes) {
+			expect(script).toHaveAttribute(k, attributes[k]);
+		}
 	}
 }
