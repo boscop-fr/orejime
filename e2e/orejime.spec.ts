@@ -31,11 +31,16 @@ test.describe('Orejime', () => {
 		]
 	};
 
+	const BaseScripts = `
+		<script type="orejime" data-purpose="mandatory"></script>
+		<script type="orejime" data-purpose="child-1" data-type="application/json"></script>
+	`;
+
 	let orejimePage: OrejimePage;
 
 	test.beforeEach(async ({page, context}) => {
 		orejimePage = new OrejimePage(page, context);
-		await orejimePage.load(BaseConfig);
+		await orejimePage.load(BaseConfig, BaseScripts);
 	});
 
 	test('should show a banner', async () => {
@@ -55,6 +60,16 @@ test.describe('Orejime', () => {
 			'child-1': true,
 			'child-2': true
 		});
+
+		orejimePage.expectScriptAttributes('mandatory', {
+			'data-purpose': 'mandatory',
+			type: 'text/javascript'
+		});
+
+		orejimePage.expectScriptAttributes('child-1', {
+			'data-purpose': 'child-1',
+			type: 'application/json'
+		});
 	});
 
 	test('should decline all purposes from the banner', async () => {
@@ -65,6 +80,17 @@ test.describe('Orejime', () => {
 			'mandatory': true,
 			'child-1': false,
 			'child-2': false
+		});
+
+		orejimePage.expectScriptAttributes('mandatory', {
+			'data-purpose': 'mandatory',
+			type: 'text/javascript'
+		});
+
+		orejimePage.expectScriptAttributes('child-1', {
+			'data-purpose': 'child-1',
+			'data-type': 'application/json',
+			'type': 'orejime'
 		});
 	});
 

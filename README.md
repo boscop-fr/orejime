@@ -50,13 +50,12 @@ For IE11, you'll need to have ES6 polyfills loaded on your page. One easy and ef
 
 For each third-party script you want Orejime to manage, you must modify its `<script>` tag so that the browser doesn't load it directly anymore. Orejime will take care of loading it if the user accepts.
 
-For inline scripts, set the `type` attribute to `opt-in` to keep the browser from executing the script. Also add a `data-purpose` attribute with a short, unique, spaceless name for this script:
+For inline scripts, set the `type` attribute to `orejime` to keep the browser from executing the script. Also add a `data-purpose` attribute with a short, unique, spaceless name for this script:
 
 ```diff
 - <script>
 + <script
-+   type="opt-in"
-+   data-type="application/javascript"
++   type="orejime"
 +   data-purpose="google-tag-manager">
     (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push [...]
 </script>
@@ -68,8 +67,7 @@ For external scripts or img tags (for tracking pixels), do the same, and rename 
 - <script
 -   src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
 + <script
-+   type="opt-in"
-+   data-type="application/javascript"
++   type="orejime"
 +   data-purpose="google-maps"
 +   data-src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
 ```
