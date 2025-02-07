@@ -5,6 +5,7 @@ import Modal from './Modal';
 import ModalBanner from './ModalBanner';
 import Purpose from './Purpose';
 import PurposeList from './PurposeList';
+import './index.css';
 
 export default {
 	Banner,

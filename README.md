@@ -1,167 +1,92 @@
 # Orejime 🍪
 
 > Let your users choose the cookies they eat on your website.
-> Orejime 🍪 is an easy to use consent manager that focuses on accessibility.
 
-## Introduction
+Orejime is a lightweight consent manager that focuses on accessibility.
 
-Orejime 🍪 is an open-source JavaScript library you can use on your website to let users choose what third-party cookies they allow. It's specifically made to comply with the GDPR.
-
-Orejime 🍪 is a fork of [Klaro!](https://github.com/KIProtect/klaro) that focuses on **accessibility**. It follows Web Content Accessibility Guidelines (WCAG) via the French <abbr lang="fr" title="Référentiel général d'accessibilité pour les administrations">RGAA</abbr>.
+[Explore its features](http://orejime.boscop.fr)
 
 ## Getting started
 
-Using Orejime 🍪 requires a few steps:
-
 1.  [Installation](#installation)
-1.  [Third-party script tags change](#third-party-script-tags-change)
 1.  [Configuration](#configuration)
+1.  [Third-party scripts configuration](#third-party-scripts-configuration)
 1.  [Initialization](#initialization)
 
 ### Installation
 
+Orejime comes with many styles and languages.
+It is distributed as individual modules that follow a common convention, namely `orejime-[THEME]-[LANGUAGE]`.
+For example:
+* `orejime-standard-en.js` uses the standard theme with english texts
+* `orejime-standard-fr.js` uses the standard theme with french texts
+* `orejime-dsfr-fr.js` uses the DSFR theme with french texts
+
+(Learn more about [themes](#theming) & [languages](#internationalization))
+
 #### Via CDN
 
-The easiest way to use the lib is to include the built files directly in the browser.
+The easiest way to use Orejime is to import a distribution via a content delivery network such as unpkg:
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/orejime@latest/dist/orejime.css" />
-<script src="https://unpkg.com/orejime@latest/dist/orejime.js"></script>
+<script src="https://unpkg.com/orejime@latest/dist/orejime-standard-en.js"></script>
+<link href="https://unpkg.com/orejime@latest/dist/orejime-standard.css" rel="stylesheet" />
 ```
 
-If you're using this method, please avoid using the `@latest` version. Prefer a fixed one like `https://unpkg.com/orejime@2.0.1/...`.
-That way you can ensure you will not be impacted by a change of API or a potential bug that could land in the latest version.
+> [!TIP]
+> If you're using this method, please avoid using the `@latest` version. Prefer a fixed one like `https://unpkg.com/orejime@3.0.0/...`.
+> That way you can ensure you will not be impacted by a change of API or a potential bug that could land in the latest version.
 
 #### Via npm
 
 Orejime only distributes built files via npm ([learn why](./adr/001-distribution-formats.md)).
 
-```
+```sh
 npm install orejime
 ```
 
-You'll find the required JS and CSS files in the `dist` folder (namely `orejime.js` & `orejime.css`).
-
-#### Old browser support
-
-For IE11, you'll need to have ES6 polyfills loaded on your page. One easy and efficient way to add such polyfills is to use [polyfill.io](https://polyfill.io/v2/docs/).
-
-### Third-party script tags change
-
-For each third-party script you want Orejime to manage, you must modify its `<script>` tag so that the browser doesn't load it directly anymore. Orejime will take care of loading it if the user accepts.
-
-For inline scripts, set the `type` attribute to `orejime` to keep the browser from executing the script. Also add a `data-purpose` attribute with a short, unique, spaceless name for this script:
-
-```diff
-- <script>
-+ <script
-+   type="orejime"
-+   data-purpose="google-tag-manager">
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push [...]
-</script>
-```
-
-For external scripts or img tags (for tracking pixels), do the same, and rename the `src` attribute to `data-src`:
-
-```diff
-- <script
--   src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
-+ <script
-+   type="orejime"
-+   data-purpose="google-maps"
-+   data-src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
-```
+You'll find the required JS and CSS files in the `dist` folder.
 
 ### Configuration
 
-You need to pass Orejime 🍪 a configuration object with, at the very least, `purposes` and `privacyPolicyUrl` properties. Each purpose listed in `purposes` must itself have at least `id`, `title` and `cookies`.
+You need to pass Orejime some configuration for it to function.
+This is typically done by assigning configuration options to `window.orejimeConfig`:
+
+```html
+<script>
+    window.orejimeConfig = {
+        // options
+    };
+</script>
+```
+
+You'll find all the available configuration options below.
+
+> [!NOTE]
+> Very few of the following options are actually required (only `purposes` and `privacyPolicyUrl` are).
+> Optional options are explicitly flagged as such.
 
 <details>
-    <summary>Here is a fully-detailed annotated example of a configuration object:</summary>
-&nbsp;
+
+<summary>Annotated example of configuration</summary>
 
 ```js
 var orejimeConfig = {
-    // Optional. You can customize the element that will contain Orejime (either
-    // a selector or a DOM element).
-    // It no element matches, an element will be created and inserted at the
-    // beginning of the <body>.
-    orejimeElement: "#orejime",
-
-    // Optional.
-    cookie: {
-        // Optional. You can customize the name of the cookie that Orejime uses for storing
-        // user consent decisions.
-        // defaults to "orejime".
-        name: "orejime",
-
-        // Optional. You can set a custom expiration time for the Orejime cookie, in days.
-        // defaults to 365.
-        duration: 365,
-
-        // Optional. You can provide a custom domain for the Orejime cookie, for example to make it available on every associated subdomains.
-        domain: 'mydomain.com',
-
-        // Optional. You can provide a custom function to serialize the cookie contents.
-        stringify: (contents) => JSON.stringify(contents),
-
-        // Optional. You can provide a custom function to unserialize the cookie contents.
-        parse: (cookie) => JSON.parse(cookie),
-    },
-
-    // You must provide a link to your privacy policy page
+    // You must provide a link to your privacy policy page for GDPR compliance.
     privacyPolicyUrl: "",
-
-    // Optional. If `forceModal` is set to true, Orejime will directly display
-    // the consent modal and not allow the user to close it before having actively
-    // consented or declined the use of third-party purposes.
-    // defaults to false
-    forceModal: false,
-
-    // Optional. If `forceBanner` is set to true, Orejime will display the consent
-    // notice and not allow the user to close it before having actively consented
-    // or declined the use of third-party purposes.
-    // Has no effect if `forceModal` is set to true.
-    // defaults to false
-    forceBanner: false,
-
-    // Optional. You can define the UI language directly here. If undefined, Orejime will
-    // use the value given in the global "lang" variable, or fallback to the value
-    // in the <html> lang attribute, or fallback to "en".
-    lang: "en",
-
-    // Optional. You can pass an image url to show in the notice.
-    // If the image is not exclusively decorative, you can pass an object
-    // with the image `src` and `alt` attributes: `logo: {src: '...', alt: '...'}`
-    logo: '/img/logo.png',
-
-    // Optional. The theme used to render the UI (See the "theming" section below).
-    // If unset, this will default to "orejime", the classic built-in UI.
-    theme: 'orejime',
-
-    // You can overwrite existing translations and add translations for your
-    // purpose descriptions and purposes. See `src/translations` for a full
-    // list of translations that can be overwritten
-    translations: {
-        modal: {
-            description: "This is an example of how to override an existing translation already used by Orejime",
-        }
-    },
 
     // The list of third-party purposes that Orejime will manage for you.
     // The purposes will appear in the modal in the same order as defined here.
     purposes: [
         {
             // The id of the purpose, used internally by Orejime.
-            // Each id should match the `data-purpose` attribute of a <script>
-            // tag defined in the "Changing your existing third-party scripts"
-            // documentation step.
             id: "google-tag-manager",
 
-            // The title of you purpose as listed in the consent modal.
+            // The title of the purpose as shown in the banner and modal.
             title: "Google Tag Manager",
 
-            // Optional. The description of you purpose as listed in the consent modal.
+            // [optional]
+            // The description of you purpose as listed in the modal.
             description: "This is used for analytics.",
 
             // A list of regex expressions, strings, or arrays, giving the names of
@@ -184,26 +109,30 @@ var orejimeConfig = {
                 "_gat_" + GTM_UA
             ],
 
-            // Optional. If "isMandatory" is set to true, Orejime will not allow this purpose to
+            // [optional]
+            // If "isMandatory" is set to true, Orejime will not allow this purpose to
             // be disabled by the user.
             // See "Special cases" below for more information.
-            // default to false
+            // (defaults to false)
             isMandatory: false,
 
-            // Optional. If `isExempt` is set to true, Orejime will load this purpose
+            // [optional]
+            // If `isExempt` is set to true, Orejime will load this purpose
             // even before the user gave explicit consent.
             // We recommend always leaving this "false".
             // See "Special cases" below for more information.
-            // defaults to false
+            // (defaults to false)
             isExempt: false,
 
-            // Optional. If "default" is set to true, the purpose will be enabled by default
-            // defaults to false.
+            // [optional]
+            // If "default" is set to true, the purpose will be enabled by default
+            // (defaults to false)
             default: false,
 
-            // Optional. If "runsOnce" is set to true, the purpose will only be executed
+            // [optional]
+            // If "runsOnce" is set to true, the purpose will only be executed
             // once regardless how often the user toggles it on and off.
-            // defaults to false
+            // (defaults to false)
             runsOnce: true,
         },
         {
@@ -247,68 +176,156 @@ var orejimeConfig = {
                 }
             ]
         }
-    ]
+    ],
+
+    // [optional]
+    // If `forceModal` is set to true, Orejime will directly display
+    // the consent modal and not allow the user to close it before having actively
+    // consented or declined the use of third-party purposes.
+    // (defaults to false)
+    forceModal: false,
+
+    // [optional]
+    // If `forceBanner` is set to true, Orejime will display the consent
+    // notice and not allow the user to close it before having actively consented
+    // or declined the use of third-party purposes.
+    // Has no effect if `forceModal` is set to true.
+    // (defaults to false)
+    forceBanner: false,
+
+    // [optional]
+    // You can overwrite existing translations and add translations for your
+    // purpose descriptions and purposes. See `src/translations` for a full
+    // list of translations that can be overwritten.
+    translations: {
+        modal: {
+            description: "This is an example of how to override an existing translation already used by Orejime",
+        }
+    },
+
+    // [optional]
+    // You can pass an image url to show in the notice.
+    // If the image is not exclusively decorative, you can pass an object
+    // with the image `src` and `alt` attributes: `logo: {src: '...', alt: '...'}`
+    logo: '/img/logo.png',
+
+    // [optional]
+    // You can customize the element that will contain Orejime (either
+    // a selector or a DOM element).
+    // It no element matches, an element will be created and inserted at the
+    // beginning of the <body>.
+    orejimeElement: "#orejime",
+
+    // [optional]
+    cookie: {
+        // [optional]
+        // You can customize the name of the cookie that Orejime uses for storing
+        // user consent decisions.
+        // (defaults to 'orejime')
+        name: 'orejime',
+
+        // [optional]
+        // You can set a custom expiration time for the Orejime cookie, in days.
+        // (defaults to 365.)
+        duration: 365,
+
+        // [optional]
+        // You can provide a custom domain for the Orejime cookie, for example to make it available on every associated subdomains.
+        domain: 'mydomain.com',
+
+        // [optional]
+        // You can provide a custom function to serialize the cookie contents.
+        stringify: (contents) => JSON.stringify(contents),
+
+        // [optional]
+        // You can provide a custom function to unserialize the cookie contents.
+        parse: (cookie) => JSON.parse(cookie),
+    }
 }
 ```
+
+> [!IMPORTANT]
+> If every purpose is either `isMandatory` or `isExempt`, Orejime will not show at startup (it will still be possible to open it programmatically).
+> However, you should consider this use case carefully, and ensure that :
+> * `isMandatory` trackers are truly required for your app to function properly
+> * `isExempt` trackers are exempt from consent (i.e. [as defined by the CNIL](https://www.cnil.fr/fr/cookies-solutions-pour-les-outils-de-mesure-daudience))
+
 
 </details>
 
-#### Special cases
+### Third-party scripts configuration
 
-##### Exemption
+For each third-party script you want Orejime to manage, you must modify its `<script>` tag so that the browser doesn't load it anymore. Orejime will take care of loading it when the user consents to it.
 
-If every purpose is either `isMandatory` or `isExempt`, Orejime will not show at startup
-(but it will still be possible to open it programmatically).
-However, you should consider this use case carefully, and ensure that :
-* `isMandatory` trackers are truly required for your app to function properly
-* `isExempt` trackers are exempt from consent, (i.e.
-[as defined by the CNIL](https://www.cnil.fr/fr/cookies-solutions-pour-les-outils-de-mesure-daudience))
+On inline scripts:
+* set the `type` attribute to `orejime` to keep the browser from executing the script
+* add a `data-purpose` containing the id of a purpose you configured previously
+
+```diff
+- <script>
++ <script
++   type="orejime"
++   data-purpose="google-tag-manager"
++  >
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push [...]
+  </script>
+```
+
+> [!WARNING]
+> The `data-purpose` attribute must match the id of a purpose in the configuration.
+> Orejime uses this id to find a purpose's associated scripts.
+> If those don't match, Orejime won't be able to load the scripts.
+
+On external scripts or `img` tags (i.e. tracking pixels), follow the same steps and rename the `src` attribute to `data-src`:
+
+```diff
+- <script
+-   src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
++ <script
++   type="orejime"
++   data-purpose="google-maps"
++   data-src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+  ></script>
+```
 
 ### Initialization
 
-Now that you included the JS, the CSS, configured existing third-party scripts and defined your configuration, you can initialize an instance. This can be done automatically or manually.
+Now that you installed and configured Orejime, you should see it greet you!
 
-#### Automatically
+Anytime the `window.orejimeConfig` variable is set with a valid configuration, Orejime will pick it up and start.
 
-When including the script, the lib checks if the `window.orejimeConfig` variable exists. If it does, a new Orejime instance is created in `window.orejime`.
-
-#### Manually
+In case you don't set this variable, Orejime can still be launched programatically by passing it a configuration:
 
 ```js
-// if using Orejime in a module context:
-// var Orejime = require('orejime');
-
 Orejime.init(orejimeConfig);
 ```
 
-#### As a module
-
-Previously, Orejime could be imported as any other module and bundled into application code.
-With version 3, we're abandonning this functionality to provide a standalone build only ([learn why](./adr/001-distribution-formats.md)).
+> [!NOTE]
+> Previously, Orejime could be imported as any other module and bundled into application code.
+> With version 3, we're abandonning this functionality to provide standalone builds only ([learn why](./adr/001-distribution-formats.md)).
 
 ### Theming
 
-Orejime support multiple themes to accomodate for every situation.
+#### Standard theme
 
-#### Default theme
+This is a custom theme meant to be simple but elegant enough to be used as-is on any website.
+It is easily customizable by tweaking some CSS properties.
 
-This theme is loaded by default. It is meant to be simple but elegant enough to be used as-is on any website. It is easily customizable by tweaking some CSS properties.
-
-Of course, you can either replace the original CSS entirely, or add your custom stylesheet to overwrite only some of the rules.
-
-```css
-/* custom-style.css */
-.orejime-Env {
-    --orejime-font-family: monospace;
-    --orejime-background: black;
-    --orejime-color: yellow;
-}
-```
+You can either replace the original CSS entirely, or add your custom stylesheet to overwrite only some of the rules.
 
 ```html
 <link rel="stylesheet" href="orejime.css" />
-<link rel="stylesheet" href="custom-style.css" />
+
+<style>
+    .orejime-Env {
+        --orejime-font-family: monospace;
+        --orejime-background: black;
+        --orejime-color: yellow;
+    }
+</style>
 ```
+
+You'll find the available CSS properties in [the theme's stylesheet](src/ui/themes/standard/index.css).
 
 #### DSFR theme
 
@@ -316,16 +333,25 @@ This theme is meant to be used on websites using the official design system of t
 
 See the [consent manager component](https://www.systeme-de-design.gouv.fr/composants-et-modeles/composants/gestionnaire-de-consentement) on the DSFR docs for an overview.
 
+### Internationalization
+
+Orejime is available in most european languages:
+Catalan, Dutch, English, Estonian, Finnish, French, German, Hungarian, Italian, Norwegian, Occitan, Romanian, Spanish, Swedish.
+
+> [!NOTE]
+> Each and every translated text is overridable via [the configuration](#configuration).
+
 ## API
 
-* `Orejime.init(config)`: creates a new Orejime instance with the given config object
-* `Orejime.defaultConfig`: object containing all the default properties of an instance
+Functions and references are made available on the global scope:
+
+* `loadOrejime(config)`: creates a new Orejime instance with the given config object
 
 ### Orejime instance
 
-* `prompt()`: opens the consent modal
-* `manager`: the Manager instance used. See `src/core/Manager.ts`
-* `config`: the complete config object used
+* `orejime.prompt()`: opens the consent modal
+* `orejime.manager`: the core consent manager (see `src/core/Manager.ts`)
+* `orejime.config`: the complete config object used
 
 ## Migrating
 
@@ -333,18 +359,18 @@ See the [consent manager component](https://www.systeme-de-design.gouv.fr/compos
 
 A major overhaul of the configuration took place in this version, as to clarify naming and align more with the GDPR vocabulary.
 
-If you were already using version 2, a tool to migrate your current configuration is available here : https://orejime.boscop.fr/migration.
+If you were already using version 2, a tool to migrate your current configuration is available here : https://orejime.boscop.fr/#migration.
 
 ## Development
 
-If you want to contribute to Orejime, or make a special build for yourself, clone the project then:
+If you want to contribute to Orejime, or make a custom build for yourself, clone the project and run these commands:
 
 ```
 npm install
 npm start
 ```
 
-You can then open the demo page on `http://localhost:3000` - it will be reloaded automatically when the JS or CSS changes.
+You can then open the demo page at `http://localhost:3000`, which will be reloaded automatically whenever the JS or CSS changes.
 
 ## License & credits
 
@@ -352,8 +378,10 @@ This project is licensed under a BSD-3 license.
 
 Orejime started as a fork of [Klaro!](https://github.com/KIProtect/klaro). A lot of stuff changed since. A few were integrated in the original project, but eventually some big bricks changed and it became difficult, or sometimes not even necessary, to push those changes in.
 
-Orejime is maintained by [<span lang="fr">Boscop</span>  (French)](http://boscop.fr).
+Orejime is maintained by [Boscop (French)](http://boscop.fr).
 
 ### What does "Orejime" mean?
 
-"Orejime" is a play-on-word. You can pronounce it like "Au régime" in French, which means "on a diet". 🍪
+"Orejime" is a play-on-word. You can pronounce it like "Au régime" in French, which means "on a diet".
+
+🍪🍪🍪

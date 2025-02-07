@@ -1,5 +1,6 @@
 import {Translations} from '../ui';
 
+// Estonian.
 export default {
 	banner: {
 		title: null,

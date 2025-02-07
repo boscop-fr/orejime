@@ -1,6 +1,4 @@
 window.orejimeConfig = {
-	theme: 'dsfr',
-	lang: 'fr',
 	purposes: [
 		{
 			id: 'mandatory',
