@@ -1,5 +1,6 @@
 import {Translations} from '../ui';
 
+// Hungarian.
 export default {
 	banner: {
 		title: null,

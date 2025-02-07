@@ -1,5 +1,6 @@
 import {Translations} from '../ui';
 
+// German.
 export default {
 	banner: {
 		title: null,

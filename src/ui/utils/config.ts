@@ -5,13 +5,11 @@ import {
 	PurposeList,
 	Translations
 } from '../types';
-import {language} from './i18n';
 
 export const DefaultConfig: Partial<Config> = {
 	privacyPolicyUrl: '',
 	forceModal: false,
 	forceBanner: false,
-	lang: language(),
 	translations: {} as Translations,
 	purposes: []
 };
