@@ -102,6 +102,16 @@ export class OrejimePage {
 		await this.page.keyboard.press('Escape');
 	}
 
+	// @see https://stackoverflow.com/a/73214414
+	async expectElement(selector: string) {
+		expect(await this.page.locator(selector)).toHaveCount(1);
+	}
+
+	// @see https://stackoverflow.com/a/73214414
+	async expectMissingElement(selector: string) {
+		expect(await this.page.locator(selector).count()).toEqual(0);
+	}
+
 	async expectConsents(consents: Record<string, unknown>) {
 		expect(await this.getConsentsFromCookies()).toEqual(consents);
 	}
@@ -111,18 +121,5 @@ export class OrejimePage {
 		const cookies = await this.context.cookies();
 		const {value} = cookies.find((cookie) => cookie.name === name)!;
 		return JSON.parse(Cookie.converter.read(value, name));
-	}
-
-	async expectScriptAttributes(
-		purposeId: string,
-		attributes: Record<string, string>
-	) {
-		const script = await this.page.locator(
-			`script[data-purpose="${purposeId}"]`
-		);
-
-		for (const k in attributes) {
-			expect(script).toHaveAttribute(k, attributes[k]);
-		}
 	}
 }
