@@ -32,8 +32,13 @@ test.describe('Orejime', () => {
 	};
 
 	const BaseScripts = `
-		<script type="orejime" data-purpose="mandatory"></script>
-		<script type="orejime" data-purpose="child-1" data-type="application/json"></script>
+		<template data-purpose="mandatory">
+			<script id="mandatory"></script>
+		</template>
+
+		<template data-purpose="child-1">
+			<iframe id="child-1"></iframe>
+		</template>
 	`;
 
 	let orejimePage: OrejimePage;
@@ -61,15 +66,8 @@ test.describe('Orejime', () => {
 			'child-2': true
 		});
 
-		orejimePage.expectScriptAttributes('mandatory', {
-			'data-purpose': 'mandatory',
-			type: 'text/javascript'
-		});
-
-		orejimePage.expectScriptAttributes('child-1', {
-			'data-purpose': 'child-1',
-			type: 'application/json'
-		});
+		orejimePage.expectElement('#mandatory');
+		orejimePage.expectElement('#child-1');
 	});
 
 	test('should decline all purposes from the banner', async () => {
@@ -82,16 +80,8 @@ test.describe('Orejime', () => {
 			'child-2': false
 		});
 
-		orejimePage.expectScriptAttributes('mandatory', {
-			'data-purpose': 'mandatory',
-			type: 'text/javascript'
-		});
-
-		orejimePage.expectScriptAttributes('child-1', {
-			'data-purpose': 'child-1',
-			'data-type': 'application/json',
-			'type': 'orejime'
-		});
+		orejimePage.expectElement('#mandatory');
+		orejimePage.expectMissingElement('#child-1');
 	});
 
 	test('should open a modal', async () => {
