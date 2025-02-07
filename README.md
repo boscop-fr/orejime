@@ -255,38 +255,58 @@ var orejimeConfig = {
 
 ### Third-party scripts configuration
 
-For each third-party script you want Orejime to manage, you must modify its `<script>` tag so that the browser doesn't load it anymore. Orejime will take care of loading it when the user consents to it.
+Scripts that require user consent must not be executed when the page load.
+Orejime will take care of loading them when the user has consented.
 
-On inline scripts:
-* set the `type` attribute to `orejime` to keep the browser from executing the script
-* add a `data-purpose` containing the id of a purpose you configured previously
-
-```diff
-- <script>
-+ <script
-+   type="orejime"
-+   data-purpose="google-tag-manager"
-+  >
-    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push [...]
-  </script>
-```
-
-> [!WARNING]
-> The `data-purpose` attribute must match the id of a purpose in the configuration.
-> Orejime uses this id to find a purpose's associated scripts.
-> If those don't match, Orejime won't be able to load the scripts.
-
-On external scripts or `img` tags (i.e. tracking pixels), follow the same steps and rename the `src` attribute to `data-src`:
+Those scripts must be tagged with their related purpose from the configuration. This is done by wrapping them with a template tag and a `data-purpose` attribute:
 
 ```diff
-- <script
--   src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
-+ <script
-+   type="orejime"
-+   data-purpose="google-maps"
-+   data-src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
-  ></script>
++ <template data-purpose="google-tag-manager">
+    <script>
+      (function(w,d,s,l,i){/* … */})(window,document,'script','dataLayer','GTM-XXXX')
+    </script>
++ </template>
 ```
+
+This way, the original script is left untouched, and any piece of HTML can be controlled by Orejime in the same way.
+
+You can wrap many elements at once or use several templates with the same purpose:
+
+```html
+<template data-purpose="ads">
+    <script src="https://annoying-ads.net"></script>
+    <script src="https://intrusive-advertising.io"></script>
+</template>
+
+<template data-purpose="ads">
+    <iframe src="https://streaming.ads-24-7.com/orejime"></iframe>
+</template>
+```
+
+<details>
+<summary>Integration tips</summary>
+
+#### WordPress
+
+Should you use Orejime in a WordPress website, you could alter the rendering of the script tags it should handle:
+
+```php
+// Register a script somewhere…
+wp_enqueue_script('matomo', 'matomo.js');
+
+// …and change the script output to wrap it in a template.
+function orejimeScriptLoader($tag, $handle, $src) {
+    if ($handle === 'matomo') {
+        return '<template data-purpose="analytics">' + $tag + '</template>';
+    }
+
+    return $tag;
+}
+
+add_filter('script_loader_tag', 'orejimeScriptLoader', 10, 3);
+
+```
+</details>
 
 ### Initialization
 
@@ -399,7 +419,28 @@ orejime.manager.on('dirty', function(isDirty) {
 
 A major overhaul of the configuration took place in this version, as to clarify naming and align more with the GDPR vocabulary.
 
+#### Configuration
+
 If you were already using version 2, a tool to migrate your current configuration is available here : https://orejime.boscop.fr/#migration.
+
+#### Third-party scripts
+
+Previous versions of Orejime required you to alter third party script tags.
+This behavior has changed, and you should now leave scripts untouched and wrap them in a template, as documented in [scripts configuration](#third-party-scripts-configuration) ([learn why](./adr/003-purpose-templates.md)).
+
+As you can see from the following example, this is simpler and less intrusive:
+
+```diff
+- <script
+-   type="opt-in"
+-   data-type="application/javascript"
+-   data-name="google-maps"
+-   data-src="https://maps.googleapis.com/maps/api/js"
+- ></script>
++ <template data-purpose="google-maps">
++   <script src="https://maps.googleapis.com/maps/api/js"></script>
++ </template>
+```
 
 ## Development
 
