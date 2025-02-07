@@ -1,5 +1,6 @@
 import {Translations} from '../ui';
 
+// Romanian.
 export default {
 	banner: {
 		title: null,

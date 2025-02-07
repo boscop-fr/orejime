@@ -17,14 +17,14 @@ export class OrejimePage {
 					<html>
 						<head>
 							<title>Orejime</title>
-							<link rel="stylesheet" href="orejime.css" />
+							<link rel="stylesheet" href="orejime-standard.css" />
 						</head>
 
 						<body>
 							<script>
 								window.orejimeConfig = ${JSON.stringify(config)}
 							</script>
-							<script src="orejime.js"></script>
+							<script src="orejime-standard-en.js"></script>
 							${scripts}
 						</body>
 					</html>

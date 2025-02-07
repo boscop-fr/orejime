@@ -2,9 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const {rspack} = require('@rspack/core');
 const sharp = require('sharp');
-const pkg = require('./package.json');
 const services = require('./site/services.json');
-const theme = require('./site/themes/boscop-light-soft-color-theme.json');
+const codeTheme = require('./site/themes/boscop-light-soft-color-theme.json');
 
 const fullPath = path.resolve.bind(path, __dirname);
 const isDev = process.env.NODE_ENV === 'development';
@@ -20,19 +19,12 @@ module.exports = {
 		}
 	},
 	entry: {
-		orejime: ['./src/umd.ts', './src/styles/orejime.scss'],
-		migrations: './src/migrations/index.ts'
+		migrations: './src/migrations/index.ts',
+		...standaloneEntries()
 	},
 	output: {
 		filename: '[name].js',
-		chunkFilename: (pathData) => {
-			// strips file names from generated chunk names
-			return isDev
-				? pathData.chunk.name
-				: pathData.chunk.name.replace(/(\-ts|\-index\-ts)$/, '.js');
-		},
 		path: fullPath('dist'),
-		publicPath: 'auto',
 		clean: true
 	},
 	module: {
@@ -62,24 +54,18 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.ya?ml$/,
-				use: 'yaml-loader'
-			},
-			{
-				test: /\.s[ac]ss$/i,
+				test: /\.css$/i,
 				type: 'javascript/auto',
-				use: [
-					rspack.CssExtractRspackPlugin.loader,
-					'css-loader',
-					'sass-loader'
-				]
+				use: [rspack.CssExtractRspackPlugin.loader, 'css-loader']
 			}
 		]
 	},
 	resolve: {
 		extensions: ['.js', '.ts', '.tsx'],
 		fallback: {
-			fs: false
+			fs: false,
+			// Avoids a warning from uneval.
+			'internal-prop': false
 		}
 	},
 	optimization: {
@@ -88,26 +74,11 @@ module.exports = {
 		splitChunks: false
 	},
 	plugins: [
-		new rspack.BannerPlugin({
-			banner:
-				pkg.name +
-				' v' +
-				pkg.version +
-				' - ' +
-				pkg.license +
-				' license, ' +
-				'original work Copyright (c) 2018 DPKit, ' +
-				'modified work Copyright (c) 2019 Boscop, ' +
-				'all rights reserved.'
-		}),
 		new rspack.CssExtractRspackPlugin({
-			filename: 'orejime.css'
+			filename: 'orejime-standard.css'
 		}),
 		new rspack.CopyRspackPlugin({
 			patterns: [
-				{
-					from: 'src/styles'
-				},
 				{
 					from: 'site/assets',
 					to: 'assets',
@@ -133,37 +104,78 @@ module.exports = {
 			}),
 			chunks: ['migrations']
 		}),
-		featureTemplatePlugin('Purposes', 'purposes'),
-		featureTemplatePlugin('Grouping', 'grouping'),
-		featureTemplatePlugin('Internationalization', 'i18n'),
-		featureTemplatePlugin('Styling', 'styling'),
-		featureTemplatePlugin(
-			"Intégration au système de design de l'état",
-			'dsfr',
-			'dsfr',
-			[]
-		)
+		featureTemplatePlugin({title: 'Purposes', feature: 'purposes'}),
+		featureTemplatePlugin({title: 'Grouping', feature: 'grouping'}),
+		featureTemplatePlugin({
+			title: 'Internationalization',
+			feature: 'i18n',
+			lang: 'fr'
+		}),
+		featureTemplatePlugin({title: 'Styling', feature: 'styling'}),
+		featureTemplatePlugin({
+			title: "Intégration au système de design de l'état",
+			feature: 'dsfr',
+			template: 'dsfr',
+			chunks: [],
+			lang: 'fr'
+		})
 	]
 };
+
+// Generates entries for each possible combination of theme
+// and language.
+// @see ./adr/002-standalone-bundles.md
+function standaloneEntries() {
+	const themes = fs.readdirSync(fullPath('src/ui/themes'));
+	const langs = fs
+		.readdirSync(fullPath('src/translations'))
+		.map((file) => path.basename(file, '.ts'));
+
+	const entries = {};
+
+	for (const theme of themes) {
+		for (const lang of langs) {
+			entries[`orejime-${theme}-${lang}`] = standaloneEntry(theme, lang);
+		}
+	}
+
+	return entries;
+}
+
+// Generates a custom entry by inlining a small bootstrap
+// script.
+function standaloneEntry(theme, lang) {
+	return (
+		'data:text/javascript,' +
+		`import theme from '${fullPath(`./src/ui/themes/${theme}/index.ts`)}';` +
+		`import translations from '${fullPath(
+			`./src/translations/${lang}.ts`
+		)}';` +
+		`import {setupUmd} from '${fullPath('./src/umd.ts')}';` +
+		'setupUmd(theme, translations);'
+	);
+}
 
 // Configures an HTML plugin to render an example page about
 // a given feature.
 // Those pages include snippets of JS and/or CSS to setup
 // Orejime that are also presented to the user.
-function featureTemplatePlugin(
+function featureTemplatePlugin({
 	title,
-	name,
+	feature,
 	template = 'orejime',
-	chunks = ['orejime']
-) {
+	chunks = ['orejime'],
+	lang = 'en'
+}) {
 	return new rspack.HtmlRspackPlugin({
 		chunks,
 		minify: false,
-		filename: `features/${name}.html`,
+		filename: `features/${feature}.html`,
 		template: `site/features/${template}.html`,
 		templateParameters: async () => ({
-			js: await featureTemplateCode(name, 'javascript'),
-			css: await featureTemplateCode(name, 'css')
+			lang,
+			js: await featureTemplateCode(feature, 'javascript'),
+			css: await featureTemplateCode(feature, 'css')
 		}),
 		// Oddly enough, the title tag needs to be filled in
 		// the template so HtmlRspackPlugin can replace it.
@@ -191,7 +203,7 @@ async function featureTemplateCode(name, lang) {
 	const {codeToHtml} = await import('shiki');
 	const highlightedCode = await codeToHtml(code, {
 		lang,
-		theme
+		theme: codeTheme
 	});
 
 	return {

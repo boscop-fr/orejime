@@ -1,7 +1,4 @@
 window.orejimeConfig = {
-	// the base language
-	lang: 'fr',
-	// some custom translations
 	translations: {
 		banner: {
 			configure: 'Configurer'

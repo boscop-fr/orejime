@@ -52,7 +52,6 @@ const migrateApps = (
 export const migrateConfig = (config: Partial<V2Config>): Partial<Config> =>
 	cleanDeep({
 		orejimeElement: config?.elementID,
-		lang: config?.lang,
 		logo:
 			config?.logo && typeof config.logo !== 'boolean'
 				? config.logo

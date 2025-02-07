@@ -1,5 +1,6 @@
 import {Translations} from '../ui';
 
+// Occitan.
 export default {
 	banner: {
 		title: null,

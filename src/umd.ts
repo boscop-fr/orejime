@@ -1,43 +1,20 @@
-import setup, {type OrejimeInstance} from './setup';
+import setup, {OrejimeInstance} from './setup';
 import type {Config, Translations} from './ui';
-import {type Theme} from './ui/components/types/Theme';
 import {deepMerge} from './ui/utils/objects';
+import {Theme} from './ui/components/types/Theme';
 
-export type OrejimeConstructor = (config: Partial<UmdConfig>) => Promise<OrejimeInstance>;
-
-export interface Orejime {
-	init: OrejimeConstructor
-}
-
-export interface UmdConfig extends Omit<Config, 'theme'> {
-	theme: 'orejime' | 'dsfr'
-}
+export type LoadOrejime = (config: Partial<Config>) => OrejimeInstance;
 
 declare global {
 	interface Window {
-		orejimeConfig: Partial<UmdConfig>;
+		orejimeConfig: Partial<Config>;
 		orejime: OrejimeInstance;
-		Orejime: Orejime
+		loadOrejime: LoadOrejime;
 	}
 }
 
-const importTheme = (theme: UmdConfig['theme'] = 'orejime') =>
-	import(
-		/* webpackChunkName: "orejime-theme-[request]" */
-		`./ui/themes/${theme}/index.ts`
-	).then((module) => module.default as Theme);
-
-const importTranslations = (lang = 'en') =>
-	import(
-		/* webpackChunkName: "orejime-lang-[request]" */
-		`./translations/${lang}.ts`
-	).then((module) => module.default as Translations);
-
-const init: OrejimeConstructor = (config) =>
-	Promise.all([
-		importTheme(config.theme),
-		importTranslations(config.lang)
-	]).then(([theme, translations]) => {
+export const setupUmd = (theme: Theme, translations: Translations) => {
+	const load: LoadOrejime = (config) => {
 		const orejime = setup(
 			deepMerge(
 				{
@@ -62,24 +39,19 @@ const init: OrejimeConstructor = (config) =>
 		}
 
 		return orejime;
-	});
-
-const autoload = async () => {
-	window.Orejime = {
-		init
 	};
 
-	if (
-		window.orejimeConfig !== undefined &&
-		// `window.orejime instanceof Element` means there is a #orejime div in the dom
-		(window.orejime === undefined || window.orejime instanceof Element)
-	) {
-		window.orejime = await init(window.orejimeConfig);
+	const autoload = async () => {
+		window.loadOrejime = load;
+
+		if (window.orejimeConfig !== undefined && window.orejime === undefined) {
+			window.orejime = load(window.orejimeConfig);
+		}
+	};
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', autoload);
+	} else {
+		autoload();
 	}
 };
-
-if (document.readyState === 'loading') {
-	document.addEventListener('DOMContentLoaded', autoload);
-} else {
-	autoload();
-}
