@@ -103,10 +103,6 @@ export default class Manager extends EventEmitter<ManagerEvents> {
 		);
 	}
 
-	resetConsents() {
-		this.setConsents({...this.#defaultConsents});
-	}
-
 	clearConsents() {
 		this.#updateConsents({...this.#defaultConsents});
 		this.#updateInvalidConsents(
