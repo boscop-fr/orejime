@@ -350,8 +350,48 @@ Functions and references are made available on the global scope:
 ### Orejime instance
 
 * `orejime.prompt()`: opens the consent modal
-* `orejime.manager`: the core consent manager (see `src/core/Manager.ts`)
+* `orejime.manager`: the core consent manager
 * `orejime.config`: the complete config object used
+
+### Manager
+
+The manager handles the core functionality of Orejime.
+
+* `orejime.manager.getConsent(purposeId)`: tells if the user has given consent to a given purpose
+* `orejime.manager.setConsent(purposeId, consent)`: sets consent to a given purpose
+* `orejime.manager.clearConsents()`: resets consents as if the user never interacted with Orejime (this will reopen the banner)
+* `orejime.manager.acceptAll()`: gives consent to all purposes
+* `orejime.manager.declineAll()`: revokes consent to all purposes
+
+#### Events
+
+The manager emits events to which you might subscribe to implement side effects:
+
+```js
+orejime.manager.on('update', function(updatedConsents, allConsents) {
+    // Consent was granted or denied on some purposes.
+    // `updatedConsents` is an object with purpose ids as
+    // keys and consent state as values that holds only
+    // updated purposes.
+    // `allConsents` is similar to `updatedConsents` but
+    // contains every purpose configured.
+});
+
+orejime.manager.on('clear', function() {
+    // All consents have been reset to their default state.
+    // This happens after a call to `orejime.manager.clearConsents()`.
+});
+
+orejime.manager.on('dirty', function(isDirty) {
+    // If `isDirty` is true, the menager is in a state where
+    // the consents given don't satisfy the constraints of
+    // their related purposes (for example, a purpose with
+    // the flag `isMandatory` requires explicit consent from
+    // the user).
+});
+```
+
+(See `src/core/Manager.ts` for a complete overview)
 
 ## Migrating
 
