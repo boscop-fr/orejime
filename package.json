@@ -46,6 +46,9 @@
     "url": "https://github.com/boscop-fr/orejime/issues"
   },
   "homepage": "https://orejime.boscop.fr",
+  "browserslist": [
+    "defaults"
+  ],
   "dependencies": {
     "js-cookie": "^3.0.1"
   },
