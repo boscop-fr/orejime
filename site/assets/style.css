@@ -67,6 +67,11 @@ iframe {
 	color: var(--color-black--100);
 }
 
+.ExamplePage iframe {
+	aspect-ratio: 16 / 9;
+	min-height: 0;
+}
+
 .ExamplePage .orejime-Env {
 	font-size: 0.875rem;
 }

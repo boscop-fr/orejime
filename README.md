@@ -283,6 +283,9 @@ You can wrap many elements at once or use several templates with the same purpos
 </template>
 ```
 
+> [!NOTE]
+> There is more you can do with templates! Learn about [contextual consent](#contextual-consent).
+
 <details>
 <summary>Integration tips</summary>
 
@@ -360,6 +363,29 @@ Catalan, Dutch, English, Estonian, Finnish, French, German, Hungarian, Italian, 
 
 > [!NOTE]
 > Each and every translated text is overridable via [the configuration](#configuration).
+
+### Contextual consent
+
+Content embedded from other websites might be restricted by user consent (i.e. a YouTube video).
+
+In that case, using templates would work just like with scripts:
+
+```js
+<template data-purpose="youtube">
+    <iframe src="https://www.youtube.com/embed/toto"></iframe>
+</template>
+```
+
+However, this won't show anything until the user consents to the related purpose.
+
+To be a little more user friendly, adding the `data-contextual` attribute will display a fallback notice until consent is given, detailing the reason and offering a way to consent in place.
+
+```diff
+- <template data-purpose="youtube">
++ <template data-purpose="youtube" data-contextual>
+      <iframe src="https://www.youtube.com/embed/toto"></iframe>
+  </template>
+```
 
 ## API
 

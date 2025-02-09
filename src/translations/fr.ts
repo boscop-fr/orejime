@@ -27,6 +27,11 @@ export default {
 		save: 'Sauvegarder',
 		saveTitle: 'Sauvegarder ma configuration sur les informations collectées'
 	},
+	contextual: {
+		title: '"{purpose}" est désactivé',
+		description: 'Autorisez le dépôt de cookies pour accèder à cette fonctionnalité.',
+		accept: 'Autoriser'
+	},
 	purpose: {
 		mandatory: 'toujours requis',
 		mandatoryTitle: 'Cette application est toujours requise',

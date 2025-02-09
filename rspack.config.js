@@ -116,6 +116,7 @@ module.exports = {
 		featureTemplatePlugin('Grouping', 'grouping'),
 		featureTemplatePlugin('Internationalization', 'i18n'),
 		featureTemplatePlugin('Styling', 'styling'),
+		featureTemplatePlugin('Contextual consent', 'contextual', 'contextual'),
 		featureTemplatePlugin(
 			"Intégration au système de design de l'état",
 			'dsfr',

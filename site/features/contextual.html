@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html class="ExamplePage" lang="en">
+	<head>
+		<title>Orejime</title>
+
+		<link
+			rel="stylesheet"
+			href="https://boscop.fr/wp-content/themes/boscop/dist/app.css"
+		/>
+
+		<link rel="stylesheet" href="../assets/style.css" />
+		<link rel="stylesheet" href="../orejime-standard.css" />
+	</head>
+
+	<body>
+		<main class="ExampleMain" role="main">
+            <template data-purpose="youtube" data-contextual>
+                <figure role="group">
+                    <iframe
+                        title="YouTube video player"
+                        src="https://www.youtube-nocookie.com/embed/pghz5vpi5q4?si=npJInLIEM7XiD0MB"
+                        allowfullscreen
+                    ></iframe>
+
+                    <figcaption class="fr-content-media__caption">
+                        Cooking cookies with Philippe Etchebest
+                    </figcaption>
+                </figure>
+            </template>
+
+			<button class="ExampleReset Button">
+				Reset consent
+			</button>
+		</main>
+
+		<script>
+			window.orejimeConfig = {
+				purposes: [
+					{
+						id: 'youtube',
+						title: 'YouTube'
+					}
+				],
+				privacyPolicyUrl: '#'
+			};
+		</script>
+
+		<script src="../orejime-standard-en.js"></script>
+
+		<script>
+			document
+				.querySelector('.ExampleReset')
+				.addEventListener('click', function () {
+					window.orejime.manager.clearConsents();
+				});
+		</script>
+	</body>
+</html>

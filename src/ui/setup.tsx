@@ -5,6 +5,7 @@ import Main, {MainApi} from './components/Main';
 import type {Config} from './types';
 import {getRootElement} from './utils/dom';
 import {once} from './utils/functions';
+import {contextualConsentsEffect} from './contextualConsentsEffect';
 
 export default (config: Config, manager: Manager) => {
 	const element = getRootElement(config.orejimeElement);
@@ -28,8 +29,25 @@ export default (config: Config, manager: Manager) => {
 		apiRef.current!.openModal();
 	};
 
+	const contextualEffect = contextualConsentsEffect(config, manager);
+
+	manager.on('update', (consents) => {
+		contextualEffect(consents);
+	});
+
+	contextualEffect(manager.getAllConsents());
+
+	manager.on('dirty', (isDirty) => {
+		if (isDirty) {
+			show();
+		}
+	});
+
+	if (manager.isDirty()) {
+		show();
+	}
+
 	return {
-		show,
 		openModal
 	};
 };

@@ -27,6 +27,11 @@ export default {
 		save: 'Save',
 		saveTitle: 'Save my configuration on collected information'
 	},
+	contextual: {
+		title: '"{purpose}" is inactive',
+		description: 'Allow cookies to access this functionality.',
+		accept: 'Allow'
+	},
 	purpose: {
 		mandatory: 'always required',
 		mandatoryTitle: 'This application is always required',
