@@ -4,6 +4,7 @@ const {rspack} = require('@rspack/core');
 const sharp = require('sharp');
 const services = require('./site/services.json');
 const codeTheme = require('./site/themes/boscop-light-soft-color-theme.json');
+const package = require('./package.json');
 
 const fullPath = path.resolve.bind(path, __dirname);
 const isDev = process.env.NODE_ENV === 'development';
@@ -36,6 +37,10 @@ module.exports = {
 				use: {
 					loader: 'builtin:swc-loader',
 					options: {
+						env: {
+							// @see https://github.com/swc-project/swc-loader/issues/37#issuecomment-1233829398
+							targets: package.browserslist
+						},
 						jsc: {
 							externalHelpers: true,
 							preserveAllComments: false,
