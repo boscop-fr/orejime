@@ -5,18 +5,16 @@ import type {
 } from '../../components/types/ContextualNotice';
 import {template} from '../../utils/template';
 
-interface StandardContextualNoticeOptions extends ContextualNoticeOptions {
-	titleLevel?: string;
-}
-
-const ContextualNotice: ContextualNoticeComponent<StandardContextualNoticeOptions> = ({
+const ContextualNotice: ContextualNoticeComponent = ({
 	purpose,
 	data,
 	onAccept
 }) => {
 	const t = useTranslations();
 	const {titleLevel} = data;
-	const TitleTag = titleLevel ? `h${data.titleLevel}` : 'h2';
+	const TitleTag:
+		| `h${ContextualNoticeOptions['titleLevel']}`
+		| 'strong' = titleLevel ? `h${titleLevel}` : 'strong';
 	const templateProps = {
 		purpose: purpose.title
 	};

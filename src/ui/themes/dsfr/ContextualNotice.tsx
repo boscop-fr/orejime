@@ -5,18 +5,17 @@ import type {
 } from '../../components/types/ContextualNotice';
 import {template} from '../../utils/template';
 
-interface DsfrContextualNoticeData extends ContextualNoticeOptions {
-	titleLevel?: string;
-}
-
-const ContextualNotice: ContextualNoticeComponent<DsfrContextualNoticeData> = ({
+const ContextualNotice: ContextualNoticeComponent = ({
 	purpose,
 	data,
 	onAccept
 }) => {
 	const t = useTranslations();
 	const {titleLevel} = data;
-	const TitleTag = titleLevel ? `h${titleLevel}` : 'h4';
+	const TitleTag: `h${ContextualNoticeOptions['titleLevel']}` = titleLevel
+		? `h${titleLevel}`
+		: 'h4';
+
 	const templateProps = {
 		purpose: purpose.title
 	};
