@@ -155,7 +155,7 @@
 						></iframe>
 					</details>
 
-					<h3 id="styling">Styling</h3>
+					<h3 id="styling" data-example="styling-example">Styling</h3>
 
 					<p>
 						Orejime provides default styles that are easily customizable,
@@ -163,9 +163,10 @@
 						plain CSS.
 					</p>
 
-					<details>
+					<details id="styling-example">
 						<summary>Example</summary>
 						<iframe
+							style="min-height: 20lh"
 							data-src="./features/styling.html"
 							title="Example of styling"
 							loading="lazy"
@@ -393,6 +394,27 @@
 			);
 
 			document.querySelectorAll('details[open]').forEach(loadFeatureExample);
+		</script>
+
+		<!-- Auto opening of targeted feature examples. -->
+		<script>
+			const openFeatureExample = () => {
+				const hash = window.location.hash;
+				const target = document.getElementById(hash.slice(1));
+
+				if (!target) {
+					return;
+				}
+
+				const example = document.getElementById(target.dataset.example);
+
+				if (example) {
+					example.setAttribute('open', true);
+				}
+			};
+
+			openFeatureExample();
+			window.addEventListener('hashchange', openFeatureExample);
 		</script>
 
 		<!-- Migration form. -->
