@@ -38,6 +38,7 @@ export default (purposes: Purpose[], options: SetupOptions) => {
 
 	domEffect.apply(consents);
 	cookiesEffect.apply(consents);
+	googleConsentModeEffect?.apply(consents);
 
 	return manager;
 };

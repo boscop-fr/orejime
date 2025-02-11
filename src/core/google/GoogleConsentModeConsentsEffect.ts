@@ -27,50 +27,35 @@ export default class GoogleConsentModeConsentsEffect implements ConsentsEffect {
 					purposeId: id
 				}))
 			);
-
-		this.setDefaultStates(
-			this.#relationships.reduce<BooleanStates>(
-				(states, rel) => ({
-					...states,
-					[rel.type]:
-						rel.type in states
-							? states[rel.type] && rel.default
-							: rel.default
-				}),
-				{}
-			)
-		);
 	}
 
-	apply(consents: ConsentsMap) {
-		this.updateStates(
-			this.#relationships
-				.filter(({purposeId}) => purposeId in consents)
-				.reduce<BooleanStates>(
-					(states, rel) => ({
-						...states,
-						[rel.type]:
-							rel.type in states
-								? states[rel.type] && consents[rel.purposeId]
-								: consents[rel.purposeId]
-					}),
-					{}
-				)
-		);
-	}
-
-	private setDefaultStates(booleanStates: BooleanStates) {
-		const states = this.fromBooleanStates(booleanStates);
+	setDefaults(consents: ConsentsMap) {
+		const states = this.fromBooleanStates(this.fromConsents(consents));
 
 		window?.gtag?.('consent', 'default', states);
 		window?.orejimeSetDefaultGoogleConsents?.(states);
 	}
 
-	private updateStates(booleanStates: BooleanStates) {
-		const states = this.fromBooleanStates(booleanStates);
+	apply(consents: ConsentsMap) {
+		const states = this.fromBooleanStates(this.fromConsents(consents));
 
 		window?.gtag?.('consent', 'update', states);
 		window?.orejimeUpdateGoogleConsents?.(states);
+	}
+
+	private fromConsents(consents: ConsentsMap): BooleanStates {
+		return this.#relationships
+			.filter(({purposeId}) => purposeId in consents)
+			.reduce<BooleanStates>(
+				(states, rel) => ({
+					...states,
+					[rel.type]:
+						rel.type in states
+							? states[rel.type] && consents[rel.purposeId]
+							: consents[rel.purposeId]
+				}),
+				{}
+			);
 	}
 
 	private fromBooleanStates(states: BooleanStates): GoogleConsentModeStates {

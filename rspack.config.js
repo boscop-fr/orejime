@@ -61,10 +61,7 @@ module.exports = {
 			{
 				test: /\.css$/i,
 				type: 'javascript/auto',
-				use: [
-					rspack.CssExtractRspackPlugin.loader,
-					'css-loader',
-				]
+				use: [rspack.CssExtractRspackPlugin.loader, 'css-loader']
 			}
 		]
 	},
@@ -123,7 +120,7 @@ module.exports = {
 			'dsfr',
 			[]
 		),
-		featureTemplatePlugin('Google Consent Mode', 'google'),
+		featureTemplatePlugin('Google Consent Mode', 'google-consent-mode')
 	]
 };
 
