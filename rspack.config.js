@@ -122,7 +122,8 @@ module.exports = {
 			'dsfr',
 			'dsfr',
 			[]
-		)
+		),
+		featureTemplatePlugin('Google Consent Mode', 'google'),
 	]
 };
 

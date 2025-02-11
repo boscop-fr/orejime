@@ -134,6 +134,14 @@ var orejimeConfig = {
             // once regardless how often the user toggles it on and off.
             // (defaults to false)
             runsOnce: true,
+
+            // [optional]
+            // Options for Google Consent Mode integration.
+            googleConsentMode: {
+                // Types of consent affected by this purpose.
+                // @see https://support.google.com/analytics/answer/12334711
+                types: ['analytics_storage']
+            }
         },
         {
             id: "inline-tracker",
