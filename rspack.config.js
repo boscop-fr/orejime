@@ -130,6 +130,7 @@ module.exports = {
 			feature: 'contextual',
 			template: 'contextual'
 		}),
+		featureTemplatePlugin('Google Consent Mode', 'google'),
 		featureTemplatePlugin({
 			title: "Intégration au système de design de l'état",
 			feature: 'dsfr',

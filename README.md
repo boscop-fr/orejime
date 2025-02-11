@@ -140,7 +140,15 @@ var orejimeConfig = {
       // If "runsOnce" is set to true, the purpose will only be executed
       // once regardless how often the user toggles it on and off.
       // (defaults to false)
-      runsOnce: true
+      runsOnce: true,
+
+      // [optional]
+      // Options for Google Consent Mode integration.
+      googleConsentMode: {
+        // Types of consent affected by this purpose.
+        // @see https://support.google.com/analytics/answer/12334711
+        types: ['analytics_storage']
+      }
     },
     {
       id: 'inline-tracker',
