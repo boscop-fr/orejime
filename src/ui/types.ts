@@ -90,7 +90,7 @@ export interface Config {
 	theme: Theme;
 	orejimeElement?: ElementReference;
 	purposes: PurposeList;
-	cookie?: CookieOptions;
+	cookie?: Partial<CookieOptions>;
 	lang: string;
 	logo?: ImageDescriptor;
 	forceBanner: boolean;

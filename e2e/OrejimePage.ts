@@ -32,7 +32,9 @@ export class OrejimePage {
 							${body}
 
 							<script>
-								window.orejimeConfig = ${JSON.stringify(config)}
+								window.orejimeConfig = ${JSON.stringify({...config, cookie: {}})}
+								window.orejimeConfig.cookie.parse = JSON.parse;
+								window.orejimeConfig.cookie.stringify = JSON.stringify;
 							</script>
 							<script src="orejime-standard-en.js"></script>
 						</body>
