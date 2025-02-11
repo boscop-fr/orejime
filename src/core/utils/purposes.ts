@@ -29,3 +29,19 @@ export const areAllPurposesDisabled = (
 	purposes: Purpose[],
 	consents: ConsentsMap
 ) => every(purposes, ({id, isMandatory}) => isMandatory || !consents?.[id]);
+
+export const serializeConsents = (object: ConsentsMap) =>
+	Object.entries(object)
+		.map(([id, state]) => `${id}=${state ? '1' : '0'}`)
+		.join(';');
+
+export const deserializeConsents = (object: string): ConsentsMap =>
+	Object.fromEntries(
+		object
+			.split(';')
+			.filter((entry) => entry.length)
+			.map((entry) => {
+				const [id, state] = entry.split('=');
+				return [id, state === '1'];
+			})
+	);

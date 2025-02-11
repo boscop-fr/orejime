@@ -29,11 +29,17 @@ describe('GoogleConsentModeConsentsEffect', () => {
 		}
 	];
 
-	test('default', () => {
+	test('setDefaults', () => {
 		global.gtag = jest.fn();
 		global.orejimeSetDefaultGoogleConsents = jest.fn();
 
-		new GoogleConsentModeConsentsEffect(purposes);
+		const effect = new GoogleConsentModeConsentsEffect(purposes);
+
+		effect.setDefaults({
+			analytics: false,
+			ads: false,
+			override: false
+		})
 
 		expect(global.gtag.mock.calls).toEqual([
 			[
@@ -43,7 +49,7 @@ describe('GoogleConsentModeConsentsEffect', () => {
 					'ad_personalization': 'denied',
 					'ad_storage': 'denied',
 					'ad_user_data': 'denied',
-					'analytics_storage': 'granted'
+					'analytics_storage': 'denied'
 				}
 			]
 		]);
@@ -54,13 +60,13 @@ describe('GoogleConsentModeConsentsEffect', () => {
 					'ad_personalization': 'denied',
 					'ad_storage': 'denied',
 					'ad_user_data': 'denied',
-					'analytics_storage': 'granted'
+					'analytics_storage': 'denied'
 				}
 			]
 		]);
 	});
 
-	test('update', () => {
+	test('apply', () => {
 		global.gtag = jest.fn();
 		global.orejimeUpdateGoogleConsents = jest.fn();
 
@@ -84,7 +90,7 @@ describe('GoogleConsentModeConsentsEffect', () => {
 			override: false
 		});
 
-		expect(global.gtag.mock.calls.slice(1)).toEqual([
+		expect(global.gtag.mock.calls).toEqual([
 			[
 				'consent',
 				'update',
@@ -152,6 +158,12 @@ describe('GoogleConsentModeConsentsEffect', () => {
 
 		expect(() => {
 			const effect = new GoogleConsentModeConsentsEffect(purposes);
+
+			effect.setDefaults({
+				analytics: true,
+				ads: true,
+				override: true
+			});
 
 			effect.apply({
 				analytics: true,

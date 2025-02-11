@@ -1,6 +1,7 @@
 import ConsentsRepository from './ConsentsRepository';
 import {ConsentsMap, CookieOptions} from './types';
 import {deleteCookie, getCookie, setCookie} from './utils/cookies';
+import {deserializeConsents, serializeConsents} from './utils/purposes';
 
 export default class CookieConsentsRepository implements ConsentsRepository {
 	#options: CookieOptions;
@@ -11,8 +12,8 @@ export default class CookieConsentsRepository implements ConsentsRepository {
 			domain: undefined,
 			duration: 120,
 			sameSite: 'strict',
-			parse: JSON.parse,
-			stringify: JSON.stringify,
+			stringify: serializeConsents,
+			parse: deserializeConsents,
 			...options
 		};
 	}
