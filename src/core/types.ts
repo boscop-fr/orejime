@@ -1,4 +1,4 @@
-import {GoogleConsentModePurposeOptions} from './GoogleConsentModeConsentsEffect';
+import {GoogleConsentModePurposeOptions} from './google/types';
 
 export type PurposeCookieProps = [
 	pattern: RegExp,
