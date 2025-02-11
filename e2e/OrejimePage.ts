@@ -32,9 +32,7 @@ export class OrejimePage {
 							${body}
 
 							<script>
-								window.orejimeConfig = ${JSON.stringify({...config, cookie: {}})}
-								window.orejimeConfig.cookie.parse = JSON.parse;
-								window.orejimeConfig.cookie.stringify = JSON.stringify;
+								window.orejimeConfig = ${JSON.stringify(config)}
 							</script>
 							<script src="orejime-standard-en.js"></script>
 						</body>
@@ -156,7 +154,17 @@ export class OrejimePage {
 			return undefined;
 		}
 
-		return JSON.parse(Cookie.converter.read(cookie.value, cookie.name));
+		const params = new URLSearchParams(
+			Cookie.converter.read(cookie.value, cookie.name)
+		);
+
+		const consents = {} as Record<string, boolean>;
+
+		for (const [id, state] of params.entries()) {
+			consents[id] = state === '1';
+		}
+
+		return consents;
 	}
 
 	async clearConsents() {
