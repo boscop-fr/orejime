@@ -24,20 +24,20 @@ For example:
 
 (Learn more about [themes](#theming) & [languages](#internationalization))
 
-#### Via CDN
+#### Content Delivery Network
 
-The easiest way to use Orejime is to import a distribution via a content delivery network such as unpkg:
+The easiest way to use Orejime is to import a distribution via a CDN such as jsDelivr:
 
 ```html
-<script src="https://unpkg.com/orejime@latest/dist/orejime-standard-en.js"></script>
-<link href="https://unpkg.com/orejime@latest/dist/orejime-standard.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/orejime@latest/dist/orejime-standard-en.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/orejime@latest/dist/orejime-standard.css" rel="stylesheet" />
 ```
 
 > [!TIP]
-> If you're using this method, please avoid using the `@latest` version. Prefer a fixed one like `https://unpkg.com/orejime@3.0.0/...`.
+> If you're using this method, please avoid using the `@latest` version. Prefer a fixed one like `https://cdn.jsdelivr.net/npm/orejime@3.0.0/…`.
 > That way you can ensure you will not be impacted by a change of API or a potential bug that could land in the latest version.
 
-#### Via npm
+#### npm
 
 Orejime only distributes built files via npm ([learn why](./adr/001-distribution-formats.md)).
 
