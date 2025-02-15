@@ -93,6 +93,10 @@ module.exports = {
 				services
 			}
 		}),
+		templatePlugin({
+			title: 'Legal information & privacy policy',
+			template: 'legal'
+		}),
 		featureTemplatePlugin({title: 'Purposes', feature: 'purposes'}),
 		featureTemplatePlugin({title: 'Grouping', feature: 'grouping'}),
 		featureTemplatePlugin({

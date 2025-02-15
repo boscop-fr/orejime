@@ -17,7 +17,7 @@ iframe {
 	display: none;
 }
 
-#features {
+.RichText > :first-child {
 	margin-top: 0;
 }
 
