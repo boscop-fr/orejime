@@ -6,7 +6,8 @@ const {standaloneEntries} = require('./build/entries');
 const {
 	templatePlugin,
 	featureTemplatePlugin,
-	assetsPlugin
+	assetsPlugin,
+	matomoPlugin
 } = require('./build/site');
 
 const fullPath = path.resolve.bind(path, __dirname);
@@ -107,6 +108,7 @@ module.exports = {
 			chunks: [],
 			lang: 'fr'
 		}),
-		assetsPlugin()
+		assetsPlugin(),
+		matomoPlugin()
 	]
 };

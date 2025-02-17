@@ -102,3 +102,42 @@ export const assetsPlugin = () =>
 			}
 		]
 	});
+
+export const matomoPlugin = () => {
+	const matomoScript = `
+		<script>
+			var _paq = window._paq = window._paq || [];
+			_paq.push(['trackPageView']);
+			_paq.push(['enableLinkTracking']);
+			(function() {
+				var u="https://matomo.boscop.io/";
+				_paq.push(['setTrackerUrl', u+'matomo.php']);
+				_paq.push(['setSiteId', '104']);
+				var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+				g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+			})();
+		</script>
+	`;
+
+	return {
+		apply(compiler) {
+			compiler.hooks.compilation.tap('MatomoPlugin', (compilation) => {
+				rspack.HtmlRspackPlugin.getCompilationHooks(
+					compilation
+				).afterTemplateExecution.tapPromise(
+					'MatomoPlugin',
+					async (data) => {
+						// The `alterAssetTags` hook would
+						// be a nicer place to that but tags
+						// other than `title` can't have any
+						// HTML contents.
+						data.html = data.html.replace(
+							'</head>',
+							`${matomoScript}</head>`
+						);
+					}
+				);
+			});
+		}
+	};
+};
