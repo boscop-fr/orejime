@@ -1,6 +1,6 @@
 import {expect, BrowserContext, Page} from '@playwright/test';
 import Cookie from 'js-cookie';
-import {Config} from '../src/ui';
+import {Config} from '../src/ui/types';
 
 export class OrejimePage {
 	constructor(

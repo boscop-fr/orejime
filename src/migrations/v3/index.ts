@@ -1,4 +1,4 @@
-import {Translations} from '../../ui';
+import {Translations} from '../../ui/types';
 import {parse, stringify} from '../serialization';
 import {migrateConfig} from './config';
 import {migrateTranslations} from './translations';

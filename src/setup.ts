@@ -1,6 +1,12 @@
-import {Manager, setup as setupManager} from './core';
-import {Config, setup as setupUi} from './ui';
-import {assertConfigValidity, DefaultConfig, purposesOnly} from './ui/utils/config';
+import Manager from './core/Manager';
+import setupManager from './core/setup';
+import {Config} from './ui/types';
+import setupUi from './ui/setup';
+import {
+	assertConfigValidity,
+	DefaultConfig,
+	purposesOnly
+} from './ui/utils/config';
 import {deepMerge} from './ui/utils/objects';
 
 export interface OrejimeInstance {
@@ -17,7 +23,7 @@ export default (partialConfig: Partial<Config>): OrejimeInstance => {
 		cookie: config.cookie
 	});
 
-	const {show, openModal} = setupUi(config, manager)
+	const {show, openModal} = setupUi(config, manager);
 
 	manager.on('dirty', (isDirty) => {
 		if (isDirty) {
@@ -34,4 +40,4 @@ export default (partialConfig: Partial<Config>): OrejimeInstance => {
 		manager,
 		prompt: openModal
 	};
-}
+};

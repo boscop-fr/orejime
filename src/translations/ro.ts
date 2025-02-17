@@ -1,4 +1,4 @@
-import {Translations} from '../ui';
+import {Translations} from '../ui/types';
 
 // Romanian.
 export default {

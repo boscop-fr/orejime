@@ -1,5 +1,5 @@
 import cleanDeep from 'clean-deep';
-import {Config, Purpose, PurposeList} from '../../ui';
+import {Config, Purpose, PurposeList} from '../../ui/types';
 import {V2App, V2Category, V2Config, V2Translations} from '../v2/types';
 
 const migrateApp = (

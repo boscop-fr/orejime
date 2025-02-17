@@ -1,5 +1,5 @@
 import {test, expect} from '@playwright/test';
-import {Config} from '../src/ui';
+import {Config} from '../src/ui/types';
 import {OrejimePage} from './OrejimePage';
 
 test.describe('Orejime', () => {

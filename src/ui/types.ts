@@ -1,4 +1,4 @@
-import {CookieOptions, Purpose as CorePurpose, Manager} from '../core';
+import {CookieOptions, Purpose as CorePurpose} from '../core/types';
 import {Theme} from './components/types/Theme';
 
 export interface Purpose extends CorePurpose {

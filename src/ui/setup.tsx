@@ -1,5 +1,5 @@
 import {createRef, render} from 'preact';
-import {Manager} from '../core';
+import Manager from '../core/Manager';
 import Context from './components/Context';
 import Main, {MainApi} from './components/Main';
 import type {Config} from './types';

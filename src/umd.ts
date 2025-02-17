@@ -1,5 +1,5 @@
 import setup, {OrejimeInstance} from './setup';
-import type {Config, Translations} from './ui';
+import type {Config, Translations} from './ui/types';
 import {deepMerge} from './ui/utils/objects';
 import {Theme} from './ui/components/types/Theme';
 

@@ -1,12 +1,12 @@
-import {useContext, useEffect, useRef, useState} from 'preact/hooks';
+import {useContext, useEffect, useState} from 'preact/hooks';
 import Context from '../components/Context';
+import {Purpose} from '../../core/types';
 import {
 	acceptedConsents,
 	areAllPurposesDisabled,
 	areAllPurposesEnabled,
-	declinedConsents,
-	Purpose
-} from '../../core';
+	declinedConsents
+} from '../../core/utils/purposes';
 
 export const useConfig = () => {
 	const {config} = useContext(Context);
