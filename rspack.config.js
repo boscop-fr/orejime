@@ -1,10 +1,13 @@
-const fs = require('fs');
 const path = require('path');
 const {rspack} = require('@rspack/core');
-const sharp = require('sharp');
 const services = require('./site/services.json');
-const codeTheme = require('./site/themes/boscop-light-soft-color-theme.json');
 const package = require('./package.json');
+const {standaloneEntries} = require('./build/entries');
+const {
+	templatePlugin,
+	featureTemplatePlugin,
+	assetsPlugin
+} = require('./build/site');
 
 const fullPath = path.resolve.bind(path, __dirname);
 const isDev = process.env.NODE_ENV === 'development';
@@ -82,32 +85,12 @@ module.exports = {
 		new rspack.CssExtractRspackPlugin({
 			filename: 'orejime-standard.css'
 		}),
-		new rspack.CopyRspackPlugin({
-			patterns: [
-				{
-					from: 'site/assets',
-					to: 'assets',
-					async transform(content, from) {
-						if (/(jpe?g|png|webp)$/i.test(from)) {
-							return sharp(content)
-								.resize({
-									height: 48
-								})
-								.toBuffer();
-						}
-
-						return content;
-					}
-				}
-			]
-		}),
-		new rspack.HtmlRspackPlugin({
-			minify: false,
-			template: 'site/index.html',
-			templateParameters: () => ({
+		templatePlugin({
+			title: 'A lightweight and accessible consent manager',
+			chunks: ['migrations'],
+			params: {
 				services
-			}),
-			chunks: ['migrations']
+			}
 		}),
 		featureTemplatePlugin({title: 'Purposes', feature: 'purposes'}),
 		featureTemplatePlugin({title: 'Grouping', feature: 'grouping'}),
@@ -123,96 +106,7 @@ module.exports = {
 			template: 'dsfr',
 			chunks: [],
 			lang: 'fr'
-		})
+		}),
+		assetsPlugin()
 	]
 };
-
-// Generates entries for each possible combination of theme
-// and language.
-// @see ./adr/002-standalone-bundles.md
-function standaloneEntries() {
-	const themes = fs.readdirSync(fullPath('src/ui/themes'));
-	const langs = fs
-		.readdirSync(fullPath('src/translations'))
-		.map((file) => path.basename(file, '.ts'));
-
-	const entries = {};
-
-	for (const theme of themes) {
-		for (const lang of langs) {
-			entries[`orejime-${theme}-${lang}`] = standaloneEntry(theme, lang);
-		}
-	}
-
-	return entries;
-}
-
-// Generates a custom entry by inlining a small bootstrap
-// script.
-function standaloneEntry(theme, lang) {
-	return (
-		'data:text/javascript,' +
-		`import theme from '${fullPath(`./src/ui/themes/${theme}/index.ts`)}';` +
-		`import translations from '${fullPath(
-			`./src/translations/${lang}.ts`
-		)}';` +
-		`import {setupUmd} from '${fullPath('./src/umd.ts')}';` +
-		'setupUmd(theme, translations);'
-	);
-}
-
-// Configures an HTML plugin to render an example page about
-// a given feature.
-// Those pages include snippets of JS and/or CSS to setup
-// Orejime that are also presented to the user.
-function featureTemplatePlugin({
-	title,
-	feature,
-	template = 'orejime',
-	chunks = ['orejime'],
-	lang = 'en'
-}) {
-	return new rspack.HtmlRspackPlugin({
-		chunks,
-		minify: false,
-		filename: `features/${feature}.html`,
-		template: `site/features/${template}.html`,
-		templateParameters: async () => ({
-			lang,
-			js: await featureTemplateCode(feature, 'javascript'),
-			css: await featureTemplateCode(feature, 'css')
-		}),
-		// Oddly enough, the title tag needs to be filled in
-		// the template so HtmlRspackPlugin can replace it.
-		// If missing or left empty, the plugin injects an
-		// empty title.
-		title: `${title} - Orejime`,
-		meta: {
-			charset: 'utf-8',
-			viewport: 'width=device-width, initial-scale=1',
-			robots: 'noindex'
-		}
-	});
-}
-
-// Finds and highlights code associated with a given feature.
-async function featureTemplateCode(name, lang) {
-	const ext = lang === 'javascript' ? 'js' : 'css';
-	const path = `./site/features/${name}.${ext}`;
-
-	if (!fs.existsSync(path)) {
-		return null;
-	}
-
-	const code = fs.readFileSync(path, 'utf-8');
-	const {codeToHtml} = await import('shiki');
-	const highlightedCode = await codeToHtml(code, {
-		lang,
-		theme: codeTheme
-	});
-
-	return {
-		code,
-		highlightedCode
-	};
-}
