@@ -12,7 +12,7 @@ window.orejimeConfig = {
 		},
 		{
 			id: 'analytics',
-			title: 'Analyse d\'audience'
+			title: "Analyse d'audience"
 		}
 	],
 	privacyPolicyUrl: '#'

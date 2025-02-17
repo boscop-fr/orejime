@@ -1,4 +1,4 @@
-import  {ComponentChildren, FunctionComponent} from 'preact';
+import {ComponentChildren, FunctionComponent} from 'preact';
 
 export interface PurposeListProps {
 	children?: ComponentChildren;

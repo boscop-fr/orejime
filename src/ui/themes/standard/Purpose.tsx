@@ -70,8 +70,8 @@ const Purpose: PurposeComponent = ({
 					{consent === ConsentState.accepted
 						? t.purpose.enabled
 						: consent === ConsentState.declined
-						? t.purpose.disabled
-						: t.purpose.partial}
+							? t.purpose.disabled
+							: t.purpose.partial}
 				</span>
 			</label>
 

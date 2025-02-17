@@ -32,11 +32,11 @@ const migrateApps = (
 			{
 				id: category?.name,
 				title:
-					translations?.categories?.[category?.name]?.title ??
-					category?.title,
+					translations?.categories?.[category?.name]?.title
+					?? category?.title,
 				description:
-					translations?.categories?.[category?.name]?.description ??
-					category?.description,
+					translations?.categories?.[category?.name]?.description
+					?? category?.description,
 				purposes: category.apps.map((name) =>
 					migrateApp(
 						apps.find((app) => app.name === name),

@@ -20,8 +20,8 @@ const GlobalConsent: GlobalConsentComponent = ({
 				isEnabled
 					? ConsentState.accepted
 					: isDisabled
-					? ConsentState.declined
-					: ConsentState.partial
+						? ConsentState.declined
+						: ConsentState.partial
 			}
 			onChange={isEnabled ? declineAll : acceptAll}
 		/>

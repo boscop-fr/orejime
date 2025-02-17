@@ -7,13 +7,11 @@ export default (code: string) => {
 	const v2Config = parse(code);
 	const v3Config = migrateConfig(v2Config);
 	const v2Translations = v2Config?.translations ?? {};
-	const translationsEntries: [
-		string,
-		Partial<Translations>
-	][] = Object.entries(v2Translations).map(([lang, translations]) => [
-		lang,
-		migrateTranslations(translations)
-	]);
+	const translationsEntries: [string, Partial<Translations>][] =
+		Object.entries(v2Translations).map(([lang, translations]) => [
+			lang,
+			migrateTranslations(translations)
+		]);
 
 	switch (translationsEntries.length) {
 		case 0:
@@ -33,13 +31,13 @@ export default (code: string) => {
 			const lang = v2Config?.lang ?? translationsEntries[0][0];
 			const translations = Object.fromEntries(translationsEntries);
 			const placeholder = Symbol();
-			v3Config.translations = (placeholder as never) as Translations;
+			v3Config.translations = placeholder as never as Translations;
 
 			return (
-				`// replace this with the current language of the page\n` +
-				`var lang = "${lang}";\n\n` +
-				`var translations = ${stringify(translations)};\n\n` +
-				`var config = ${stringify(v3Config, {
+				`// replace this with the current language of the page\n`
+				+ `var lang = "${lang}";\n\n`
+				+ `var translations = ${stringify(translations)};\n\n`
+				+ `var config = ${stringify(v3Config, {
 					namespace: new Map([
 						[
 							placeholder,

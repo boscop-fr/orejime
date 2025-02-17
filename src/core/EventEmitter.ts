@@ -3,11 +3,9 @@ export default class EventEmitter<
 		[name: string]: (...args: any[]) => void;
 	}
 > {
-	#listeners: Partial<
-		{
-			[Key in keyof Types]: Array<Types[Key]>;
-		}
-	>;
+	#listeners: Partial<{
+		[Key in keyof Types]: Array<Types[Key]>;
+	}>;
 
 	constructor() {
 		this.#listeners = {};

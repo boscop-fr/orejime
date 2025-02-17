@@ -23,9 +23,9 @@ export default class DomConsentsEffect implements ConsentsEffect {
 		Object.entries(consents)
 			.filter(
 				([id, consent]) =>
-					!consent ||
-					!this.#singletonPurposes[id] ||
-					!this.#alreadyExecuted?.[id]
+					!consent
+					|| !this.#singletonPurposes[id]
+					|| !this.#alreadyExecuted?.[id]
 			)
 			.forEach(([id, consent]) => {
 				this.#apply(id, consent);

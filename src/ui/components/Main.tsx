@@ -1,8 +1,4 @@
-import {
-	useImperativeHandle,
-	useEffect,
-	useRef
-} from 'preact/hooks';
+import {useImperativeHandle, useEffect, useRef} from 'preact/hooks';
 import {
 	useBannerState,
 	useConfig,
@@ -21,8 +17,8 @@ export interface MainApi {
 
 interface MainProps {
 	apiRef: {
-		current: MainApi
-	}
+		current: MainApi;
+	};
 }
 
 const Main = ({apiRef}: MainProps) => {

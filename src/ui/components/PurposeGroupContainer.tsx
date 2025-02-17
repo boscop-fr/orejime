@@ -8,12 +8,8 @@ interface PurposeGroupProps extends PurposeGroupType {
 }
 
 const PurposeGroup = ({purposes, children, ...props}: PurposeGroupProps) => {
-	const [
-		areAllEnabled,
-		areAllDisabled,
-		acceptAll,
-		declineAll
-	] = useConsentGroup(purposes);
+	const [areAllEnabled, areAllDisabled, acceptAll, declineAll] =
+		useConsentGroup(purposes);
 	const {Purpose} = useTheme();
 
 	return (
@@ -23,8 +19,8 @@ const PurposeGroup = ({purposes, children, ...props}: PurposeGroupProps) => {
 				areAllEnabled
 					? ConsentState.accepted
 					: areAllDisabled
-					? ConsentState.declined
-					: ConsentState.partial
+						? ConsentState.declined
+						: ConsentState.partial
 			}
 			onChange={(consent) => (consent ? acceptAll() : declineAll())}
 		>

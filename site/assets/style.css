@@ -69,7 +69,12 @@ body:not(:has(.orejime-Banner)):not(:has(.orejime-Modal)) .ExampleReset {
 .ExampleCode {
 	display: block;
 	line-height: 1.6;
-	font-family: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console,
+	font-family:
+		Menlo,
+		Consolas,
+		Monaco,
+		Liberation Mono,
+		Lucida Console,
 		monospace;
 	tab-size: 3;
 	overflow-x: auto;

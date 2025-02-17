@@ -45,8 +45,8 @@ export default class Manager extends EventEmitter<ManagerEvents> {
 		this.#consents = overwrite(this.#defaultConsents, consents);
 
 		this.#isInitiallyInvalid =
-			Object.keys(consents).length > 0 &&
-			this.#invalidConsentsIds.length > 0;
+			Object.keys(consents).length > 0
+			&& this.#invalidConsentsIds.length > 0;
 	}
 
 	// Clones data, but not event handlers.

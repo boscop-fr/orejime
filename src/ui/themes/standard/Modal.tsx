@@ -18,7 +18,7 @@ const Modal: ModalComponent = ({
 	return (
 		<Dialog
 			isAlert={isForced}
-			labelId='orejime-modal-title'
+			labelId="orejime-modal-title"
 			portalClassName="orejime-Env"
 			overlayClassName="orejime-ModalOverlay"
 			className="orejime-ModalWrapper"
@@ -77,9 +77,9 @@ const Modal: ModalComponent = ({
 						// Prevents a bug where hitting the `Enter`
 						// key on a checkbox submits the form.
 						if (
-							event.target.nodeName === 'INPUT' &&
-							event.target.type === 'checkbox' &&
-							event.key === 'Enter'
+							event.target.nodeName === 'INPUT'
+							&& event.target.type === 'checkbox'
+							&& event.key === 'Enter'
 						) {
 							event.preventDefault();
 						}

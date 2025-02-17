@@ -10,7 +10,7 @@ window.orejimeConfig = {
 				},
 				{
 					id: 'google-analytics',
-					title: 'Google Analytics',
+					title: 'Google Analytics'
 				}
 			]
 		}

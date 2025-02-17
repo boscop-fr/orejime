@@ -6,11 +6,11 @@ const fullPath = path.resolve.bind(path, import.meta.dirname, '..');
 // Generates a custom entry by inlining a small bootstrap
 // script.
 const standaloneEntry = (theme, lang) =>
-	'data:text/javascript,' +
-	`import theme from '${fullPath(`src/ui/themes/${theme}/index.ts`)}';` +
-	`import translations from '${fullPath(`src/translations/${lang}.ts`)}';` +
-	`import {setupUmd} from '${fullPath('src/umd.ts')}';` +
-	'setupUmd(theme, translations);';
+	'data:text/javascript,'
+	+ `import theme from '${fullPath(`src/ui/themes/${theme}/index.ts`)}';`
+	+ `import translations from '${fullPath(`src/translations/${lang}.ts`)}';`
+	+ `import {setupUmd} from '${fullPath('src/umd.ts')}';`
+	+ 'setupUmd(theme, translations);';
 
 // Generates entries for each possible combination of theme
 // and language.

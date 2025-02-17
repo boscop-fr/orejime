@@ -21,7 +21,7 @@ const Modal: ModalComponent = ({
 			htmlClassName="fr-no-scroll"
 			overlayClassName="fr-modal fr-modal--opened"
 			className="fr-container fr-container--fluid fr-container-md"
-			labelId='fr-consent-modal-title'
+			labelId="fr-consent-modal-title"
 		>
 			<div className="fr-grid-row fr-grid-row--center">
 				<div className="fr-col-12 fr-col-md-10 fr-col-lg-8">
@@ -40,7 +40,10 @@ const Modal: ModalComponent = ({
 						</div>
 
 						<div className="fr-modal__content">
-							<h1 id="fr-consent-modal-title" className="fr-modal__title">
+							<h1
+								id="fr-consent-modal-title"
+								className="fr-modal__title"
+							>
 								{t.modal.title}
 							</h1>
 

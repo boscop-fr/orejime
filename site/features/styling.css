@@ -2,7 +2,7 @@
  * We're only tuning the colors here, but more variables are
  * available.
  */
- .orejime-Env {
+.orejime-Env {
 	--orejime-color-background: #132d2c;
 	--orejime-color-text: #fff;
 	--orejime-color-subdued: #c1d2b5;
