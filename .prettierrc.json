@@ -1,8 +1,8 @@
 {
 	"arrowParens": "always",
 	"bracketSpacing": false,
+	"experimentalOperatorPosition": "start",
 	"htmlWhitespaceSensitivity": "ignore",
-	"jsxBracketSameLine": false,
 	"jsxSingleQuote": false,
 	"printWidth": 80,
 	"proseWrap": "always",
@@ -14,10 +14,16 @@
 	"useTabs": true,
 	"overrides": [
 		{
-			"files": ["package.json", "package-lock.json"],
+			"files": ["package.json", "package-lock.json", "*.yml", "*.md"],
 			"options": {
 				"tabWidth": 2,
 				"useTabs": false
+			}
+		},
+		{
+			"files": "*.html",
+			"options": {
+				"htmlWhitespaceSensitivity": "css"
 			}
 		}
 	]

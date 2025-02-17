@@ -28,6 +28,8 @@
   "scripts": {
     "start": "rspack --watch",
     "serve": "rspack serve",
+    "lint": "prettier --check .",
+    "format": "prettier --write .",
     "test-unit": "NODE_OPTIONS=--experimental-vm-modules jest src",
     "test-e2e": "playwright test",
     "test-e2e-ui": "npm run test-e2e -- --ui",
@@ -69,8 +71,7 @@
     "jest-environment-jsdom": "^28.1.0",
     "micromodal": "^0.4.10",
     "preact": "^10.23.2",
-    "prettier": "^2.2.1",
-    "prettier-loader": "^3.3.0",
+    "prettier": "^3.5.1",
     "sharp": "^0.33.5",
     "shiki": "^2.2.0",
     "shx": "^0.3.4",
