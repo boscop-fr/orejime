@@ -1,12 +1,13 @@
 import cleanDeep from 'clean-deep';
 import type {Translations} from '../../ui/types';
 import type {V2Translations} from '../v2/types';
+import {RecursivePartial} from '../../core/utils/types';
 
 const join = (strings: string[], separator = ' ') =>
 	strings.filter((string) => !!string).join(separator);
 
 export const migrateTranslations = (
-	translations: Partial<V2Translations>
+	translations: RecursivePartial<V2Translations>
 ): Translations =>
 	cleanDeep({
 		banner: {
