@@ -23,17 +23,7 @@ export default (partialConfig: Partial<Config>): OrejimeInstance => {
 		cookie: config.cookie
 	});
 
-	const {show, openModal} = setupUi(config, manager);
-
-	manager.on('dirty', (isDirty) => {
-		if (isDirty) {
-			show();
-		}
-	});
-
-	if (manager.isDirty()) {
-		show();
-	}
+	const {openModal} = setupUi(config, manager);
 
 	return {
 		config,

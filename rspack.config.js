@@ -106,6 +106,11 @@ module.exports = {
 		}),
 		featureTemplatePlugin({title: 'Styling', feature: 'styling'}),
 		featureTemplatePlugin({
+			title: 'Contextual consent',
+			feature: 'contextual',
+			template: 'contextual'
+		}),
+		featureTemplatePlugin({
 			title: "Intégration au système de design de l'état",
 			feature: 'dsfr',
 			template: 'dsfr',

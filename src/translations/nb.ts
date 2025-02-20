@@ -27,6 +27,13 @@ export default {
 		save: 'Opslaan',
 		saveTitle: null
 	},
+	contextual: {
+		title: '"{purpose}" er inaktiv',
+		description:
+			'Tillat informasjonskapsler å få tilgang til denne funksjonaliteten.',
+		accept: 'Tillate',
+		accepted: '"{purpose}" er nå tillatt.'
+	},
 	purpose: {
 		mandatory: 'alltid påkrevd',
 		mandatoryTitle: 'Denne applikasjonen er alltid påkrevd',

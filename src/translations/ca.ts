@@ -27,6 +27,12 @@ export default {
 		save: 'Desa',
 		saveTitle: 'Desa la meva configuració sobre la informació recollida'
 	},
+	contextual: {
+		title: '"{purpose}" està inactiu',
+		description: 'Permet que les cookies accedeixin a aquesta funcionalitat.',
+		accept: 'Permetre',
+		accepted: '"{purpose}" ara està permès.'
+	},
 	purpose: {
 		mandatory: 'sempre obligatori',
 		mandatoryTitle: 'Aquesta aplicació sempre és necessària',

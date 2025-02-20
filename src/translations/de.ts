@@ -27,6 +27,13 @@ export default {
 		save: 'Speichern',
 		saveTitle: 'Meine Einstellungen speichern'
 	},
+	contextual: {
+		title: '"{purpose}" ist inaktiv',
+		description:
+			'Erlauben Sie Cookies, auf diese Funktionalität zuzugreifen.',
+		accept: 'Erlauben',
+		accepted: '"{purpose}" ist jetzt erlaubt.'
+	},
 	purpose: {
 		mandatory: 'immer notwendig',
 		mandatoryTitle: 'Diese Einstellungen werden immer benötigt',

@@ -7,20 +7,9 @@ window.orejimeConfig = {
 			isMandatory: true
 		},
 		{
-			id: 'third-party',
-			title: 'Suivi tiers',
-			description: 'Cookies déposés par des partenaires',
-			purposes: [
-				{
-					id: 'analytics',
-					title: "Analyse d'audience"
-				},
-				{
-					id: 'social',
-					title: 'Réseaux sociaux',
-					description: 'Médias et partage'
-				}
-			]
+			id: 'youtube',
+			title: 'YouTube',
+			description: 'Vidéos YouTube'
 		}
 	],
 	privacyPolicyUrl: '#privacyPolicy'

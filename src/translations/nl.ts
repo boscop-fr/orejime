@@ -27,6 +27,13 @@ export default {
 		save: 'Opslaan',
 		saveTitle: 'Mijn configuratie voor de informatievergaring opslaan'
 	},
+	contextual: {
+		title: '"{purpose}" is inactief',
+		description:
+			'Sta cookies toe om toegang te krijgen tot deze functionaliteit.',
+		accept: 'Toestaan',
+		accepted: '"{purpose}" is nu toegestaan.'
+	},
 	purpose: {
 		mandatory: 'altijd verplicht',
 		mandatoryTitle: 'Deze applicatie is altijd vereist',

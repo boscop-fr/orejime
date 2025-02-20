@@ -27,6 +27,12 @@ export default {
 		save: 'Guardar',
 		saveTitle: 'Guardar mi configuración en la información recopilada'
 	},
+	contextual: {
+		title: '"{purpose}" está inactivo',
+		description: 'Permitir que las cookies accedan a esta funcionalidad.',
+		accept: 'Permitir',
+		accepted: '"{purpose}" ahora está permitido.'
+	},
 	purpose: {
 		mandatory: 'siempre obligatorio',
 		mandatoryTitle: 'Esta aplicación es siempre obligatoria',

@@ -27,6 +27,13 @@ export default {
 		save: 'Mentés',
 		saveTitle: null
 	},
+	contextual: {
+		title: '"{purpose}" inaktív',
+		description:
+			'Engedélyezze a cookie-k számára, hogy hozzáférjenek ehhez a funkcióhoz.',
+		accept: 'Engedélyezze',
+		accepted: 'A {purpose} mostantól engedélyezett.'
+	},
 	purpose: {
 		mandatory: 'mindig kötelező',
 		mandatoryTitle: 'Ez az applikáció mindig kötelező',

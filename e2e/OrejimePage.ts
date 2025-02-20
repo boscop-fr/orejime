@@ -1,4 +1,4 @@
-import {expect, BrowserContext, Page} from '@playwright/test';
+import {expect, BrowserContext, Page, Locator} from '@playwright/test';
 import Cookie from 'js-cookie';
 import {Config} from '../src/ui/types';
 
@@ -8,7 +8,7 @@ export class OrejimePage {
 		public readonly context: BrowserContext
 	) {}
 
-	async load(config: Partial<Config>, scripts: string) {
+	async load(config: Partial<Config>, body: string) {
 		await this.page.route('/', async (route) => {
 			await route.fulfill({
 				body: `
@@ -21,11 +21,12 @@ export class OrejimePage {
 						</head>
 
 						<body>
+							${body}
+
 							<script>
 								window.orejimeConfig = ${JSON.stringify(config)}
 							</script>
 							<script src="orejime-standard-en.js"></script>
-							${scripts}
 						</body>
 					</html>
 				`
@@ -36,35 +37,43 @@ export class OrejimePage {
 	}
 
 	get banner() {
-		return this.page.locator('.orejime-Banner');
+		return this.locator('.orejime-Banner');
 	}
 
 	get learnMoreBannerButton() {
-		return this.page.locator('.orejime-Banner-learnMoreButton');
+		return this.locator('.orejime-Banner-learnMoreButton');
 	}
 
 	get firstFocusableElementFromBanner() {
-		return this.page.locator('.orejime-Banner :is(a, button)').first();
+		return this.locator('.orejime-Banner :is(a, button)').first();
 	}
 
 	get modal() {
-		return this.page.locator('.orejime-Modal');
+		return this.locator('.orejime-Modal');
+	}
+
+	get contextualNotice() {
+		return this.locator('.orejime-ContextualNotice');
+	}
+
+	get contextualNoticePlaceholder() {
+		return this.locator('.orejime-ContextualNotice-placeholder');
+	}
+
+	locator(selector: string) {
+		return this.page.locator(selector);
 	}
 
 	purposeCheckbox(purposeId: string) {
-		return this.page.locator(`#orejime-purpose-${purposeId}`);
-	}
-
-	async focusNext() {
-		await this.page.keyboard.press('Tab');
+		return this.locator(`#orejime-purpose-${purposeId}`);
 	}
 
 	async acceptAllFromBanner() {
-		await this.page.locator('.orejime-Banner-saveButton').click();
+		await this.locator('.orejime-Banner-saveButton').click();
 	}
 
 	async declineAllFromBanner() {
-		await this.page.locator('.orejime-Banner-declineButton').click();
+		await this.locator('.orejime-Banner-declineButton').click();
 	}
 
 	async openModalFromBanner() {
@@ -72,25 +81,25 @@ export class OrejimePage {
 	}
 
 	async enableAllFromModal() {
-		await this.page.locator('.orejime-PurposeToggles-enableAll').click();
+		await this.locator('.orejime-PurposeToggles-enableAll').click();
 	}
 
 	async disableAllFromModal() {
-		await this.page.locator('.orejime-PurposeToggles-disableAll').click();
+		await this.locator('.orejime-PurposeToggles-disableAll').click();
 	}
 
 	async saveFromModal() {
-		await this.page.locator('.orejime-Modal-saveButton').click();
+		await this.locator('.orejime-Modal-saveButton').click();
 	}
 
 	async closeModalByClickingButton() {
-		await this.page.locator('.orejime-Modal-closeButton').click();
+		await this.locator('.orejime-Modal-closeButton').click();
 	}
 
 	async closeModalByClickingOutside() {
 		// We're clicking in a corner to avoid clicking on the
 		// modal itself, which has no effect.
-		await this.page.locator('.orejime-ModalOverlay').click({
+		await this.locator('.orejime-ModalOverlay').click({
 			position: {
 				x: 1,
 				y: 1
@@ -102,12 +111,8 @@ export class OrejimePage {
 		await this.page.keyboard.press('Escape');
 	}
 
-	async expectElement(selector: string) {
-		await expect(this.page.locator(selector)).toBeAttached();
-	}
-
-	async expectMissingElement(selector: string) {
-		await expect(this.page.locator(selector)).not.toBeAttached();
+	async acceptContextualNotice() {
+		await this.locator('.orejime-ContextualNotice-button').click();
 	}
 
 	async expectConsents(consents: Record<string, unknown>) {
@@ -119,5 +124,14 @@ export class OrejimePage {
 		const cookies = await this.context.cookies();
 		const {value} = cookies.find((cookie) => cookie.name === name)!;
 		return JSON.parse(Cookie.converter.read(value, name));
+	}
+
+	// In specific conditions, browser events can get queued
+	// up and won't be fired until some interaction with the
+	// page.
+	// We're using a dummy click to trigger queued events.
+	// @see https://github.com/microsoft/playwright/issues/979
+	emptyEventQueue() {
+		return this.page.mouse.click(0, 0);
 	}
 }

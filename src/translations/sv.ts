@@ -27,6 +27,12 @@ export default {
 		save: 'Spara',
 		saveTitle: null
 	},
+	contextual: {
+		title: '"{purpose}" är inaktiv',
+		description: 'Tillåt cookies att få tillgång till denna funktionalitet.',
+		accept: 'Tillåta',
+		accepted: '"{purpose}" är nu tillåtet.'
+	},
 	purpose: {
 		mandatory: 'Krävs alltid',
 		mandatoryTitle: 'Den här applikationen krävs alltid',

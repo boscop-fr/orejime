@@ -27,6 +27,12 @@ export default {
 		save: 'Salvagardar',
 		saveTitle: 'Salvagardar ma configuracion per las informacions collectadas'
 	},
+	contextual: {
+		title: '"{purpose}" és inactiu',
+		description: 'Autorizar los cookies a accedir a aquesta foncionalitat.',
+		accept: 'Permetre',
+		accepted: '"{purpose}" es ara autorizat.'
+	},
 	purpose: {
 		mandatory: 'tojors requerit',
 		mandatoryTitle: 'Aquesta aplicacion es totjorn requerida',

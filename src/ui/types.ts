@@ -41,6 +41,14 @@ export interface ModalTranslations {
 	saveTitle: string;
 }
 
+export interface ContextualNoticeTranslations {
+	title: string;
+	description: string;
+	accept: string;
+	acceptTitle?: string;
+	accepted: string;
+}
+
 export interface PurposeTranslations {
 	mandatory: string;
 	mandatoryTitle: string;
@@ -63,6 +71,7 @@ export interface MiscTranslations {
 export interface Translations {
 	banner: BannerTranslations;
 	modal: ModalTranslations;
+	contextual: ContextualNoticeTranslations;
 	purpose: PurposeTranslations;
 	misc: MiscTranslations;
 }

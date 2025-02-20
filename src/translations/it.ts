@@ -27,6 +27,12 @@ export default {
 		save: 'Salva',
 		saveTitle: null
 	},
+	contextual: {
+		title: '"{purpose}" è inattivo',
+		description: 'Consenti ai cookie di accedere a questa funzionalità.',
+		accept: 'Permettere',
+		accepted: '"{purpose}" ora è consentito.'
+	},
 	purpose: {
 		mandatory: 'sempre richiesto',
 		mandatoryTitle: "Quest'applicazione è sempre richiesta",
