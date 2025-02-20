@@ -60,28 +60,28 @@ test.describe('Orejime', () => {
 		await orejimePage.acceptAllFromBanner();
 		await expect(orejimePage.banner).not.toBeVisible();
 
-		orejimePage.expectConsents({
+		await orejimePage.expectConsents({
 			'mandatory': true,
 			'child-1': true,
 			'child-2': true
 		});
 
-		orejimePage.expectElement('#mandatory');
-		orejimePage.expectElement('#child-1');
+		await orejimePage.expectElement('#mandatory');
+		await orejimePage.expectElement('#child-1');
 	});
 
 	test('should decline all purposes from the banner', async () => {
 		await orejimePage.declineAllFromBanner();
 		await expect(orejimePage.banner).not.toBeVisible();
 
-		orejimePage.expectConsents({
+		await orejimePage.expectConsents({
 			'mandatory': true,
 			'child-1': false,
 			'child-2': false
 		});
 
-		orejimePage.expectElement('#mandatory');
-		orejimePage.expectMissingElement('#child-1');
+		await orejimePage.expectElement('#mandatory');
+		await orejimePage.expectMissingElement('#child-1');
 	});
 
 	test('should open a modal', async () => {
@@ -133,7 +133,7 @@ test.describe('Orejime', () => {
 		await expect(orejimePage.purposeCheckbox('mandatory')).toBeChecked();
 		await orejimePage.saveFromModal();
 
-		orejimePage.expectConsents({
+		await orejimePage.expectConsents({
 			'mandatory': true,
 			'child-1': true,
 			'child-2': true
@@ -148,7 +148,7 @@ test.describe('Orejime', () => {
 		await expect(orejimePage.purposeCheckbox('mandatory')).toBeChecked();
 		await orejimePage.saveFromModal();
 
-		orejimePage.expectConsents({
+		await orejimePage.expectConsents({
 			'mandatory': true,
 			'child-1': false,
 			'child-2': false

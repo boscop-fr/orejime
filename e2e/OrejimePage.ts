@@ -111,7 +111,7 @@ export class OrejimePage {
 	}
 
 	async expectConsents(consents: Record<string, unknown>) {
-		expect(await this.getConsentsFromCookies()).toEqual(consents);
+		await expect(await this.getConsentsFromCookies()).toEqual(consents);
 	}
 
 	async getConsentsFromCookies() {
