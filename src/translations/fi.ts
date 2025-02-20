@@ -27,6 +27,12 @@ export default {
 		save: 'Tallenna',
 		saveTitle: null
 	},
+	contextual: {
+		title: '"{purpose}" ei ole aktiivinen',
+		description: 'Salli evästeiden käyttää tätä toimintoa.',
+		accept: 'Salli',
+		accepted: '"{purpose}" on nyt sallittu.'
+	},
 	purpose: {
 		mandatory: 'vaaditaan',
 		mandatoryTitle: 'Sivusto vaatii tämän aina',

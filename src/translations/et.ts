@@ -27,6 +27,12 @@ export default {
 		save: 'Salvesta',
 		saveTitle: 'Salvesta kogutud teabe seadistused'
 	},
+	contextual: {
+		title: '"{purpose}" on passiivne',
+		description: 'Luba küpsistele sellele funktsioonile juurde pääseda.',
+		accept: 'Luba',
+		accepted: '"{purpose}" on nüüd lubatud.'
+	},
 	purpose: {
 		mandatory: 'alati vajalik',
 		mandatoryTitle: 'See rakendus on alati vajalik',

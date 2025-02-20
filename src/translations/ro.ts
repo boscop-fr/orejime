@@ -27,6 +27,13 @@ export default {
 		save: 'Salvează',
 		saveTitle: null
 	},
+	contextual: {
+		title: '"{purpose}" este inactiv',
+		description:
+			'Permiteți cookie-urilor să acceseze această funcționalitate.',
+		accept: 'Permite',
+		accepted: '"{purpose}" este acum permis.'
+	},
 	purpose: {
 		mandatory: 'întotdeauna necesar',
 		mandatoryTitle: 'Această aplicație este întotdeauna necesară',

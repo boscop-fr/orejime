@@ -303,6 +303,9 @@ purpose:
 </template>
 ```
 
+> [!NOTE] There is more you can do with templates! Learn about
+> [contextual consent](#contextual-consent).
+
 <details>
 <summary>Integration tips</summary>
 
@@ -393,6 +396,55 @@ Romanian, Spanish, Swedish.
 
 > [!NOTE] Each and every translated text is overridable via
 > [the configuration](#configuration).
+
+### Contextual consent
+
+Content embedded from other websites might be restricted by user consent (i.e. a
+YouTube video).
+
+In that case, using templates would work just like with scripts:
+
+```js
+<template data-purpose="youtube">
+  <iframe src="https://www.youtube.com/embed/toto"></iframe>
+</template>
+```
+
+However, this won't show anything until the user consents to the related
+purpose.
+
+To be a little more user friendly, adding the `data-contextual` attribute will
+display a fallback notice until consent is given, detailing the reason and
+offering a way to consent in place.
+
+```diff
+- <template data-purpose="youtube">
++ <template data-purpose="youtube" data-contextual>
+      <iframe src="https://www.youtube.com/embed/toto"></iframe>
+  </template>
+```
+
+<details>
+<summary>Integration tips</summary>
+
+#### WordPress
+
+Should you use Orejime in a WordPress website, you could alter the rendering of
+embeds so they use contextual consent:
+
+```php
+function orejimeWrapEmbeds($content, $block) {
+	if ($block['blockName'] === 'core/embed') {
+		return '<template data-purpose="embeds" data-contextual>' . $content . '</template>';
+	}
+
+	return $content;
+}
+
+add_filter('render_block', 'orejimeWrapEmbeds', 10, 2);
+```
+
+</details>
 
 ## API
 

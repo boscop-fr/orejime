@@ -325,3 +325,19 @@
 .orejime-Purpose-children {
 	grid-area: children;
 }
+
+.orejime-ContextualNotice {
+	border-radius: var(--orejime-radius);
+	padding: var(--orejime-space-l);
+	background: var(--orejime-color-background);
+	color: var(--orejime-color-text);
+}
+
+.orejime-ContextualNotice-title {
+	font: inherit;
+	font-weight: bold;
+}
+
+.orejime-ContextualNotice-button {
+	margin-top: var(--orejime-space-s);
+}

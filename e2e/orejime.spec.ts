@@ -1,51 +1,49 @@
 import {test, expect} from '@playwright/test';
-import {Config} from '../src/ui/types';
 import {OrejimePage} from './OrejimePage';
 
 test.describe('Orejime', () => {
-	const BaseConfig: Partial<Config> = {
-		privacyPolicyUrl: 'https://example.org/privacy',
-		purposes: [
-			{
-				id: 'mandatory',
-				title: 'Mandatory',
-				cookies: ['mandatory'],
-				isMandatory: true
-			},
-			{
-				id: 'group',
-				title: 'Group',
-				purposes: [
-					{
-						id: 'child-1',
-						title: 'First child',
-						cookies: ['child-1']
-					},
-					{
-						id: 'child-2',
-						title: 'Second child',
-						cookies: ['child-2']
-					}
-				]
-			}
-		]
-	};
-
-	const BaseScripts = `
-		<template data-purpose="mandatory">
-			<script id="mandatory"></script>
-		</template>
-
-		<template data-purpose="child-1">
-			<iframe id="child-1"></iframe>
-		</template>
-	`;
-
 	let orejimePage: OrejimePage;
 
 	test.beforeEach(async ({page, context}) => {
 		orejimePage = new OrejimePage(page, context);
-		await orejimePage.load(BaseConfig, BaseScripts);
+		await orejimePage.load(
+			{
+				privacyPolicyUrl: 'https://example.org/privacy',
+				purposes: [
+					{
+						id: 'mandatory',
+						title: 'Mandatory',
+						cookies: ['mandatory'],
+						isMandatory: true
+					},
+					{
+						id: 'group',
+						title: 'Group',
+						purposes: [
+							{
+								id: 'contextual',
+								title: 'Contextual',
+								cookies: ['contextual']
+							},
+							{
+								id: 'other',
+								title: 'Other',
+								cookies: ['other']
+							}
+						]
+					}
+				]
+			},
+			`
+				<template data-purpose="contextual" data-contextual>
+					<iframe id="contextual" src=""></iframe>
+				</template>
+
+				<template data-purpose="mandatory">
+					<script id="mandatory"></script>
+				</template>
+			`
+		);
 	});
 
 	test('should show a banner', async () => {
@@ -62,12 +60,12 @@ test.describe('Orejime', () => {
 
 		await orejimePage.expectConsents({
 			'mandatory': true,
-			'child-1': true,
-			'child-2': true
+			'contextual': true,
+			'other': true
 		});
 
-		await orejimePage.expectElement('#mandatory');
-		await orejimePage.expectElement('#child-1');
+		await expect(orejimePage.locator('#mandatory')).toBeAttached();
+		await expect(orejimePage.locator('#contextual')).toBeVisible();
 	});
 
 	test('should decline all purposes from the banner', async () => {
@@ -76,12 +74,12 @@ test.describe('Orejime', () => {
 
 		await orejimePage.expectConsents({
 			'mandatory': true,
-			'child-1': false,
-			'child-2': false
+			'contextual': false,
+			'other': false
 		});
 
-		await orejimePage.expectElement('#mandatory');
-		await orejimePage.expectMissingElement('#child-1');
+		await expect(orejimePage.locator('#mandatory')).toBeAttached();
+		await expect(orejimePage.locator('#contextual')).not.toBeAttached();
 	});
 
 	test('should open a modal', async () => {
@@ -129,14 +127,14 @@ test.describe('Orejime', () => {
 	test('should accept all purposes from the modal', async () => {
 		await orejimePage.openModalFromBanner();
 		await orejimePage.enableAllFromModal();
-		await expect(orejimePage.purposeCheckbox('child-1')).toBeChecked();
+		await expect(orejimePage.purposeCheckbox('contextual')).toBeChecked();
 		await expect(orejimePage.purposeCheckbox('mandatory')).toBeChecked();
 		await orejimePage.saveFromModal();
 
 		await orejimePage.expectConsents({
 			'mandatory': true,
-			'child-1': true,
-			'child-2': true
+			'contextual': true,
+			'other': true
 		});
 	});
 
@@ -144,24 +142,24 @@ test.describe('Orejime', () => {
 		await orejimePage.openModalFromBanner();
 		await orejimePage.enableAllFromModal();
 		await orejimePage.disableAllFromModal();
-		await expect(orejimePage.purposeCheckbox('child-1')).not.toBeChecked();
+		await expect(orejimePage.purposeCheckbox('contextual')).not.toBeChecked();
 		await expect(orejimePage.purposeCheckbox('mandatory')).toBeChecked();
 		await orejimePage.saveFromModal();
 
 		await orejimePage.expectConsents({
 			'mandatory': true,
-			'child-1': false,
-			'child-2': false
+			'contextual': false,
+			'other': false
 		});
 	});
 
 	test('should sync grouped purposes', async () => {
 		await orejimePage.openModalFromBanner();
 
-		const checkbox = orejimePage.purposeCheckbox('child-1');
+		const checkbox = orejimePage.purposeCheckbox('contextual');
 		await expect(checkbox).not.toBeChecked();
 
-		const checkbox2 = orejimePage.purposeCheckbox('child-2');
+		const checkbox2 = orejimePage.purposeCheckbox('other');
 		await expect(checkbox2).not.toBeChecked();
 
 		const groupCheckbox = orejimePage.purposeCheckbox('group');
@@ -180,5 +178,36 @@ test.describe('Orejime', () => {
 		await expect(groupCheckbox).not.toBeChecked();
 		await expect(checkbox).not.toBeChecked();
 		await expect(checkbox2).not.toBeChecked();
+	});
+
+	test('should show a contextual consent notice', async () => {
+		await expect(orejimePage.contextualNotice).toBeAttached();
+	});
+
+	test('should accept contextual consent from the notice', async () => {
+		await orejimePage.acceptContextualNotice();
+		await expect(orejimePage.locator('#contextual')).toBeVisible();
+		await expect(orejimePage.contextualNotice).not.toBeVisible();
+		await expect(orejimePage.contextualNoticePlaceholder).toBeAttached();
+
+		await orejimePage.contextualNoticePlaceholder.press('Tab');
+		await expect(orejimePage.locator('#contextual')).toBeFocused();
+
+		// This fixes an issue on Firefox, where `focusout`
+		// events wouldn't be fired as soon as they should be.
+		// The contextual notice relies on those events to
+		// remove placeholder elements from the page.
+		// This bug is only related to Playwright and does
+		// not happen in the browser alone.
+		await orejimePage.emptyEventQueue();
+
+		await expect(orejimePage.contextualNoticePlaceholder).not.toBeAttached();
+	});
+
+	test('should accept contextual consent from the banner', async () => {
+		await orejimePage.acceptAllFromBanner();
+		await expect(orejimePage.locator('#contextual')).toBeVisible();
+		await expect(orejimePage.contextualNotice).not.toBeVisible();
+		await expect(orejimePage.contextualNoticePlaceholder).not.toBeAttached();
 	});
 });
