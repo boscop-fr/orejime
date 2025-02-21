@@ -1,5 +1,7 @@
 import Cookie from 'js-cookie';
 
+export type CookieSameSite = 'strict' | 'lax' | 'none';
+
 export const getCookieNames = () =>
 	document.cookie.split(';').reduce((names, cookie) => {
 		const [name] = cookie.split('=', 2);
@@ -12,11 +14,13 @@ export const setCookie = (
 	name: string,
 	value = '',
 	days = 0,
-	domain?: string
+	domain?: string,
+	sameSite?: CookieSameSite
 ) => {
 	Cookie.set(name, value, {
 		expires: days,
-		domain
+		domain,
+		sameSite
 	});
 };
 

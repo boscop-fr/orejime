@@ -10,6 +10,7 @@ export default class CookieConsentsRepository implements ConsentsRepository {
 			name: 'eu-consent',
 			domain: undefined,
 			duration: 120,
+			sameSite: 'strict',
 			parse: JSON.parse,
 			stringify: JSON.stringify,
 			...options
@@ -23,8 +24,8 @@ export default class CookieConsentsRepository implements ConsentsRepository {
 	}
 
 	write(consents: ConsentsMap) {
-		const {name, domain, duration, stringify} = this.#options;
-		setCookie(name, stringify(consents), duration, domain);
+		const {name, domain, duration, sameSite, stringify} = this.#options;
+		setCookie(name, stringify(consents), duration, domain, sameSite);
 	}
 
 	clear() {

@@ -243,6 +243,11 @@ var orejimeConfig = {
     domain: 'mydomain.com',
 
     // [optional]
+    // Whether the cookie should be shared via cross-site requests.
+    // @see https://web.dev/articles/samesite-cookies-explained
+    sameSite: 'strict',
+
+    // [optional]
     // You can provide a custom function to serialize the cookie contents.
     stringify: (contents) => JSON.stringify(contents),
 

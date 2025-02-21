@@ -1,3 +1,5 @@
+import {CookieSameSite} from './utils/cookies';
+
 export type PurposeCookieProps = [
 	pattern: RegExp,
 	path: string,
@@ -21,6 +23,7 @@ export type CookieOptions = {
 	name: string;
 	domain?: string;
 	duration: number;
+	sameSite?: CookieSameSite;
 	parse: (consents: string) => ConsentsMap;
 	stringify: (consents: ConsentsMap) => string;
 };
