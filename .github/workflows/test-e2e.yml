@@ -1,4 +1,4 @@
-name: Playwright tests
+name: End-to-end tests
 
 on:
   pull_request:
@@ -19,8 +19,8 @@ jobs:
         run: npm ci
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: Run tests
+        run: npm run test-e2e
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
