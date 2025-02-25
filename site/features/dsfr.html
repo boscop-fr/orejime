@@ -1,0 +1,232 @@
+<!doctype html>
+
+<html lang="fr">
+	<head>
+		<title>DSFR</title>
+
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/dsfr.main.min.css"
+		/>
+
+		<style>
+			.shiki {
+				display: block;
+				padding: 1.5rem;
+				line-height: 1.5;
+				font-size: 0.75rem;
+				font-family:
+					Menlo,
+					Consolas,
+					Monaco,
+					Liberation Mono,
+					Lucida Console,
+					monospace;
+				tab-size: 3;
+				overflow-x: auto;
+			}
+
+			.orejime-Env .fr-modal .fr-col-12 {
+				flex: 0 0 60ch;
+				max-width: 60ch;
+				width: 60ch;
+			}
+		</style>
+	</head>
+
+	<body id="app">
+		<header role="banner" class="fr-header">
+			<div class="fr-header__body">
+				<div class="fr-container">
+					<div class="fr-header__body-row">
+						<div class="fr-header__brand">
+							<div class="fr-header__brand-top">
+								<div class="fr-header__logo">
+									<p class="fr-logo">Exemple</p>
+								</div>
+								<div class="fr-header__operator">
+									<img
+										class="fr-responsive-img"
+										style="min-width: 0; height: 1lh"
+										src="https://boscop.fr/wp-content/themes/boscop/dist/design-system/logo-borderless.svg"
+										alt="Boscop"
+									/>
+								</div>
+							</div>
+
+							<div class="fr-header__service">
+								<p class="fr-header__service-title">Orejime</p>
+								<p class="fr-header__service-tagline">
+									Gestionnaire de consentement accessible et éco-conçu
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<main role="main" class="contentAll">
+			<div class="fr-container fr-mb-10w">
+				<div class="fr-grid-row fr-grid-row--gutters fr-grid-row--center">
+					<div class="fr-col-12 fr-col-md-8 fr-py-12v">
+						<h1>Intégration au système de design de l'État français</h1>
+
+						<p class="fr-mt-5w fr-mb-0w">
+							Orejime propose une version adaptée au système de design de
+							l'État.
+							<br />
+							Cette version est configurable de la même manière que la
+							version standard, mais utilise la présentation recommandée
+							du
+							<a
+								href="https://www.systeme-de-design.gouv.fr/composants-et-modeles/composants/gestionnaire-de-consentement/"
+							>
+								gestionnaire de consentement
+							</a>
+							.
+						</p>
+
+						<h2>Politique de confidentialité</h2>
+
+						<p>
+							Cette section tient lieu de page de politique de
+							confidentialité.
+							<br />
+							En contexte réel, ce contenu serait affiché dans une page
+							dédiée.
+							<br />
+							Cette page fournirait toutes les informations relatives à
+							la gestion des données personnelles des usagers, ainsi que
+							des boutons permettant à l'usager de configurer ou
+							réinitialiser son consentement, comme ci-dessous.
+						</p>
+
+						<ul class="fr-btns-group fr-btns-group--inline">
+							<li>
+								<button class="fr-btn" data-orejime-open>
+									Configurer
+								</button>
+							</li>
+							<li>
+								<button
+									class="fr-btn fr-btn--secondary"
+									data-orejime-reset
+								>
+									Réinitialiser
+								</button>
+							</li>
+						</ul>
+
+						<h2>Media</h2>
+
+						<template data-purpose="youtube" data-contextual>
+							<figure role="group" class="fr-content-media">
+								<iframe
+									class="fr-responsive-vid"
+									title="YouTube video player"
+									src="https://www.youtube-nocookie.com/embed/pghz5vpi5q4?si=npJInLIEM7XiD0MB"
+									allowfullscreen
+								></iframe>
+
+								<figcaption class="fr-content-media__caption">
+									Les cookies de Philippe Etchebest
+								</figcaption>
+							</figure>
+						</template>
+
+						<h2>Configuration</h2>
+
+						<%= js.highlightedCode %>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<footer class="fr-footer" role="contentinfo" id="footer">
+			<div class="fr-container">
+				<div class="fr-footer__body">
+					<div class="fr-footer__brand fr-enlarge-link">
+						<p class="fr-logo">Exemple</p>
+					</div>
+
+					<div class="fr-footer__content">
+						<p class="fr-footer__content-desc">
+							Ce site n'est pas un site de l'État.
+							<br />
+							Il utilise le système de design de l'État pour donner un
+							exemple d'intégration d'Orejime.
+						</p>
+
+						<ul class="fr-footer__content-list">
+							<li class="fr-footer__content-item">
+								<a
+									class="fr-footer__content-link"
+									target="_blank"
+									href="https://www.systeme-de-design.gouv.fr/"
+								>
+									systeme-de-design.gouv.fr
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="fr-footer__bottom">
+					<ul class="fr-footer__bottom-list">
+						<li class="fr-footer__bottom-item">
+							<a class="fr-footer__bottom-link" href="#privacy-policy">
+								Données personnelles
+							</a>
+						</li>
+						<li class="fr-footer__bottom-item">
+							<button
+								class="fr-footer__bottom-link"
+								href="#"
+								data-orejime-open
+							>
+								Gestion des cookies
+							</button>
+						</li>
+					</ul>
+
+					<div class="fr-footer__bottom-copy">
+						<p>
+							Sauf mention contraire, tous les contenus de ce site sont
+							sous
+							<a
+								href="https://github.com/etalab/licence-ouverte/blob/master/LO.md"
+								target="_blank"
+							>
+								licence etalab-2.0
+							</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<script src="../orejime-dsfr-<%= lang %>.js"></script>
+		<script>
+			<%= js.code %>
+		</script>
+
+		<script>
+			document
+				.querySelectorAll('[data-orejime-open]')
+				.forEach(function (trigger) {
+					trigger.addEventListener('click', function () {
+						window.orejime.prompt();
+					});
+				});
+
+			document
+				.querySelectorAll('[data-orejime-reset]')
+				.forEach(function (trigger) {
+					trigger.addEventListener('click', function () {
+						window.orejime.manager.clearConsents();
+					});
+				});
+		</script>
+	</body>
+</html>

@@ -1,6 +1,2 @@
 *
-!dist/orejime.js
-!dist/orejime.css
-!dist/orejime.scss
-!es/**/*
-!lib/**/*
+!/dist/orejime*

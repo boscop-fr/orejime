@@ -1,6 +1,7 @@
-node_modules
-/dist/orejime.js
-/dist/orejime.css
-/dist/orejime.scss
-/es
-/lib
+/node_modules
+/dist/*
+!/dist/site
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

@@ -1,0 +1,86 @@
+@font-face {
+	font-family: Outfit Variable;
+	font-style: normal;
+	font-display: swap;
+	font-weight: 200 900;
+	src: url('./outfit-variable.woff2') format('woff2');
+}
+
+iframe {
+	border: 0;
+	border-radius: var(--radius--m);
+	width: 100%;
+	min-height: 25lh;
+}
+
+.is-hidden {
+	display: none;
+}
+
+.RichText > :first-child {
+	margin-top: 0;
+}
+
+.ButtonList {
+	padding: 0;
+}
+
+.LogoList {
+	padding: 0;
+}
+
+.LogoList img {
+	height: 2lh;
+}
+
+.MigrationForm-output {
+	margin-top: var(--spacing-block--l);
+}
+
+.ExamplePage {
+	min-height: 100%;
+	background: var(--color-paper--100);
+	color: var(--color-black--100);
+}
+
+.ExamplePage iframe {
+	aspect-ratio: 16 / 9;
+	min-height: 0;
+}
+
+.ExamplePage .orejime-Env {
+	font-size: 0.875rem;
+}
+
+.ExampleMain {
+	padding: var(--spacing-block--l) var(--spacing-inline--xl);
+}
+
+.ExampleReset {
+	display: none;
+	position: fixed;
+	right: 1.4em;
+	bottom: 1.4em;
+}
+
+body:not(:has(.orejime-Banner)):not(:has(.orejime-Modal)) .ExampleReset {
+	display: block;
+}
+
+/**
+ * We're using the actual code as doc by making the script's
+ * contents visible.
+ */
+.ExampleCode {
+	display: block;
+	line-height: 1.6;
+	font-family:
+		Menlo,
+		Consolas,
+		Monaco,
+		Liberation Mono,
+		Lucida Console,
+		monospace;
+	tab-size: 3;
+	overflow-x: auto;
+}
