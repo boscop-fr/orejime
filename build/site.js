@@ -85,6 +85,7 @@ export const templatePlugin = ({
 export const assetsPlugin = () =>
 	new rspack.CopyRspackPlugin({
 		patterns: [
+			{from: 'site/_redirects'},
 			{
 				from: 'site/assets',
 				to: 'assets',
