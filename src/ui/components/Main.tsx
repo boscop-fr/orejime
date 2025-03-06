@@ -9,7 +9,7 @@ import {
 import PurposeTree from './PurposeTree';
 import StubManagerProvider from './StubManagerProvider';
 import GlobalConsentContainer from './GlobalConsentContainer';
-import {findFirstFocusableChild} from '../utils/dom';
+import {findFirstFocusableChild, softFocus} from '../utils/dom';
 
 export interface MainApi {
 	openModal: () => void;
@@ -38,7 +38,7 @@ const Main = ({apiRef}: MainProps) => {
 	// moves focus inside the banner once it opens
 	useEffect(() => {
 		if (isBannerOpen && !isModalOpen && bannerRef.current) {
-			findFirstFocusableChild(bannerRef.current)?.focus();
+			softFocus(findFirstFocusableChild(bannerRef.current));
 		}
 	}, [isBannerOpen]);
 

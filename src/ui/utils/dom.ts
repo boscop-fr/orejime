@@ -29,6 +29,24 @@ export const getRootElement = (reference: ElementReference) => {
 	return element;
 };
 
+// @see https://stackoverflow.com/a/326076/2391359
+const isTopLevelFrame = () => {
+	try {
+		return window.self === window.top;
+	} catch (e) {
+		return true;
+	}
+};
+
+// On Firefox, iframes can "steal" focus from the top level
+// page. We don't want that to happen so we're moving focus
+// at the top level only.
+export const softFocus = (element?: HTMLElement) => {
+	if (element && isTopLevelFrame()) {
+		element?.focus();
+	}
+};
+
 // A very minimal implementation tailored for the kind of
 // elements used within the app.
 export const findFirstFocusableChild = (element: HTMLElement) =>
