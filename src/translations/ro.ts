@@ -11,8 +11,8 @@ export default {
 		acceptTitle: 'Acceptați toate modulele cookie',
 		decline: 'Renunță',
 		declineTitle: 'Refuzați toate modulele cookie opționale',
-		configure: 'Află mai multe',
-		configureTitle: 'Alegeți modulele cookie'
+		configure: 'Configurați',
+		configureTitle: 'Configura cookie'
 	},
 	modal: {
 		title: 'Informațiile pe care le colectăm',

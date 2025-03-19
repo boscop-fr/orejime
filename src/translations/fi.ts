@@ -11,8 +11,8 @@ export default {
 		acceptTitle: 'Hyväksy kaikki evästeet',
 		decline: 'Hylkää',
 		declineTitle: 'Hylkää kaikki valinnaiset evästeet',
-		configure: 'Lue lisää',
-		configureTitle: 'Valitse evästeet'
+		configure: 'Konfiguroida',
+		configureTitle: 'Määritä evästeet'
 	},
 	modal: {
 		title: 'Keräämämme tiedot',

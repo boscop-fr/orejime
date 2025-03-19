@@ -11,8 +11,8 @@ export default {
 		acceptTitle: 'Accept all cookies',
 		decline: 'Decline',
 		declineTitle: 'Decline optional cookies',
-		configure: 'Learn more',
-		configureTitle: 'Choose cookies'
+		configure: 'Configure',
+		configureTitle: 'Configure cookies'
 	},
 	modal: {
 		title: 'Information that we collect',

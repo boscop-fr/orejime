@@ -11,8 +11,8 @@ export default {
 		acceptTitle: 'Accettare tutti i cookie',
 		decline: 'Rifiuta',
 		declineTitle: 'Rifiutare tutti i cookie opzionali',
-		configure: 'Scopri di più',
-		configureTitle: 'Scegliere i cookie'
+		configure: 'Configurare',
+		configureTitle: 'Configurare i cookie'
 	},
 	modal: {
 		title: 'Informazioni che raccogliamo',

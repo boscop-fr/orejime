@@ -10,9 +10,9 @@ export default {
 		accept: 'Acceptar',
 		acceptTitle: 'Acceptar les cookies',
 		decline: 'Refusar',
-		declineTitle: null,
-		configure: 'Més informació',
-		configureTitle: null
+		declineTitle: 'Rebutjar les galetes opcionals',
+		configure: 'Configurar',
+		configureTitle: 'Configurar cookies'
 	},
 	modal: {
 		title: 'La informació que recollim',
