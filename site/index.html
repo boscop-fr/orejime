@@ -311,13 +311,13 @@
 					</p>
 
 					<div class="Notice Theme--info">
-						<strong>All fields are mandatory</strong>
 						<p>
+							<strong id="mandatory">All fields are mandatory.</strong>
+							<br />
 							Boscop only processes the collected data to respond to your
 							request. To learn more about how we manage your personal
 							data and to exercise your GDPR rights, you can consult our
-							<a href="/legal">data privacy policy</a>
-							.
+							<a href="/legal">data privacy policy</a>.
 						</p>
 					</div>
 
@@ -327,6 +327,7 @@
 							id="SupportForm-name"
 							type="text"
 							name="name"
+							aria-describedby="mandatory"
 							required
 						/>
 
@@ -337,6 +338,7 @@
 							id="SupportForm-email"
 							type="email"
 							name="email"
+							aria-describedby="mandatory"
 							required
 						/>
 
@@ -345,6 +347,7 @@
 							id="SupportForm-message"
 							name="message"
 							rows="5"
+							aria-describedby="mandatory"
 							required
 						></textarea>
 
