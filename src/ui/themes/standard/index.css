@@ -70,12 +70,13 @@
 		:hover,
 		:focus
 	) {
-	outline: 1px solid var(--orejime-color-interactive);
+	outline: 2px solid var(--orejime-color-interactive);
 	outline-offset: 1px;
 }
 
 .orejime-Button:not(:is([disabled], [aria-disabled='true'])):active {
-	outline-width: 2px;
+	outline-width: 1px;
+	outline-offset: 2px;
 }
 
 .orejime-ButtonList {
