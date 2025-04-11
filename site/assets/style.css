@@ -52,11 +52,17 @@ iframe {
 	font-size: 0.875rem;
 }
 
+.ExamplePage .orejime-Purpose-input {
+	accent-color: var(--orejime-color-interactive);
+}
+
 .ExampleMain {
 	padding: var(--spacing-block--l) var(--spacing-inline--xl);
 }
 
 .ExampleReset {
+	--orejime-color-interactive: royalblue;
+	--orejime-color-on-interactive: white;
 	display: none;
 	position: fixed;
 	right: 1.4em;
