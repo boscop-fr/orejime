@@ -33,6 +33,14 @@ iframe {
 	height: 2lh;
 }
 
+.Form-error {
+	display: none;
+}
+
+label:has(.Form-error):has(+ :user-invalid) .Form-error {
+	display: block;
+}
+
 .MigrationForm-output {
 	margin-top: var(--spacing-block--l);
 }

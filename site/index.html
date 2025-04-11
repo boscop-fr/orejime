@@ -322,27 +322,42 @@
 					</div>
 
 					<form method="POST" name="support" data-netlify="true">
-						<label for="SupportForm-name">Your name</label>
+						<label for="SupportForm-name">
+							Your name
+							<span class="Form-error">Please fill out your name</span>
+						</label>
+
 						<input
 							id="SupportForm-name"
 							type="text"
 							name="name"
 							aria-describedby="mandatory"
+							autocomplete="name"
 							required
 						/>
 
 						<label for="SupportForm-email">
 							Your email address (i.e. company@example.org)
+							<span class="Form-error">
+								Please enter a valid email address, for example
+								muriel.tramis@email.com
+							</span>
 						</label>
+
 						<input
 							id="SupportForm-email"
 							type="email"
 							name="email"
 							aria-describedby="mandatory"
+							autocomplete="email"
 							required
 						/>
 
-						<label for="SupportForm-message">Your message</label>
+						<label for="SupportForm-message">
+							Your message
+							<span class="Form-error">Please write a message</span>
+						</label>
+
 						<textarea
 							id="SupportForm-message"
 							name="message"
