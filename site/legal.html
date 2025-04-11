@@ -16,6 +16,15 @@
 	</head>
 
 	<body>
+		<ul class="SkipLinks Theme--secondary">
+			<li>
+				<a class="SkipLinks-link Button" href="#main">Skip to content</a>
+			</li>
+			<li>
+				<a class="SkipLinks-link Button" href="#footer">Skip to footer</a>
+			</li>
+		</ul>
+
 		<div class="Surface Theme--primary">
 			<div class="Container">
 				<div class="Header">
@@ -101,7 +110,12 @@
 			</div>
 		</div>
 
-		<main class="Section Section--padding-xl" role="main">
+		<main
+			class="Section Section--padding-xl"
+			role="main"
+			id="main"
+			tabindex="-1"
+		>
 			<div class="Container">
 				<div class="RichText">
 					<h2>Privacy policy</h2>
@@ -281,6 +295,8 @@
 		<footer
 			class="Footer Section Section--padding-l Surface Theme--tertiary"
 			role="contentinfo"
+			id="footer"
+			tabindex="-1"
 		>
 			<div class="Container">
 				<p lang="fr">
