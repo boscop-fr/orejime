@@ -1,5 +1,4 @@
-import {useContext, useEffect, useState} from 'preact/hooks';
-import Context from '../components/Context';
+import {MutableRef, useContext, useEffect, useState} from 'preact/hooks';
 import {Purpose} from '../../core/types';
 import {
 	acceptedConsents,
@@ -7,6 +6,8 @@ import {
 	areAllPurposesEnabled,
 	declinedConsents
 } from '../../core/utils/purposes';
+import Context from '../components/Context';
+import {resolveCollision} from './dom';
 
 export const useConfig = () => {
 	const {config} = useContext(Context);
@@ -106,4 +107,18 @@ export const useConsent = (
 ): [consent: boolean, setConsent: (consent: boolean) => void] => {
 	const manager = useManager();
 	return [manager.getConsent(id), manager.setConsent.bind(manager, id)];
+};
+
+export const useNonObscuringElement = (ref: MutableRef<HTMLElement>): void => {
+	useEffect(() => {
+		const resolve = (event: FocusEvent) => {
+			resolveCollision(event.target as HTMLElement, ref.current);
+		};
+
+		document.addEventListener('focusin', resolve);
+
+		return () => {
+			document.removeEventListener('focusin', resolve);
+		};
+	}, [ref]);
 };

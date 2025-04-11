@@ -1,6 +1,7 @@
-import {useTranslations} from '../../utils/hooks';
-import {template} from '../../utils/template';
+import {useRef} from 'preact/hooks';
 import type {BannerComponent} from '../../components/types/Banner';
+import {useNonObscuringElement, useTranslations} from '../../utils/hooks';
+import {template} from '../../utils/template';
 
 const Banner: BannerComponent = ({
 	needsUpdate,
@@ -11,10 +12,13 @@ const Banner: BannerComponent = ({
 	onDecline,
 	onConfigure
 }) => {
+	const ref = useRef<HTMLDivElement>();
 	const t = useTranslations();
 
+	useNonObscuringElement(ref);
+
 	return (
-		<div className="fr-consent-banner" aria-hidden={isHidden}>
+		<div className="fr-consent-banner" aria-hidden={isHidden} ref={ref}>
 			{t.banner.title ? <h2 className="fr-h6">{t.banner.title}</h2> : null}
 
 			<div className="fr-consent-banner__content">

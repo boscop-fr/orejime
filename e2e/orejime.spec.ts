@@ -42,6 +42,13 @@ test.describe('Orejime', () => {
 				<template data-purpose="mandatory">
 					<script id="mandatory"></script>
 				</template>
+
+				<button
+					id="obscured"
+					style="position: absolute; bottom: 3rem; right: 3rem;"
+				>
+					Obscured
+				</button>
 			`
 		);
 	});
@@ -209,6 +216,24 @@ test.describe('Orejime', () => {
 		await expect(orejimePage.locator('#contextual')).toBeVisible();
 		await expect(orejimePage.contextualNotice).not.toBeVisible();
 		await expect(orejimePage.contextualNoticePlaceholder).not.toBeAttached();
+	});
+
+	test('should not obscure any focused element (WCAG 2.4.12)', async () => {
+		const obscured = orejimePage.locator('#obscured');
+
+		// The button should be obscured by the banner at
+		// this stage, thus not being able to receive click
+		// events.
+		await expect(
+			obscured.click({
+				timeout: 10
+			})
+		).rejects.toThrow();
+
+		// When the button takes focus, the banner should be
+		// moved so it becomes visible/usable.
+		await obscured.focus();
+		await obscured.click();
 	});
 });
 
