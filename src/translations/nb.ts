@@ -11,8 +11,8 @@ export default {
 		acceptTitle: 'Godta alle informasjonskapsler',
 		decline: 'Avslå',
 		declineTitle: 'Avslå alle valgfrie informasjonskapsler',
-		configure: 'Lær mer',
-		configureTitle: 'Velg informasjonskapsler'
+		configure: 'Konfigurere',
+		configureTitle: 'Konfigurere informasjonskapsler'
 	},
 	modal: {
 		title: 'Informasjon vi samler inn',

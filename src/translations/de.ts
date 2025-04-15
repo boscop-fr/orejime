@@ -10,9 +10,9 @@ export default {
 		accept: 'Akzeptieren',
 		acceptTitle: 'Cookies akzeptieren',
 		decline: 'Ablehnen',
-		declineTitle: 'optionalen Cookies ablehnen',
-		configure: 'Mehr erfahren',
-		configureTitle: 'Cookies auswählen'
+		declineTitle: 'Optionalen Cookies ablehnen',
+		configure: 'Konfigurieren',
+		configureTitle: 'Cookies konfigurieren'
 	},
 	modal: {
 		title: 'Informationen zur Privatsphäre',

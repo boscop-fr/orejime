@@ -11,8 +11,8 @@ export default {
 		acceptTitle: 'Acceptar los cookies',
 		decline: 'Refusar',
 		declineTitle: 'Refusar los cookies',
-		configure: 'Ne saber mai',
-		configureTitle: null
+		configure: 'Configurar',
+		configureTitle: 'Configurar los cookies'
 	},
 	modal: {
 		title: 'Las informacions que reculhissèm',

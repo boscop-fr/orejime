@@ -11,8 +11,8 @@ export default {
 		acceptTitle: 'Minden cookie elfogadása',
 		decline: 'Elvet',
 		declineTitle: 'Minden opcionális cookie elutasítása',
-		configure: 'Tudj meg többet',
-		configureTitle: 'Cookie-k kiválasztása'
+		configure: 'Konfigurálni',
+		configureTitle: 'Konfigurálja a cookie-kat'
 	},
 	modal: {
 		title: 'Információk, amiket gyűjtünk',

@@ -11,8 +11,8 @@ export default {
 		acceptTitle: 'Acceptera alla cookies',
 		decline: 'Avböj',
 		declineTitle: 'Avvisa alla valfria cookies',
-		configure: 'Läs mer',
-		configureTitle: 'Välj cookies'
+		configure: 'Konfigurera',
+		configureTitle: 'Konfigurera cookies'
 	},
 	modal: {
 		title: 'Information som vi samlar',

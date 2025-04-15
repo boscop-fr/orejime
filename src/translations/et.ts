@@ -11,8 +11,8 @@ export default {
 		acceptTitle: 'Aktsepteeri kõik küpsised',
 		decline: 'Keeldu',
 		declineTitle: 'Keelata kõik valikulised küpsised',
-		configure: 'Lisateave',
-		configureTitle: 'Vali küpsised'
+		configure: 'Seadistada',
+		configureTitle: 'Seadistada küpsiseid'
 	},
 	modal: {
 		title: 'Isikuandmete kogumine',
