@@ -102,7 +102,7 @@ test.describe('Orejime', () => {
 		await orejimePage.openModalFromBanner();
 		await expect(orejimePage.modal).toBeVisible();
 
-		await orejimePage.closeModalByClickingOutside();
+		await orejimePage.closeDialogByClickingOutside();
 		await expect(orejimePage.modal).toHaveCount(0);
 		await expect(orejimePage.banner).toBeVisible();
 	});
@@ -209,5 +209,87 @@ test.describe('Orejime', () => {
 		await expect(orejimePage.locator('#contextual')).toBeVisible();
 		await expect(orejimePage.contextualNotice).not.toBeVisible();
 		await expect(orejimePage.contextualNoticePlaceholder).not.toBeAttached();
+	});
+});
+
+test.describe('Orejime with forced banner', () => {
+	test('should prevent navigation before consent', async ({page, context}) => {
+		const orejimePage = new OrejimePage(page, context);
+		await orejimePage.load(
+			{
+				forceBanner: true,
+				privacyPolicyUrl: 'https://example.org/privacy',
+				purposes: [
+					{
+						id: 'foo',
+						title: '',
+						cookies: []
+					}
+				]
+			},
+			`
+				<button id="button">Button</button>
+			`
+		);
+
+		await expect(orejimePage.banner).toBeVisible();
+
+		// The banner shouldn't be closable.
+		await orejimePage.closeDialogByClickingOutside();
+		await expect(orejimePage.banner).toBeVisible();
+
+		const button = await orejimePage.locator('#button');
+
+		// Focus should never escape the banner.
+		for (let i = 0; i < 10; i++) {
+			await orejimePage.locator(':focus').press('Tab');
+			await expect(button).not.toBeFocused();
+		}
+
+		await orejimePage.acceptAllFromBanner();
+		await expect(orejimePage.banner).not.toBeAttached();
+	});
+});
+
+test.describe('Orejime with forced modal', () => {
+	test('should prevent navigation before consent', async ({page, context}) => {
+		const orejimePage = new OrejimePage(page, context);
+		await orejimePage.load(
+			{
+				forceModal: true,
+				privacyPolicyUrl: 'https://example.org/privacy',
+				purposes: [
+					{
+						id: 'foo',
+						title: '',
+						cookies: []
+					}
+				]
+			},
+			`
+				<button id="button">Button</button>
+			`
+		);
+
+		await expect(orejimePage.modal).toBeVisible();
+
+		// The modal shouldn't be closable.
+		await orejimePage.closeDialogByClickingOutside();
+		await expect(orejimePage.modal).toBeVisible();
+		await expect(orejimePage.closeModalButton).not.toBeAttached();
+
+		// The banner shouldn't be visible.
+		await expect(orejimePage.banner).not.toBeAttached();
+
+		const button = await orejimePage.locator('#button');
+
+		// Focus should never escape the modal.
+		for (let i = 0; i < 10; i++) {
+			await orejimePage.locator(':focus').press('Tab');
+			await expect(button).not.toBeFocused();
+		}
+
+		await orejimePage.saveFromModal();
+		await expect(orejimePage.modal).not.toBeAttached();
 	});
 });

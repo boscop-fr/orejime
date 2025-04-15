@@ -19,7 +19,6 @@ const Modal: ModalComponent = ({
 		<Dialog
 			isAlert={isForced}
 			labelId="orejime-modal-title"
-			portalClassName="orejime-Env"
 			overlayClassName="orejime-ModalOverlay"
 			className="orejime-ModalWrapper"
 			onRequestClose={onClose}
