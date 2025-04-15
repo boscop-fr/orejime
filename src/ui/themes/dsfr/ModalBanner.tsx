@@ -13,6 +13,7 @@ const ModalBanner: ModalBannerComponent = ({...props}) => {
 			overlayClassName="orejime-banner-overlay"
 			className="fr-modal fr-modal--opened"
 			label={t.banner.title}
+			isAlert
 		>
 			<Banner {...props} />
 		</Dialog>

@@ -52,6 +52,10 @@ export class OrejimePage {
 		return this.locator('.orejime-Modal');
 	}
 
+	get closeModalButton() {
+		return this.locator('.orejime-Modal-closeButton');
+	}
+
 	get contextualNotice() {
 		return this.locator('.orejime-ContextualNotice');
 	}
@@ -96,10 +100,10 @@ export class OrejimePage {
 		await this.locator('.orejime-Modal-closeButton').click();
 	}
 
-	async closeModalByClickingOutside() {
+	async closeDialogByClickingOutside() {
 		// We're clicking in a corner to avoid clicking on the
 		// modal itself, which has no effect.
-		await this.locator('.orejime-ModalOverlay').click({
+		await this.locator('body').click({
 			position: {
 				x: 1,
 				y: 1

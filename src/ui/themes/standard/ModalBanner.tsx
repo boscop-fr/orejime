@@ -8,10 +8,10 @@ const ModalBanner: ModalBannerComponent = (props) => {
 
 	return (
 		<Dialog
-			portalClassName="orejime-Env"
 			overlayClassName="orejime-BannerOverlay"
 			className="orejime-BannerWrapper"
 			label={t.banner.title}
+			isAlert
 		>
 			<Banner {...props} />
 		</Dialog>
