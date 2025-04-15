@@ -16,13 +16,22 @@
 	</head>
 
 	<body>
+		<ul class="SkipLinks Theme--secondary">
+			<li>
+				<a class="SkipLinks-link Button" href="#main">Skip to content</a>
+			</li>
+			<li>
+				<a class="SkipLinks-link Button" href="#footer">Skip to footer</a>
+			</li>
+		</ul>
+
 		<div class="Surface Theme--primary">
 			<div class="Container">
 				<div class="Header">
 					<header class="Header-banner" role="banner">
 						<img
 							class="Header-logo"
-							src="https://boscop.fr/wp-content/themes/boscop/dist/design-system/logo-horizontal-borderless.svg"
+							src="./assets/logo-boscop.svg"
 							alt="boscop"
 						/>
 					</header>
@@ -69,7 +78,12 @@
 			</div>
 		</div>
 
-		<main class="Section Section--padding-xl" role="main">
+		<main
+			class="Section Section--padding-xl"
+			role="main"
+			id="main"
+			tabindex="-1"
+		>
 			<div class="Container">
 				<div class="RichText">
 					<h2 id="features">Features</h2>
@@ -297,40 +311,58 @@
 					</p>
 
 					<div class="Notice Theme--info">
-						<strong>All fields are mandatory</strong>
 						<p>
+							<strong id="mandatory">All fields are mandatory.</strong>
+							<br />
 							Boscop only processes the collected data to respond to your
 							request. To learn more about how we manage your personal
 							data and to exercise your GDPR rights, you can consult our
-							<a href="/legal">data privacy policy</a>
-							.
+							<a href="/legal">data privacy policy</a>.
 						</p>
 					</div>
 
 					<form method="POST" name="support" data-netlify="true">
-						<label for="SupportForm-name">Your name</label>
+						<label for="SupportForm-name">
+							Your name
+							<span class="Form-error">Please fill out your name</span>
+						</label>
+
 						<input
 							id="SupportForm-name"
 							type="text"
 							name="name"
+							aria-describedby="mandatory"
+							autocomplete="name"
 							required
 						/>
 
 						<label for="SupportForm-email">
 							Your email address (i.e. company@example.org)
+							<span class="Form-error">
+								Please enter a valid email address, for example
+								muriel.tramis@email.com
+							</span>
 						</label>
+
 						<input
 							id="SupportForm-email"
 							type="email"
 							name="email"
+							aria-describedby="mandatory"
+							autocomplete="email"
 							required
 						/>
 
-						<label for="SupportForm-message">Your message</label>
+						<label for="SupportForm-message">
+							Your message
+							<span class="Form-error">Please write a message</span>
+						</label>
+
 						<textarea
 							id="SupportForm-message"
 							name="message"
 							rows="5"
+							aria-describedby="mandatory"
 							required
 						></textarea>
 
@@ -392,6 +424,8 @@
 		<footer
 			class="Footer Section Section--padding-l Surface Theme--tertiary"
 			role="contentinfo"
+			id="footer"
+			tabindex="-1"
 		>
 			<div class="Container">
 				<p lang="fr">
