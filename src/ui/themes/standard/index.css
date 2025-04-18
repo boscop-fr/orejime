@@ -35,6 +35,7 @@
 		0.2em 0.6em 1.5em rgba(var(--orejime-color-shadow), 0.2);
 	--orejime-banner-max-width: 45ch;
 	--orejime-modal-max-width: 65ch;
+	--orejime-collision-padding: 0;
 
 	all: unset;
 

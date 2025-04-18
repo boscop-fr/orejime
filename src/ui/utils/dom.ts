@@ -76,6 +76,19 @@ const translateElementY = (
 	}
 };
 
+const getCollisionPadding = (element: HTMLElement) => {
+	const styles = window.getComputedStyle(element);
+	const padding = styles.getPropertyValue('--orejime-collision-padding');
+	return padding.length ? parseInt(padding, 10) : 16;
+};
+
+const getPaddedBoundingBox = (element: DOMRect, padding: number) => ({
+	top: element.top + padding,
+	right: element.right + padding,
+	bottom: element.bottom + padding,
+	left: element.left + padding
+});
+
 // Resolves a visual collision between two elements, either
 // by scrolling the page or moving one of them.
 // We're only resolving collisions on the vertical axis, as
@@ -86,7 +99,13 @@ export const resolveCollision = (fixed: HTMLElement, mobile: HTMLElement) => {
 		return;
 	}
 
-	const fixedRect = fixed.getBoundingClientRect();
+	// We're padding the fixed element's bounding box to
+	// avoid snapping the mobile one right on its border.
+	const fixedRect = getPaddedBoundingBox(
+		fixed.getBoundingClientRect(),
+		getCollisionPadding(mobile)
+	);
+
 	const mobileRect = mobile.getBoundingClientRect();
 	const isCollidingX =
 		mobileRect.left < fixedRect.right && mobileRect.right > fixedRect.left;
