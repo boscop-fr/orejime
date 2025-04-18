@@ -49,6 +49,13 @@ test.describe('Orejime', () => {
 				>
 					Obscured
 				</button>
+
+				<button
+					id="non-obscured"
+					style="position: absolute; bottom: 3rem; left: 3rem;"
+				>
+					Non obscured
+				</button>
 			`
 		);
 	});
@@ -219,6 +226,7 @@ test.describe('Orejime', () => {
 	});
 
 	test('should not obscure any focused element (WCAG 2.4.12)', async () => {
+		const initalPosition = await orejimePage.banner.boundingBox();
 		const obscured = orejimePage.locator('#obscured');
 
 		// The button should be obscured by the banner at
@@ -230,10 +238,23 @@ test.describe('Orejime', () => {
 			})
 		).rejects.toThrow();
 
-		// When the button takes focus, the banner should be
-		// moved so it becomes visible/usable.
+		// When the obscured button takes focus, the banner
+		// should be moved so it becomes visible/usable.
 		await obscured.focus();
 		await obscured.click();
+
+		const position = await orejimePage.banner.boundingBox();
+		console.log(position, initalPosition);
+		await expect(position).not.toEqual(initalPosition);
+
+		// When a non obscured button takes focus, the banner
+		// shouldn't be displaced.
+		const nonObscured = orejimePage.locator('#non-obscured');
+		await nonObscured.focus();
+		await nonObscured.click();
+
+		const position2 = await orejimePage.banner.boundingBox();
+		await expect(position2).toEqual(initalPosition);
 	});
 });
 

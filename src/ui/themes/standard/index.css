@@ -90,15 +90,8 @@
 	z-index: 1000;
 	right: 0;
 	bottom: 0;
-	left: 0;
-	display: flex;
-	justify-content: flex-end;
 	padding: var(--orejime-space-m);
-	pointer-events: none;
-}
-
-.orejime-Banner--forced {
-	padding: 0;
+	max-width: 100%;
 }
 
 .orejime-Banner-body {
@@ -108,13 +101,6 @@
 	max-width: var(--orejime-banner-max-width);
 	background: var(--orejime-color-background);
 	color: var(--orejime-color-text);
-	pointer-events: auto;
-}
-
-.orejime-Banner--forced .orejime-Banner-body {
-	border: 0;
-	border-radius: 0;
-	max-width: 100%;
 }
 
 .orejime-Banner-logo {

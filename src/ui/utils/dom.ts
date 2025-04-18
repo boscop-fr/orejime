@@ -88,11 +88,13 @@ export const resolveCollision = (fixed: HTMLElement, mobile: HTMLElement) => {
 
 	const fixedRect = fixed.getBoundingClientRect();
 	const mobileRect = mobile.getBoundingClientRect();
-	const isColliding =
-		mobileRect.left < fixedRect.right
-		&& mobileRect.right > fixedRect.x
-		&& mobileRect.top < fixedRect.bottom
-		&& mobileRect.bottom > fixedRect.top;
+	const isCollidingX =
+		mobileRect.left < fixedRect.right && mobileRect.right > fixedRect.left;
+
+	if (!isCollidingX) {
+		translateElementY(mobile, 0);
+		return;
+	}
 
 	const mobileCenterY = mobileRect.top + mobileRect.height / 2;
 	const direction = mobileCenterY > window.innerHeight / 2 ? 1 : -1;
@@ -101,7 +103,10 @@ export const resolveCollision = (fixed: HTMLElement, mobile: HTMLElement) => {
 			? fixedRect.bottom - mobileRect.top
 			: mobileRect.bottom - fixedRect.top;
 
-	if (!isColliding) {
+	const isCollidingY =
+		mobileRect.top < fixedRect.bottom && mobileRect.bottom > fixedRect.top;
+
+	if (!isCollidingY) {
 		translateElementY(mobile, overlap, direction);
 		return;
 	}
