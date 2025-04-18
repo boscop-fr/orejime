@@ -128,6 +128,11 @@ module.exports = {
 			chunks: [],
 			lang: 'fr'
 		}),
+		featureTemplatePlugin({
+			title: 'WCAG compliance',
+			feature: 'wcag',
+			template: 'wcag'
+		}),
 		assetsPlugin(),
 		matomoPlugin()
 	]
