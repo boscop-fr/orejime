@@ -1,0 +1,57 @@
+<!doctype html>
+
+<html class="ExamplePage" lang="en">
+	<head>
+		<title>Orejime</title>
+
+		<link
+			rel="stylesheet"
+			href="https://boscop.fr/wp-content/themes/boscop/dist/app.css"
+		/>
+
+		<link rel="stylesheet" href="../assets/style.css" />
+		<link rel="stylesheet" href="../orejime-standard.css" />
+	</head>
+
+	<body>
+		<main class="ExampleMain" role="main">
+			<div class="ExampleGrid Grid">
+				<a href="#">Example link 1</a>
+				<a href="#">Example link 2</a>
+				<a href="#">Example link 3</a>
+				<a href="#">Example link 4</a>
+				<a href="#">Example link 5</a>
+				<a href="#">Example link 6</a>
+				<a href="#">Example link 7</a>
+				<a href="#">Example link 8</a>
+				<a href="#">Example link 9</a>
+			</div>
+
+			<div class="orejime-Env">
+				<button class="ExampleReset Button">Reset consent</button>
+			</div>
+		</main>
+
+		<script>
+			window.orejimeConfig = {
+				purposes: [
+					{
+						id: 'example',
+						title: 'Example purpose'
+					}
+				],
+				privacyPolicyUrl: '#'
+			};
+		</script>
+
+		<script src="../orejime-standard-en.js"></script>
+
+		<script>
+			document
+				.querySelector('.ExampleReset')
+				.addEventListener('click', function () {
+					window.orejime.manager.clearConsents();
+				});
+		</script>
+	</body>
+</html>

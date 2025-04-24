@@ -35,6 +35,7 @@
 		0.2em 0.6em 1.5em rgba(var(--orejime-color-shadow), 0.2);
 	--orejime-banner-max-width: 45ch;
 	--orejime-modal-max-width: 65ch;
+	--orejime-collision-padding: 0;
 
 	all: unset;
 
@@ -70,12 +71,13 @@
 		:hover,
 		:focus
 	) {
-	outline: 1px solid var(--orejime-color-interactive);
+	outline: 2px solid var(--orejime-color-interactive);
 	outline-offset: 1px;
 }
 
 .orejime-Button:not(:is([disabled], [aria-disabled='true'])):active {
-	outline-width: 2px;
+	outline-width: 1px;
+	outline-offset: 2px;
 }
 
 .orejime-ButtonList {
@@ -89,15 +91,8 @@
 	z-index: 1000;
 	right: 0;
 	bottom: 0;
-	left: 0;
-	display: flex;
-	justify-content: flex-end;
 	padding: var(--orejime-space-m);
-	pointer-events: none;
-}
-
-.orejime-Banner--forced {
-	padding: 0;
+	max-width: 100%;
 }
 
 .orejime-Banner-body {
@@ -107,13 +102,6 @@
 	max-width: var(--orejime-banner-max-width);
 	background: var(--orejime-color-background);
 	color: var(--orejime-color-text);
-	pointer-events: auto;
-}
-
-.orejime-Banner--forced .orejime-Banner-body {
-	border: 0;
-	border-radius: 0;
-	max-width: 100%;
 }
 
 .orejime-Banner-logo {

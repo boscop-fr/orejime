@@ -1,7 +1,8 @@
-import {imageAttributes} from '../../utils/config';
-import {useTranslations} from '../../utils/hooks';
-import {template} from '../../utils/template';
+import {useRef} from 'preact/hooks';
 import {BannerComponent} from '../../components/types/Banner';
+import {imageAttributes} from '../../utils/config';
+import {useNonObscuringElement, useTranslations} from '../../utils/hooks';
+import {template} from '../../utils/template';
 
 const Banner: BannerComponent = ({
 	isHidden,
@@ -13,10 +14,13 @@ const Banner: BannerComponent = ({
 	onDecline: onDeclineRequest,
 	onConfigure: onConfigRequest
 }) => {
+	const ref = useRef<HTMLDivElement>();
 	const t = useTranslations();
 
+	useNonObscuringElement(ref);
+
 	return (
-		<div aria-hidden={isHidden} className="orejime-Banner">
+		<div aria-hidden={isHidden} className="orejime-Banner" ref={ref}>
 			<div className="orejime-Banner-body">
 				{logo && (
 					<div className="orejime-Banner-logoContainer">
