@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## 3.0.1
+
+- fix: Updated legal notice (https://github.com/boscop-fr/orejime/pull/117)
+- fix: Redirection from the old demo site
+  (https://github.com/boscop-fr/orejime/pull/118)
+- fix: Added a favicon (https://github.com/boscop-fr/orejime/pull/119)
+- fix: Translations of the "configure" button
+  (https://github.com/boscop-fr/orejime/pull/121)
+- fix: Accessibility issues on the website
+  (https://github.com/boscop-fr/orejime/pull/123)
+- fix: Focus trap on forced banners
+  (https://github.com/boscop-fr/orejime/pull/124)
+- fix: WCAG compliance (https://github.com/boscop-fr/orejime/pull/125)
+- fix: CSS output for older browsers
+  (https://github.com/boscop-fr/orejime/pull/126)
+
 ## 3.0.0
 
 - feature: Added themes (standard & DSFR for now)
