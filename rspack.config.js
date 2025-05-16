@@ -108,6 +108,10 @@ module.exports = {
 			title: 'Legal information & privacy policy',
 			template: 'legal'
 		}),
+		templatePlugin({
+			title: 'Accessibility statement',
+			template: 'accessibility'
+		}),
 		featureTemplatePlugin({title: 'Purposes', feature: 'purposes'}),
 		featureTemplatePlugin({title: 'Grouping', feature: 'grouping'}),
 		featureTemplatePlugin({
