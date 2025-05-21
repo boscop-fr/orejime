@@ -148,7 +148,7 @@ var orejimeConfig = {
       description: 'Example of an inline tracking script',
       cookies: [
         'inline-tracker',
-	[
+        [
           // When deleting a cookie, Orejime will try to delete a cookie with the given name,
           // the "/" path, and multiple domains (the current domain and `"." + current domain`).
           // If an app sets a cookie on a different path or domain than that, Orejime won't be
