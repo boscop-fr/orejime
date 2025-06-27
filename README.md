@@ -368,8 +368,8 @@ to overwrite only some of the rules.
 <style>
   .orejime-Env {
     --orejime-font-family: monospace;
-    --orejime-background: black;
-    --orejime-color: yellow;
+    --orejime-color-background: black;
+    --orejime-color-text: yellow;
   }
 </style>
 ```
