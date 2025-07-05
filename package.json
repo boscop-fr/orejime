@@ -18,13 +18,6 @@
     "low footprint",
     "lightweight"
   ],
-  "main": "./dist/orejime.js",
-  "browser": "./dist/orejime.js",
-  "exports": {
-    "./package.json": "./package.json",
-    "./orejime.js": "./dist/orejime.js",
-    "./orejime.css": "./dist/orejime.css"
-  },
   "scripts": {
     "start": "rspack --watch",
     "serve": "rspack serve",
