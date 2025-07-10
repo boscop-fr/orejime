@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 3.0.2
+
+- fix: Removed deprecated file references from package.json
+  (https://github.com/boscop-fr/orejime/pull/132)
+- fix: Removed useless log in e2e tests
+  (https://github.com/boscop-fr/orejime/pull/133)
+- doc: CSS properties example (https://github.com/boscop-fr/orejime/pull/131)
+- doc: Cookie settings example (https://github.com/boscop-fr/orejime/pull/130)
+- doc: Typo in the README (https://github.com/boscop-fr/orejime/pull/128)
+- demo: Added an accessibility statement
+  (https://github.com/boscop-fr/orejime/pull/127)
+
 ## 3.0.1
 
 - fix: Updated legal notice (https://github.com/boscop-fr/orejime/pull/117)
