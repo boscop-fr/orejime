@@ -40,12 +40,12 @@ const Modal: ModalComponent = ({
 						</div>
 
 						<div className="fr-modal__content">
-							<h1
+							<h2
 								id="fr-consent-modal-title"
 								className="fr-modal__title"
 							>
 								{t.modal.title}
-							</h1>
+							</h2>
 
 							<div>
 								{isForced && needsUpdate ? (

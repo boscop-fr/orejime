@@ -33,12 +33,12 @@ const Banner: BannerComponent = ({
 
 				<div className="orejime-Banner-text">
 					{t.banner.title && (
-						<h1
+						<h2
 							className="orejime-Banner-title"
 							id="orejime-Banner-title"
 						>
 							{t.banner.title}
-						</h1>
+						</h2>
 					)}
 
 					<p className="orejime-Banner-description">
