@@ -244,7 +244,6 @@ test.describe('Orejime', () => {
 		await obscured.click();
 
 		const position = await orejimePage.banner.boundingBox();
-		console.log(position, initalPosition);
 		await expect(position).not.toEqual(initalPosition);
 
 		// When a non obscured button takes focus, the banner

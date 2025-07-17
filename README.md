@@ -147,14 +147,14 @@ var orejimeConfig = {
       title: 'Inline Tracker',
       description: 'Example of an inline tracking script',
       cookies: [
-        'inline-tracker'[
-          // When deleting a cookie, Orejime will try to delete a cookie with the given name,
-          // the "/" path, and multiple domains (the current domain and `"." + current domain`).
-          // If an app sets a cookie on a different path or domain than that, Orejime won't be
-          // able to delete it by itself without more info.
-          // In this case, you can explicitely define a cookie, a path and domain:
-          ('cookieName', '/blog', '.' + location.hostname)
-        ],
+        'inline-tracker',
+        // When deleting a cookie, Orejime will try to delete a cookie with the
+        // given name, the "/" path, and multiple domains (the current domain
+        // and `"." + current domain`).
+        // If an app sets a cookie on a different path or domain than that,
+        // Orejime won't be able to delete it by itself without more info.
+        // In this case, you can explicitely define a cookie, a path and domain:
+        ['cookieName', '/blog', '.' + location.hostname],
         ['cookieName', '/', 'test.mydomain.com']
       ]
     },
@@ -368,8 +368,8 @@ to overwrite only some of the rules.
 <style>
   .orejime-Env {
     --orejime-font-family: monospace;
-    --orejime-background: black;
-    --orejime-color: yellow;
+    --orejime-color-background: black;
+    --orejime-color-text: yellow;
   }
 </style>
 ```
