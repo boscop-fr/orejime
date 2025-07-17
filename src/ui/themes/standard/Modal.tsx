@@ -36,9 +36,9 @@ const Modal: ModalComponent = ({
 						</button>
 					)}
 
-					<h1 className="orejime-Modal-title" id="orejime-modal-title">
+					<h2 className="orejime-Modal-title" id="orejime-modal-title">
 						{t.modal.title}
-					</h1>
+					</h2>
 
 					<p className="orejime-Modal-description">
 						{isForced && needsUpdate ? (
