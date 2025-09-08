@@ -1,26 +1,33 @@
-import {PurposeCookie} from '../types';
+import {PurposeCookie, PurposeCookieProps} from '../types';
 import {deleteCookie, getCookieNames} from './cookies';
-import escapeRegex from './escapeRegex';
+
+const expandCookie = (cookie: PurposeCookie): PurposeCookieProps =>
+	cookie instanceof Array ? cookie : [cookie, undefined, undefined];
+
+const matcher = (pattern: string | RegExp) =>
+	pattern instanceof RegExp
+		? (name: string) => pattern.test(name)
+		: (name: string) => pattern === name;
+
+export const findDeletableCookies = (
+	cookies: PurposeCookie[],
+	names: string[]
+) =>
+	cookies.flatMap((cookie) => {
+		const [pattern, path, domain] = expandCookie(cookie);
+		const test = matcher(pattern);
+
+		return names.filter(test).map((name) => ({
+			name,
+			path,
+			domain
+		}));
+	});
 
 export default (cookies: PurposeCookie[]) => {
-	const cookieNames = getCookieNames();
-
-	cookies.forEach((pattern) => {
-		let path: string;
-		let domain: string;
-
-		if (pattern instanceof Array) {
-			[pattern, path, domain] = pattern;
+	findDeletableCookies(cookies, getCookieNames()).forEach(
+		({name, path, domain}) => {
+			deleteCookie(name, path, domain);
 		}
-
-		if (!(pattern instanceof RegExp)) {
-			pattern = new RegExp(`^${escapeRegex(pattern)}$`);
-		}
-
-		cookieNames
-			.filter((name) => (pattern as RegExp).test(name))
-			.forEach((cookie) => {
-				deleteCookie(cookie, path, domain);
-			});
-	});
+	);
 };

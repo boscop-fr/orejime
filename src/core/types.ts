@@ -1,7 +1,7 @@
 import {CookieSameSite} from './utils/cookies';
 
 export type PurposeCookieProps = [
-	pattern: RegExp,
+	pattern: string | RegExp,
 	path: string,
 	domain: string
 ];
