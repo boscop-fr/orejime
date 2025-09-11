@@ -31,6 +31,7 @@ export default {
 		title: '"{purpose}" ist inaktiv',
 		description:
 			'Erlauben Sie Cookies, auf diese Funktionalität zuzugreifen.',
+		privacyPolicyLabel: 'Datenschutzerklärung',
 		accept: 'Erlauben',
 		accepted: '"{purpose}" ist jetzt erlaubt.'
 	},

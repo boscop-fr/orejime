@@ -30,6 +30,7 @@ export default {
 	contextual: {
 		title: '"{purpose}" è inattivo',
 		description: 'Consenti ai cookie di accedere a questa funzionalità.',
+		privacyPolicyLabel: 'policy privacy',
 		accept: 'Permettere',
 		accepted: '"{purpose}" ora è consentito.'
 	},

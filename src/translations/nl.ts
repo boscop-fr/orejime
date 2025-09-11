@@ -31,6 +31,7 @@ export default {
 		title: '"{purpose}" is inactief',
 		description:
 			'Sta cookies toe om toegang te krijgen tot deze functionaliteit.',
+		privacyPolicyLabel: 'privacybeleid',
 		accept: 'Toestaan',
 		accepted: '"{purpose}" is nu toegestaan.'
 	},

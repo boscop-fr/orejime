@@ -30,6 +30,7 @@ export default {
 	contextual: {
 		title: '"{purpose}" ei ole aktiivinen',
 		description: 'Salli evästeiden käyttää tätä toimintoa.',
+		privacyPolicyLabel: 'tietosuojasivultamme',
 		accept: 'Salli',
 		accepted: '"{purpose}" on nyt sallittu.'
 	},

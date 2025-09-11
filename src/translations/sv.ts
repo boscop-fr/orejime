@@ -30,6 +30,7 @@ export default {
 	contextual: {
 		title: '"{purpose}" är inaktiv',
 		description: 'Tillåt cookies att få tillgång till denna funktionalitet.',
+		privacyPolicyLabel: 'Integritetspolicy',
 		accept: 'Tillåta',
 		accepted: '"{purpose}" är nu tillåtet.'
 	},

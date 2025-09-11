@@ -30,6 +30,7 @@ export default {
 	contextual: {
 		title: '"{purpose}" és inactiu',
 		description: 'Autorizar los cookies a accedir a aquesta foncionalitat.',
+		privacyPolicyLabel: 'politica de confidencialitat',
 		accept: 'Permetre',
 		accepted: '"{purpose}" es ara autorizat.'
 	},

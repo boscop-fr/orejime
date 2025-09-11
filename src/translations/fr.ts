@@ -31,6 +31,7 @@ export default {
 		title: '"{purpose}" est désactivé',
 		description:
 			'Autorisez le dépôt de cookies pour accèder à cette fonctionnalité.',
+		privacyPolicyLabel: 'politique de confidentialité',
 		accept: 'Autoriser',
 		accepted: '"{purpose}" est maintenant autorisé.'
 	},

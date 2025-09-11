@@ -31,6 +31,7 @@ export default {
 		title: '"{purpose}" este inactiv',
 		description:
 			'Permiteți cookie-urilor să acceseze această funcționalitate.',
+		privacyPolicyLabel: 'politica privacy',
 		accept: 'Permite',
 		accepted: '"{purpose}" este acum permis.'
 	},

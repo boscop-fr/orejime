@@ -8,6 +8,7 @@ export interface ContextualNoticeOptions extends Record<string, string> {
 export interface ContextualNoticeProps<Data extends ContextualNoticeOptions> {
 	purpose: Purpose;
 	data: Data;
+	privacyPolicyUrl: string;
 	onAccept: () => void;
 }
 
