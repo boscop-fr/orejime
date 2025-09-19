@@ -50,6 +50,19 @@
 	}
 }
 
+.orejime-Env dialog {
+	position: relative;
+}
+
+/**
+ * This allows for easier tests for clicks outside a dialog.
+ * Without it, clicks on the backdrop would register as
+ * clicks on the dialog itself.
+ */
+.orejime-Env dialog::backdrop {
+	pointer-events: none;
+}
+
 .orejime-Button {
 	margin: 0;
 	border: 0;
