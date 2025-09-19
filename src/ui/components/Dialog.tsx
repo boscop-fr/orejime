@@ -1,5 +1,4 @@
-import {useEffect, useId, useLayoutEffect, useState} from 'preact/hooks';
-import MicroModal from 'micromodal';
+import {useEffect, useRef} from 'preact/hooks';
 
 interface DialogProps {
 	isAlert?: boolean;
@@ -9,26 +8,6 @@ interface DialogProps {
 	portalClassName?: string;
 	overlayClassName?: string;
 	htmlClassName?: string;
-	// the scroll position stuff is for iOS to work correctly
-	// when we want to prevent normal website scrolling with
-	// the modal opened
-	//
-	// /!\ this requires specific CSS to work. For example,
-	// if `htmlClassName = 'modal-open'`:
-	//
-	// ```
-	// .modal-open {
-	//   height: 100%;
-	// }
-	//
-	// .modal-open body {
-	//   position: fixed;
-	//   overflow: hidden;
-	//   height: 100%;
-	//   width: 100%;
-	// }
-	// ```
-	handleScrollPosition?: boolean;
 	onRequestClose?: () => void;
 	children: any;
 }
@@ -41,68 +20,107 @@ const Dialog = ({
 	portalClassName,
 	overlayClassName,
 	htmlClassName,
-	handleScrollPosition = true,
 	onRequestClose,
 	children
 }: DialogProps) => {
-	const id = useId();
-	const [scrollPosition, setScrollPosition] = useState<number | null>(null);
-
-	useLayoutEffect(() => {
-		if (scrollPosition === null) {
-			setScrollPosition(window.pageYOffset);
-		}
-	});
+	const dialogRef = useRef<HTMLDialogElement>();
+	const containerRef = useRef<HTMLDivElement>();
 
 	useEffect(() => {
-		if (scrollPosition !== null) {
-			// setTimeout() avoids a race condition of some sort
-			setTimeout(() => {
-				if (handleScrollPosition) {
-					window.scrollTo(window.pageXOffset, scrollPosition);
-				}
+		const handleCancel = (event: Event) => {
+			if (onRequestClose) {
+				event.preventDefault();
+				onRequestClose();
+			}
+		};
 
-				setScrollPosition(null);
-			}, 0);
-		}
-	});
+		dialogRef.current.addEventListener('cancel', handleCancel);
 
+		return () => {
+			dialogRef.current.removeEventListener('cancel', handleCancel);
+		};
+	}, []);
+
+	// Watches for clicks outside the dialog to close it.
+	useEffect(() => {
+		const handleClick = (event: MouseEvent) => {
+			if (!onRequestClose) {
+				return;
+			}
+
+			if (!(event.target instanceof Node)) {
+				return;
+			}
+
+			if (
+				event.target !== containerRef.current
+				&& containerRef.current.contains(event.target)
+			) {
+				return;
+			}
+
+			event.preventDefault();
+			onRequestClose();
+		};
+
+		// Using capture here prevents the handler from catching
+		// the opening event, for example a click on a button,
+		// which would close the dialog instantly.
+		document.addEventListener('click', handleClick, true);
+
+		return () => {
+			document.removeEventListener('click', handleClick, true);
+		};
+	}, []);
+
+	// Adds a class to the html tag when the dialog is open.
 	useEffect(() => {
 		if (htmlClassName) {
 			document.documentElement.classList.add(htmlClassName);
 		}
 
-		MicroModal.show(id, {
-			onClose: onRequestClose
-		});
-
 		return () => {
-			MicroModal.close(id);
-
 			if (htmlClassName) {
 				document.documentElement.classList.remove(htmlClassName);
 			}
 		};
 	}, []);
 
+	useEffect(() => {
+		const opener = document.activeElement;
+
+		if (isAlert || onRequestClose) {
+			dialogRef.current.showModal();
+		} else {
+			dialogRef.current.show();
+		}
+
+		// We're focusing back on the element that was active
+		// when opening the dialog.
+		return () => {
+			if (opener instanceof HTMLElement) {
+				setTimeout(() => {
+					opener.focus();
+				});
+			}
+		};
+	}, []);
+
 	return (
-		<div className={portalClassName} id={id} aria-hidden="true">
-			<div
-				className={overlayClassName}
-				tabIndex={-1}
-				data-micromodal-close={isAlert ? null : true}
-			>
-				<div
-					className={className}
-					role={isAlert ? 'alertdialog' : 'dialog'}
-					aria-modal="true"
-					aria-label={label}
-					aria-labelledby={labelId}
-				>
+		<dialog
+			ref={dialogRef}
+			className={portalClassName}
+			role={isAlert ? 'alertdialog' : 'dialog'}
+			aria-modal="true"
+			aria-label={label}
+			aria-labelledby={labelId}
+		>
+			<div className={overlayClassName}>
+				<div ref={containerRef} className={className}>
 					{children}
 				</div>
 			</div>
-		</div>
+		</dialog>
 	);
 };
 
