@@ -543,7 +543,7 @@ the project and run these commands:
 
 ```
 npm install
-npm start
+npm run serve
 ```
 
 You can then open the demo page at `http://localhost:3000`, which will be
