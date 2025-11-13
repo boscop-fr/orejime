@@ -46,6 +46,7 @@ const ContextualNoticeContainer = ({
 				<ContextualNotice
 					purpose={purpose}
 					data={data}
+					privacyPolicyUrl={config.privacyPolicyUrl}
 					onAccept={() => {
 						manager.setConsent(purpose.id, true);
 						setIsBeingDisabled(true);

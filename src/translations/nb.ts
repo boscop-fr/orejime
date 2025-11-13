@@ -31,6 +31,7 @@ export default {
 		title: '"{purpose}" er inaktiv',
 		description:
 			'Tillat informasjonskapsler å få tilgang til denne funksjonaliteten.',
+		privacyPolicyLabel: 'personvernerklæring',
 		accept: 'Tillate',
 		accepted: '"{purpose}" er nå tillatt.'
 	},

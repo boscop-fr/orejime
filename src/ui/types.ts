@@ -44,6 +44,7 @@ export interface ModalTranslations {
 export interface ContextualNoticeTranslations {
 	title: string;
 	description: string;
+	privacyPolicyLabel: string;
 	accept: string;
 	acceptTitle?: string;
 	accepted: string;

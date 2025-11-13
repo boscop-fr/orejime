@@ -30,6 +30,7 @@ export default {
 	contextual: {
 		title: '"{purpose}" on passiivne',
 		description: 'Luba küpsistele sellele funktsioonile juurde pääseda.',
+		privacyPolicyLabel: 'privaatsustingimused',
 		accept: 'Luba',
 		accepted: '"{purpose}" on nüüd lubatud.'
 	},

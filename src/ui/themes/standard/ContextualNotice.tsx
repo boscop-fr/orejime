@@ -8,14 +8,20 @@ import {template} from '../../utils/template';
 const ContextualNotice: ContextualNoticeComponent = ({
 	purpose,
 	data,
-	onAccept
+	onAccept,
+	privacyPolicyUrl
 }) => {
 	const t = useTranslations();
 	const {titleLevel} = data;
 	const TitleTag: `h${ContextualNoticeOptions['titleLevel']}` | 'strong' =
 		titleLevel ? `h${titleLevel}` : 'strong';
 	const templateProps = {
-		purpose: purpose.title
+		purpose: purpose.title,
+		privacyPolicy: (
+			<a key="privacyPolicyUrl" href={privacyPolicyUrl}>
+				{t.contextual.privacyPolicyLabel}
+			</a>
+		)
 	};
 
 	return (

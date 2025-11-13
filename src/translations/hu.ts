@@ -31,6 +31,7 @@ export default {
 		title: '"{purpose}" inaktív',
 		description:
 			'Engedélyezze a cookie-k számára, hogy hozzáférjenek ehhez a funkcióhoz.',
+		privacyPolicyLabel: 'adatvédelmi irányelveinket',
 		accept: 'Engedélyezze',
 		accepted: 'A {purpose} mostantól engedélyezett.'
 	},

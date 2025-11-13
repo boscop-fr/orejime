@@ -30,6 +30,7 @@ export default {
 	contextual: {
 		title: '"{purpose}" is inactive',
 		description: 'Allow cookies to access this functionality.',
+		privacyPolicyLabel: 'privacy policy',
 		accept: 'Allow',
 		accepted: '"{purpose}" is now allowed.'
 	},
