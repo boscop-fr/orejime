@@ -1,10 +1,10 @@
-import fs from 'fs';
-import path from 'path';
-import {rspack} from '@rspack/core';
-import sharp from 'sharp';
-import codeTheme from '../site/themes/boscop-light-soft-color-theme.json' with {type: 'json'};
+const fs = require('fs');
+const path = require('path');
+const {rspack} = require('@rspack/core');
+const sharp = require('sharp');
+const codeTheme = require('../site/themes/boscop-light-soft-color-theme.json');
 
-const fullPath = path.resolve.bind(path, import.meta.dirname, '..');
+const fullPath = path.resolve.bind(path, __dirname, '..');
 const meta = {
 	charset: 'utf-8',
 	viewport: 'width=device-width, initial-scale=1'
@@ -13,13 +13,13 @@ const meta = {
 // Finds and highlights code associated with a given feature.
 const featureTemplateCode = async (name, lang) => {
 	const ext = lang === 'javascript' ? 'js' : 'css';
-	const path = fullPath(`site/features/${name}.${ext}`);
+	const filePath = fullPath(`site/features/${name}.${ext}`);
 
-	if (!fs.existsSync(path)) {
+	if (!fs.existsSync(filePath)) {
 		return null;
 	}
 
-	const code = fs.readFileSync(path, 'utf-8');
+	const code = fs.readFileSync(filePath, 'utf-8');
 	const {codeToHtml} = await import('shiki');
 	const highlightedCode = await codeToHtml(code, {
 		lang,
@@ -36,7 +36,7 @@ const featureTemplateCode = async (name, lang) => {
 // a given feature.
 // Those pages include snippets of JS and/or CSS to setup
 // Orejime that are also presented to the user.
-export const featureTemplatePlugin = ({
+const featureTemplatePlugin = ({
 	title,
 	feature,
 	template = 'orejime',
@@ -65,7 +65,7 @@ export const featureTemplatePlugin = ({
 	});
 };
 
-export const templatePlugin = ({
+const templatePlugin = ({
 	title,
 	template = 'index',
 	chunks = [],
@@ -82,7 +82,7 @@ export const templatePlugin = ({
 	});
 
 // Copies assets to the dist folder and optimizes images.
-export const assetsPlugin = () =>
+const assetsPlugin = () =>
 	new rspack.CopyRspackPlugin({
 		patterns: [
 			{from: 'site/_redirects'},
@@ -104,7 +104,7 @@ export const assetsPlugin = () =>
 		]
 	});
 
-export const matomoPlugin = () => {
+const matomoPlugin = () => {
 	const matomoScript = `
 		<script>
 			var _paq = window._paq = window._paq || [];
@@ -141,4 +141,11 @@ export const matomoPlugin = () => {
 			});
 		}
 	};
+};
+
+module.exports = {
+	templatePlugin,
+	featureTemplatePlugin,
+	assetsPlugin,
+	matomoPlugin
 };

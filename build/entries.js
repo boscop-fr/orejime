@@ -1,7 +1,7 @@
-import fs from 'fs';
-import path from 'path';
+const fs = require('fs');
+const path = require('path');
 
-const fullPath = path.resolve.bind(path, import.meta.dirname, '..');
+const fullPath = path.resolve.bind(path, __dirname, '..');
 
 // Generates a custom entry by inlining a small bootstrap
 // script.
@@ -15,7 +15,7 @@ const standaloneEntry = (theme, lang) =>
 // Generates entries for each possible combination of theme
 // and language.
 // @see ./adr/002-standalone-bundles.md
-export const standaloneEntries = () => {
+const standaloneEntries = () => {
 	const themes = fs.readdirSync(fullPath('src/ui/themes'));
 	const langs = fs
 		.readdirSync(fullPath('src/translations'))
@@ -30,4 +30,8 @@ export const standaloneEntries = () => {
 	}
 
 	return entries;
+};
+
+module.exports = {
+	standaloneEntries
 };
