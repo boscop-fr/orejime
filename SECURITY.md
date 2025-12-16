@@ -2,8 +2,9 @@
 
 ## Supported Versions
 
-We will fix security issues on the current major version (i.e. on all of its minor versions).
-We will also fix the last minor version from the previous major version.
+We will fix security issues on the current major version (i.e. on all of its
+minor versions). We will also fix the last minor version from the previous major
+version.
 
 | Version | Supported          |
 | ------- | ------------------ |
@@ -13,4 +14,5 @@ We will also fix the last minor version from the previous major version.
 
 ## Reporting a Vulnerability
 
-Please use the support form to report a security issue privately https://orejime.boscop.fr/#support.
+Please use the support form to report a security issue privately
+https://orejime.boscop.fr/#support.
