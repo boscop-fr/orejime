@@ -1,4 +1,5 @@
 import {getCookie, getCookies, setCookie, deleteCookie} from './utils/cookies';
+import {isSafeUrl} from './utils/validation';
 
 export default class ConsentManager {
 	constructor(config) {
@@ -217,7 +218,11 @@ export default class ConsentManager {
 				if (consent) {
 					for (var attr of attrs) {
 						const attrValue = dataset[attr];
-						if (attrValue === undefined) continue;
+
+						if (attrValue === undefined || !isSafeUrl(attrValue)) {
+							continue;
+						}
+
 						if (dataset['original' + attr] === undefined)
 							dataset['original' + attr] = element[attr];
 						element[attr] = attrValue;
