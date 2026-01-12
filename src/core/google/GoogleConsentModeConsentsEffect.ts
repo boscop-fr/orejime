@@ -1,10 +1,6 @@
 import ConsentsEffect from '../ConsentsEffect';
 import {ConsentsMap, Purpose} from '../types';
-import {
-	GoogleConsentModeState,
-	GoogleConsentModeStates,
-	GoogleConsentModeType
-} from './types';
+import {GoogleConsentModeStates, GoogleConsentModeType} from './types';
 
 type Relationship = {
 	purposeId: Purpose['id'];
@@ -62,9 +58,7 @@ export default class GoogleConsentModeConsentsEffect implements ConsentsEffect {
 		return Object.fromEntries(
 			Object.entries(states).map(([type, state]) => [
 				type,
-				state
-					? GoogleConsentModeState.granted
-					: GoogleConsentModeState.denied
+				state ? 'granted' : 'denied'
 			])
 		);
 	}

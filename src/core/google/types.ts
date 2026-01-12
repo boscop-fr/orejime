@@ -7,10 +7,7 @@ export type GoogleConsentModeType =
 	| 'personalization_storage'
 	| 'security_storage';
 
-export enum GoogleConsentModeState {
-	granted = 'granted',
-	denied = 'denied'
-}
+export type GoogleConsentModeState = 'granted' | 'denied';
 
 export type GoogleConsentModeStates = Partial<
 	Record<GoogleConsentModeType, GoogleConsentModeState>

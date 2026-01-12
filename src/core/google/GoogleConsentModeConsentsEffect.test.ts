@@ -39,7 +39,7 @@ describe('GoogleConsentModeConsentsEffect', () => {
 			analytics: false,
 			ads: false,
 			override: false
-		})
+		});
 
 		expect(global.gtag.mock.calls).toEqual([
 			[
