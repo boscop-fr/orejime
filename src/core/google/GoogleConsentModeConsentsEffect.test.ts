@@ -8,7 +8,6 @@ describe('GoogleConsentModeConsentsEffect', () => {
 			id: 'analytics',
 			cookies: [],
 			googleConsentMode: {
-				default: true,
 				types: ['analytics_storage']
 			}
 		},
@@ -23,7 +22,6 @@ describe('GoogleConsentModeConsentsEffect', () => {
 			id: 'override',
 			cookies: [],
 			googleConsentMode: {
-				default: true,
 				types: ['ad_storage']
 			}
 		}

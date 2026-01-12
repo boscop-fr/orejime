@@ -5,7 +5,6 @@ import {GoogleConsentModeStates, GoogleConsentModeType} from './types';
 type Relationship = {
 	purposeId: Purpose['id'];
 	type: GoogleConsentModeType;
-	default: boolean;
 };
 
 type BooleanStates = Partial<Record<GoogleConsentModeType, boolean>>;
@@ -19,7 +18,6 @@ export default class GoogleConsentModeConsentsEffect implements ConsentsEffect {
 			.flatMap(({id, googleConsentMode}) =>
 				googleConsentMode.types.map((type) => ({
 					type,
-					default: googleConsentMode?.default || false,
 					purposeId: id
 				}))
 			);
