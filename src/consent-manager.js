@@ -208,7 +208,7 @@ export default class ConsentManager {
 
 				if (consent) {
 					newElement.type = type;
-					if (dataset.hasOwn('src')) {
+					if (Object.hasOwn(dataset, 'src')) {
 						newElement.src = dataset.src;
 					}
 				}
@@ -219,7 +219,7 @@ export default class ConsentManager {
 				// all other elements (images etc.) are modified in place...
 				if (consent) {
 					for (var attr of attrs) {
-						if (!dataset.hasOwn(attr)) {
+						if (!Object.hasOwn(dataset, attr)) {
 							continue;
 						}
 
@@ -229,7 +229,7 @@ export default class ConsentManager {
 							continue;
 						}
 
-						if (!dataset.hasOwn('original' + attr)) {
+						if (!Object.hasOwn(dataset, 'original' + attr)) {
 							dataset['original' + attr] = element[attr];
 						}
 
@@ -247,7 +247,7 @@ export default class ConsentManager {
 						element.style.display = 'none';
 					}
 					for (var attr of attrs) {
-						if (dataset.hasOwn(attr) && dataset.hasOwn('original' + attr)) {
+						if (Object.hasOwn(dataset, attr) && Object.hasOwn(dataset, 'original' + attr)) {
 							element[attr] = dataset['original' + attr];
 						}
 					}
