@@ -208,7 +208,9 @@ export default class ConsentManager {
 
 				if (consent) {
 					newElement.type = type;
-					if (dataset.src !== undefined) newElement.src = dataset.src;
+					if (Object.hasOwn(dataset, 'src')) {
+						newElement.src = dataset.src;
+					}
 				}
 				//we remove the original element and insert a new one
 				parent.insertBefore(newElement, element);
@@ -217,14 +219,20 @@ export default class ConsentManager {
 				// all other elements (images etc.) are modified in place...
 				if (consent) {
 					for (var attr of attrs) {
-						const attrValue = dataset[attr];
-
-						if (attrValue === undefined || !isSafeUrl(attrValue)) {
+						if (!Object.hasOwn(dataset, attr)) {
 							continue;
 						}
 
-						if (dataset['original' + attr] === undefined)
+						const attrValue = dataset[attr];
+
+						if (!isSafeUrl(attrValue)) {
+							continue;
+						}
+
+						if (!Object.hasOwn(dataset, 'original' + attr)) {
 							dataset['original' + attr] = element[attr];
+						}
+
 						element[attr] = attrValue;
 					}
 					if (dataset.title !== undefined) element.title = dataset.title;
@@ -239,10 +247,9 @@ export default class ConsentManager {
 						element.style.display = 'none';
 					}
 					for (var attr of attrs) {
-						const attrValue = dataset[attr];
-						if (attrValue === undefined) continue;
-						if (dataset['original' + attr] !== undefined)
+						if (Object.hasOwn(dataset, attr) && Object.hasOwn(dataset, 'original' + attr)) {
 							element[attr] = dataset['original' + attr];
+						}
 					}
 				}
 			}
