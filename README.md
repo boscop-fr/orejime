@@ -82,6 +82,10 @@ var orejimeConfig = {
   // You must provide a link to your privacy policy page for GDPR compliance.
   privacyPolicyUrl: '',
 
+  // [optional]
+  // Opens the privacy policy link in a new window (target="_blank" and rel="noopener noreferrer").
+  privacyPolicyNewWindow: false,
+
   // The list of third-party purposes that Orejime will manage for you.
   // The purposes will appear in the modal in the same order as defined here.
   purposes: [

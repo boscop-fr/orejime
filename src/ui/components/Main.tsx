@@ -52,6 +52,7 @@ const Main = ({apiRef}: MainProps) => {
 						needsUpdate={manager.needsUpdate()}
 						purposeTitles={config.purposes.map(({title}) => title)}
 						privacyPolicyUrl={config.privacyPolicyUrl}
+						privacyPolicyNewWindow={config.privacyPolicyNewWindow}
 						logo={config.logo}
 						onConfigure={openModal}
 						onAccept={() => {
@@ -74,6 +75,7 @@ const Main = ({apiRef}: MainProps) => {
 							isForced={config.forceModal && manager.isDirty()}
 							needsUpdate={manager.needsUpdate()}
 							privacyPolicyUrl={config.privacyPolicyUrl}
+							privacyPolicyNewWindow={config.privacyPolicyNewWindow}
 							onClose={closeModal}
 							onSave={commit}
 						>
