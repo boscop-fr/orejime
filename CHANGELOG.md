@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 3.1.1
+
+- fix: Disappearing banner under modal
+  (https://github.com/boscop-fr/orejime/pull/159)
+
 ## 3.1.0
 
 - feature: Link to the privacy policy in contextual consent notices
