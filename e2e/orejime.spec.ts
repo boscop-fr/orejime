@@ -44,6 +44,13 @@ test.describe('Orejime', () => {
 				</template>
 
 				<button
+					id="obscuring"
+					style="position: absolute; bottom: 6rem; right: 3rem; z-index: 9999;"
+				>
+					Obscuring
+				</button>
+
+				<button
 					id="obscured"
 					style="position: absolute; bottom: 3rem; right: 3rem;"
 				>
@@ -254,6 +261,14 @@ test.describe('Orejime', () => {
 
 		const position2 = await orejimePage.banner.boundingBox();
 		await expect(position2).toEqual(initalPosition);
+
+		// When a button above the banner takes focus, the
+		// banner shouldn't be displaced either.
+		const obscuring = orejimePage.locator('#obscuring');
+		await obscuring.focus();
+
+		const position3 = await orejimePage.banner.boundingBox();
+		await expect(position3).toEqual(initalPosition);
 	});
 
 	test('should clear consents', async () => {
