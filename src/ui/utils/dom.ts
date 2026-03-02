@@ -89,12 +89,36 @@ const getPaddedBoundingBox = (element: DOMRect, padding: number) => ({
 	left: element.left + padding
 });
 
+// A naive way to estimate the z-index of an element.
+// This does not take each and every stacking context rules
+// into account but merely adds up every z-indexes set on
+// the element's ancestors.
+const getZIndex = (element: HTMLElement): number => {
+	const base =
+		element.offsetParent instanceof HTMLElement
+			? getZIndex(element.offsetParent)
+			: 0;
+
+	const style = window.getComputedStyle(element);
+	const z = parseInt(style.zIndex, 10) || 0;
+
+	return base + z;
+};
+
 // Resolves a visual collision between two elements, either
 // by scrolling the page or moving one of them.
 // We're only resolving collisions on the vertical axis, as
 // it is the main direction of web pages.
 export const resolveCollision = (fixed: HTMLElement, mobile: HTMLElement) => {
 	if (mobile.contains(fixed)) {
+		translateElementY(mobile, 0);
+		return;
+	}
+
+	// If the fixed element is meant to obscure the mobile
+	// one (i.e. positionned absolutely above), there is no
+	// need to move anything.
+	if (getZIndex(fixed) > getZIndex(mobile)) {
 		translateElementY(mobile, 0);
 		return;
 	}
