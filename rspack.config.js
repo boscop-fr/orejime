@@ -28,6 +28,7 @@ module.exports = {
 	},
 	entry: {
 		migrations: './src/migrations/index.ts',
+		'orejime-gtm': './src/gtm/index.ts',
 		...standaloneEntries()
 	},
 	output: {
