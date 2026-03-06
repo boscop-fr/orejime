@@ -1,6 +1,6 @@
 {
   "name": "orejime",
-  "version": "3.1.1",
+  "version": "3.1.2-alpha.0",
   "description": "A lightweight and accessible consent manager",
   "repository": {
     "type": "git",
