@@ -9,6 +9,7 @@ export interface ContextualNoticeProps<Data extends ContextualNoticeOptions> {
 	purpose: Purpose;
 	data: Data;
 	privacyPolicyUrl: string;
+	privacyPolicyNewWindow?: boolean;
 	onAccept: () => void;
 }
 
