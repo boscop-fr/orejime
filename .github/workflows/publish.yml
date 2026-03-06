@@ -1,0 +1,29 @@
+name: Publication
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      DIST_TAG: |-
+        ${{ case(
+          contains(github.ref_name, 'alpha'), 'alpha',
+          startsWith(github.ref_name, 'v2'), 'previous',
+          'latest'
+        ) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - run: npm ci
+      - run: npx playwright install --with-deps
+      - run: npm publish --tag $DIST_TAG
