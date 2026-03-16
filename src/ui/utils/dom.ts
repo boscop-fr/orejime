@@ -1,5 +1,10 @@
 import type {ElementReference} from '../types';
 
+// A very minimal selector tailored for the kind of elements
+// used within the app.
+const FOCUSABLE_ELEMENTS_SELECTOR =
+	'a[href], button:not([disabled]):not([aria-hidden]), [tabindex]:not([tabindex^="-"])';
+
 export const getElement = (
 	reference: ElementReference,
 	defaultElement?: HTMLElement
@@ -47,12 +52,11 @@ export const softFocus = (element?: HTMLElement) => {
 	}
 };
 
-// A very minimal implementation tailored for the kind of
-// elements used within the app.
+export const findFocusableChildren = (element: HTMLElement) =>
+	element.querySelectorAll<HTMLElement>(FOCUSABLE_ELEMENTS_SELECTOR);
+
 export const findFirstFocusableChild = (element: HTMLElement) =>
-	element.querySelector<HTMLElement>(
-		'a[href], button:not([disabled]):not([aria-hidden]), [tabindex]:not([tabindex^="-"])'
-	);
+	element.querySelector<HTMLElement | null>(FOCUSABLE_ELEMENTS_SELECTOR);
 
 // Translates an element vertically by a given offset,
 // relatively to its current translation.
