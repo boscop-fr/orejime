@@ -29,7 +29,10 @@ const ContextualNotice: ContextualNoticeComponent = ({
 			className="orejime-ContextualNotice"
 			data-testid="orejime-contextual-notice"
 		>
-			<TitleTag className="orejime-ContextualNotice-title">
+			<TitleTag
+				className="orejime-ContextualNotice-title"
+				data-testid="orejime-contextual-notice-title"
+			>
 				{template(t.contextual.title, templateProps)}
 			</TitleTag>
 

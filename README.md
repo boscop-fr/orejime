@@ -424,6 +424,21 @@ offering a way to consent in place.
   </template>
 ```
 
+#### Customization
+
+The heading level of the notice's title can be configured via an attribute on
+the `template`:
+
+```diff
+  <template
+    data-purpose="youtube"
+    data-contextual
++   data-title-level="6"
+  >
+    ...
+  </template>
+```
+
 <details>
 <summary>Integration tips</summary>
 

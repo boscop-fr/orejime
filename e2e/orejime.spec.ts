@@ -35,7 +35,7 @@ test.describe('Orejime', () => {
 				]
 			},
 			`
-				<template data-purpose="contextual" data-contextual>
+				<template data-purpose="contextual" data-contextual data-title-level="2">
 					<iframe id="contextual" src=""></iframe>
 				</template>
 
@@ -203,6 +203,13 @@ test.describe('Orejime', () => {
 
 	test('should show a contextual consent notice', async () => {
 		await expect(orejimePage.contextualNotice).toBeAttached();
+	});
+
+	test('should use a custom heading level in the contextual consent notice', async () => {
+		await expect(orejimePage.contextualNoticeTitle).toHaveJSProperty(
+			'nodeName',
+			'H2'
+		);
 	});
 
 	test('should accept contextual consent from the notice', async () => {
