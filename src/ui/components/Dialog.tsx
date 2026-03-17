@@ -1,5 +1,5 @@
-import {useEffect, useId, useLayoutEffect, useState} from 'preact/hooks';
-import MicroModal from 'micromodal';
+import {useEffect, useLayoutEffect, useRef, useState} from 'preact/hooks';
+import {findFirstFocusableChild, findFocusableChildren} from '../utils/dom';
 
 interface DialogProps {
 	isAlert?: boolean;
@@ -45,8 +45,42 @@ const Dialog = ({
 	onRequestClose,
 	children
 }: DialogProps) => {
-	const id = useId();
 	const [scrollPosition, setScrollPosition] = useState<number | null>(null);
+	const portal = useRef<HTMLDivElement>();
+	const activeElement = useRef<Element>();
+
+	const handleClick = (event: Event) => {
+		if (event.target === event.currentTarget) {
+			onRequestClose();
+		}
+	};
+
+	const handleFocusOut = (event: FocusEvent) => {
+		const focusedElement = event.relatedTarget;
+
+		if (!(focusedElement instanceof HTMLElement)) {
+			return;
+		}
+
+		if (portal.current.contains(focusedElement)) {
+			return;
+		}
+
+		const focusable = findFocusableChildren(portal.current);
+		const isFocusedElementAfterDialog =
+			portal.current.compareDocumentPosition(focusedElement)
+			& Node.DOCUMENT_POSITION_FOLLOWING;
+
+		const index = isFocusedElementAfterDialog ? 0 : focusable.length - 1;
+
+		focusable.item(index).focus();
+	};
+
+	const handleKeyDown = (event: KeyboardEvent) => {
+		if (event.key === 'Escape') {
+			onRequestClose();
+		}
+	};
 
 	useLayoutEffect(() => {
 		if (scrollPosition === null) {
@@ -68,29 +102,36 @@ const Dialog = ({
 	});
 
 	useEffect(() => {
+		activeElement.current = document.activeElement;
+
 		if (htmlClassName) {
 			document.documentElement.classList.add(htmlClassName);
 		}
 
-		MicroModal.show(id, {
-			onClose: onRequestClose
-		});
+		findFirstFocusableChild(portal.current)?.focus();
 
 		return () => {
-			MicroModal.close(id);
-
 			if (htmlClassName) {
 				document.documentElement.classList.remove(htmlClassName);
 			}
+
+			setTimeout(() => {
+				if (activeElement.current instanceof HTMLElement) {
+					activeElement.current.focus();
+				}
+			}, 0);
 		};
 	}, []);
 
 	return (
-		<div className={portalClassName} id={id} aria-hidden="true">
+		<div ref={portal} className={portalClassName}>
 			<div
 				className={overlayClassName}
 				tabIndex={-1}
-				data-micromodal-close={isAlert ? null : true}
+				onMouseUp={isAlert ? null : handleClick}
+				onTouchEnd={isAlert ? null : handleClick}
+				onFocusOut={handleFocusOut}
+				onKeyDown={handleKeyDown}
 			>
 				<div
 					className={className}

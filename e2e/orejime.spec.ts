@@ -126,6 +126,8 @@ test.describe('Orejime', () => {
 		await orejimePage.closeDialogByClickingOutside();
 		await expect(orejimePage.modal).toHaveCount(0);
 		await expect(orejimePage.banner).toBeVisible();
+
+		// @toto test cancellation
 	});
 
 	test('should close the modal via `Escape` key', async () => {
