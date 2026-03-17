@@ -1,20 +1,15 @@
 import {useTranslations} from '../../utils/hooks';
-import type {
-	ContextualNoticeComponent,
-	ContextualNoticeOptions
-} from '../../components/types/ContextualNotice';
+import type {ContextualNoticeComponent} from '../../components/types/ContextualNotice';
 import {template} from '../../utils/template';
 
 const ContextualNotice: ContextualNoticeComponent = ({
 	purpose,
-	data,
+	titleLevel,
 	onAccept,
 	privacyPolicyUrl
 }) => {
 	const t = useTranslations();
-	const {titleLevel} = data;
-	const TitleTag: `h${ContextualNoticeOptions['titleLevel']}` | 'strong' =
-		titleLevel ? `h${titleLevel}` : 'strong';
+	const TitleTag: `h${typeof titleLevel}` = `h${titleLevel}`;
 	const templateProps = {
 		purpose: purpose.title,
 		privacyPolicy: (

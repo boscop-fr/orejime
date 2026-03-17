@@ -254,6 +254,13 @@ var orejimeConfig = {
     // [optional]
     // You can provide a custom function to unserialize the cookie contents.
     parse: (cookie) => JSON.parse(cookie)
+  },
+
+  // [optional]
+  contextual: {
+    // [optional]
+    // The default level of the consent notice title.
+    defaultTitleLevel: 6
   }
 };
 ```
@@ -438,6 +445,9 @@ the `template`:
     ...
   </template>
 ```
+
+When not specified, it will default to `6`, or the level set within
+`orejimeConfig.contextual.defaultTitleLevel`.
 
 <details>
 <summary>Integration tips</summary>

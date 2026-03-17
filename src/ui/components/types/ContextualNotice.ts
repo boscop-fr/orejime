@@ -1,17 +1,12 @@
 import {FunctionComponent} from 'preact';
-import {Purpose} from '../../types';
+import {Purpose, TitleLevel} from '../../types';
 
-export interface ContextualNoticeOptions extends Record<string, string> {
-	titleLevel?: '1' | '2' | '3' | '4' | '5' | '6';
-}
-
-export interface ContextualNoticeProps<Data extends ContextualNoticeOptions> {
+export interface ContextualNoticeProps {
 	purpose: Purpose;
-	data: Data;
+	titleLevel: TitleLevel;
 	privacyPolicyUrl: string;
 	onAccept: () => void;
 }
 
-export type ContextualNoticeComponent<
-	Data extends ContextualNoticeOptions = ContextualNoticeOptions
-> = FunctionComponent<ContextualNoticeProps<Data>>;
+export type ContextualNoticeComponent =
+	FunctionComponent<ContextualNoticeProps>;
