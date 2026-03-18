@@ -1,10 +1,11 @@
 import {render} from 'preact';
 import {ConsentsMap} from '../core/types';
 import Manager from '../core/Manager';
-import {Config} from './types';
+import {Config, TitleLevel} from './types';
 import Context from './components/Context';
 import ContextualNoticeContainer from './components/ContextualNoticeContainer';
 import ConsentsEffect from '../core/ConsentsEffect';
+import {clamp} from './utils/numbers';
 
 export default class ContextualConsentsEffect implements ConsentsEffect {
 	readonly #config: Config;
@@ -36,13 +37,25 @@ export default class ContextualConsentsEffect implements ConsentsEffect {
 				}}
 			>
 				<ContextualNoticeContainer
-					purposeId={template.dataset.purpose}
-					data={{...template.dataset}}
+					{...this.#parseNoticeData(template.dataset)}
 					isEnabled={isEnabled}
 				/>
 			</Context.Provider>,
 			this.#getNoticeContainer(template)
 		);
+	}
+
+	#parseNoticeData(data: DOMStringMap) {
+		return {
+			purposeId: data.purpose,
+			titleLevel: clamp(
+				parseInt(data.titleLevel, 10)
+					|| this.#config?.contextual?.defaultTitleLevel
+					|| 6,
+				1,
+				6
+			) as TitleLevel
+		};
 	}
 
 	#getNoticeContainer(template: HTMLTemplateElement) {

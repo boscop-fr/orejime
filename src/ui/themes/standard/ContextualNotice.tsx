@@ -1,20 +1,15 @@
 import {useTranslations} from '../../utils/hooks';
-import type {
-	ContextualNoticeComponent,
-	ContextualNoticeOptions
-} from '../../components/types/ContextualNotice';
+import type {ContextualNoticeComponent} from '../../components/types/ContextualNotice';
 import {template} from '../../utils/template';
 
 const ContextualNotice: ContextualNoticeComponent = ({
 	purpose,
-	data,
+	titleLevel,
 	onAccept,
 	privacyPolicyUrl
 }) => {
 	const t = useTranslations();
-	const {titleLevel} = data;
-	const TitleTag: `h${ContextualNoticeOptions['titleLevel']}` | 'strong' =
-		titleLevel ? `h${titleLevel}` : 'strong';
+	const TitleTag: `h${typeof titleLevel}` = `h${titleLevel}`;
 	const templateProps = {
 		purpose: purpose.title,
 		privacyPolicy: (
@@ -29,7 +24,10 @@ const ContextualNotice: ContextualNoticeComponent = ({
 			className="orejime-ContextualNotice"
 			data-testid="orejime-contextual-notice"
 		>
-			<TitleTag className="orejime-ContextualNotice-title">
+			<TitleTag
+				className="orejime-ContextualNotice-title"
+				data-testid="orejime-contextual-notice-title"
+			>
 				{template(t.contextual.title, templateProps)}
 			</TitleTag>
 

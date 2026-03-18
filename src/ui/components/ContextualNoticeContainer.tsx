@@ -2,17 +2,17 @@ import {useState} from 'preact/hooks';
 import {purposesOnly} from '../utils/config';
 import {useConfig, useManager, useTheme, useTranslations} from '../utils/hooks';
 import {template} from '../utils/template';
-import {Purpose} from '../types';
+import {Purpose, TitleLevel} from '../types';
 
 interface ContextualNoticeContainerProps {
 	purposeId: Purpose['id'];
-	data: Record<string, string>;
+	titleLevel: TitleLevel;
 	isEnabled: boolean;
 }
 
 const ContextualNoticeContainer = ({
 	purposeId,
-	data,
+	titleLevel,
 	isEnabled
 }: ContextualNoticeContainerProps) => {
 	const config = useConfig();
@@ -45,7 +45,7 @@ const ContextualNoticeContainer = ({
 			{isEnabled ? (
 				<ContextualNotice
 					purpose={purpose}
-					data={data}
+					titleLevel={titleLevel}
 					privacyPolicyUrl={config.privacyPolicyUrl}
 					onAccept={() => {
 						manager.setConsent(purpose.id, true);
