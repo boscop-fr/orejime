@@ -82,7 +82,7 @@ const Banner: BannerComponent = ({
 				)}
 
 				<ul className="orejime-Banner-actions orejime-ButtonList">
-					<li className="orejime-Banner-actionItem orejime-Banner-actionItem--save">
+					<li className="orejime-ButtonList-item orejime-Banner-actionItem orejime-Banner-actionItem--save">
 						<button
 							className="orejime-Button orejime-Button--save orejime-Banner-button orejime-Banner-saveButton"
 							type="button"
@@ -93,7 +93,7 @@ const Banner: BannerComponent = ({
 							{t.banner.accept}
 						</button>
 					</li>
-					<li className="orejime-Banner-actionItem orejime-Banner-actionItem--decline">
+					<li className="orejime-ButtonList-item orejime-Banner-actionItem orejime-Banner-actionItem--decline">
 						<button
 							className="orejime-Button orejime-Button--decline orejime-Banner-button orejime-Banner-declineButton"
 							type="button"
@@ -104,7 +104,7 @@ const Banner: BannerComponent = ({
 							{t.banner.decline}
 						</button>
 					</li>
-					<li className="orejime-Banner-actionItem orejime-Banner-actionItem--info">
+					<li className="orejime-ButtonList-item orejime-Banner-actionItem orejime-Banner-actionItem--info">
 						<button
 							type="button"
 							className="orejime-Button orejime-Button--info orejime-Banner-learnMoreButton"
