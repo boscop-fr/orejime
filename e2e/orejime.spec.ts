@@ -128,6 +128,14 @@ test.describe('Orejime', () => {
 		await expect(orejimePage.banner).toBeVisible();
 	});
 
+	test('should not close the modal via the overlay when cancelling the click', async () => {
+		await orejimePage.openModalFromBanner();
+		await expect(orejimePage.modal).toBeVisible();
+
+		await orejimePage.cancelClosingDialogByReleasingClickInside();
+		await expect(orejimePage.modal).toBeVisible();
+	});
+
 	test('should close the modal via `Escape` key', async () => {
 		await orejimePage.openModalFromBanner();
 		await expect(orejimePage.modal).toBeVisible();

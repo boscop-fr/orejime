@@ -125,6 +125,19 @@ export class OrejimePage {
 		});
 	}
 
+	async cancelClosingDialogByReleasingClickInside() {
+		await this.locator('body').hover({
+			position: {
+				x: 1,
+				y: 1
+			}
+		});
+
+		await this.page.mouse.down();
+		await this.modal.hover();
+		await this.page.mouse.up();
+	}
+
 	async closeModalByPressingEscape() {
 		await this.page.keyboard.press('Escape');
 	}
