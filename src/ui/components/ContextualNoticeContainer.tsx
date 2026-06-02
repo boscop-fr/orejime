@@ -37,9 +37,9 @@ const ContextualNoticeContainer = ({
 		return null;
 	}
 
-	// When the notice is closed, an invisible placeholder
-	// is inserted and takes focus to announce the change to
-	// assistive technologies.
+	// When the notice is closed, a placeholder is inserted
+	// and takes focus to announce the change to assistive
+	// technologies.
 	return (
 		<div className="orejime-Env">
 			{isEnabled ? (
@@ -53,12 +53,10 @@ const ContextualNoticeContainer = ({
 					}}
 				></ContextualNotice>
 			) : isBeingDisabled ? (
-				<div
+				<p
 					id={`orejime-ContextualNotice-placeholder--${purpose.id}`}
 					className="orejime-ContextualNotice-placeholder"
-					title={template(t.contextual.accepted, {
-						purpose: purpose.title
-					}).join('')}
+					role="status"
 					tabIndex={-1}
 					ref={(self) => {
 						self?.focus();
@@ -67,7 +65,11 @@ const ContextualNoticeContainer = ({
 						setIsBeingDisabled(false);
 					}}
 					data-testid="orejime-contextual-notice-placeholder"
-				/>
+				>
+					{template(t.contextual.accepted, {
+						purpose: purpose.title
+					})}
+				</p>
 			) : null}
 		</div>
 	);

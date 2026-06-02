@@ -329,3 +329,15 @@
 .orejime-ContextualNotice-button {
 	margin-top: var(--orejime-space-s);
 }
+
+.orejime-ContextualNotice-placeholder {
+	position: absolute;
+	margin: -1px;
+	border: 0;
+	padding: 0;
+	width: 1px;
+	height: 1px;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	overflow: hidden;
+}
