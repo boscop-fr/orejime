@@ -4,17 +4,19 @@ import {template} from '../../utils/template';
 import {useTranslations} from '../../utils/hooks';
 import {ModalComponent} from '../../components/types/Modal';
 import PoweredByLink from '../../components/PoweredByLink';
+import PrivacyPolicyLink from '../../components/PrivacyPolicyLink';
 
 const Modal: ModalComponent = ({
 	isForced,
 	needsUpdate,
 	privacyPolicyUrl,
+	privacyPolicyLinkAttributes,
 	onClose,
 	onSave,
 	children
 }) => {
 	const t = useTranslations();
-
+	console.log(privacyPolicyLinkAttributes);
 	return (
 		<Dialog
 			isAlert={isForced}
@@ -52,16 +54,14 @@ const Modal: ModalComponent = ({
 
 						{template(t.modal.description, {
 							privacyPolicy: (
-								<a
+								<PrivacyPolicyLink
+									{...privacyPolicyLinkAttributes}
 									key="privacyPolicyLink"
 									className="orejime-Modal-privacyPolicyLink"
-									onClick={(e) => {
-										onClose();
-									}}
 									href={privacyPolicyUrl}
-								>
-									{t.modal.privacyPolicyLabel}
-								</a>
+									label={t.modal.privacyPolicyLabel}
+									onExit={onClose}
+								/>
 							)
 						})}
 					</p>

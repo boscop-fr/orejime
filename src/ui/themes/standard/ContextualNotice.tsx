@@ -4,12 +4,14 @@ import type {
 	ContextualNoticeOptions
 } from '../../components/types/ContextualNotice';
 import {template} from '../../utils/template';
+import PrivacyPolicyLink from '../../components/PrivacyPolicyLink';
 
 const ContextualNotice: ContextualNoticeComponent = ({
 	purpose,
 	data,
 	onAccept,
-	privacyPolicyUrl
+	privacyPolicyUrl,
+	privacyPolicyLinkAttributes
 }) => {
 	const t = useTranslations();
 	const {titleLevel} = data;
@@ -18,9 +20,12 @@ const ContextualNotice: ContextualNoticeComponent = ({
 	const templateProps = {
 		purpose: purpose.title,
 		privacyPolicy: (
-			<a key="privacyPolicyUrl" href={privacyPolicyUrl}>
-				{t.contextual.privacyPolicyLabel}
-			</a>
+			<PrivacyPolicyLink
+				{...privacyPolicyLinkAttributes}
+				key="privacyPolicyLink"
+				href={privacyPolicyUrl}
+				label={t.contextual.privacyPolicyLabel}
+			/>
 		)
 	};
 

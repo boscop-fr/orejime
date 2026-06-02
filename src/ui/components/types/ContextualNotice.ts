@@ -1,4 +1,4 @@
-import {FunctionComponent} from 'preact';
+import {AnchorHTMLAttributes, FunctionComponent} from 'preact';
 import {Purpose} from '../../types';
 
 export interface ContextualNoticeOptions extends Record<string, string> {
@@ -9,6 +9,7 @@ export interface ContextualNoticeProps<Data extends ContextualNoticeOptions> {
 	purpose: Purpose;
 	data: Data;
 	privacyPolicyUrl: string;
+	privacyPolicyLinkAttributes?: AnchorHTMLAttributes;
 	onAccept: () => void;
 }
 
