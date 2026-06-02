@@ -9,7 +9,8 @@ const ContextualNotice: ContextualNoticeComponent = ({
 	purpose,
 	data,
 	onAccept,
-	privacyPolicyUrl
+	privacyPolicyUrl,
+	privacyPolicyNewWindow
 }) => {
 	const t = useTranslations();
 	const {titleLevel} = data;
@@ -18,7 +19,13 @@ const ContextualNotice: ContextualNoticeComponent = ({
 	const templateProps = {
 		purpose: purpose.title,
 		privacyPolicy: (
-			<a key="privacyPolicyUrl" href={privacyPolicyUrl}>
+			<a
+				key="privacyPolicyUrl"
+				href={privacyPolicyUrl}
+				{...(privacyPolicyNewWindow
+				? {target: '_blank', rel: 'noopener noreferrer', title: t.misc.newWindowTitle}
+				: {})}
+			>
 				{t.contextual.privacyPolicyLabel}
 			</a>
 		)

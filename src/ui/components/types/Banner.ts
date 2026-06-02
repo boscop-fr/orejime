@@ -6,6 +6,7 @@ export interface BannerProps {
 	needsUpdate: boolean;
 	purposeTitles: string[];
 	privacyPolicyUrl: string;
+	privacyPolicyNewWindow?: boolean;
 	logo?: ImageDescriptor;
 	onAccept: () => void;
 	onDecline: () => void;

@@ -9,6 +9,7 @@ const Modal: ModalComponent = ({
 	isForced,
 	needsUpdate,
 	privacyPolicyUrl,
+	privacyPolicyNewWindow,
 	onClose,
 	onSave,
 	children
@@ -55,10 +56,17 @@ const Modal: ModalComponent = ({
 								<a
 									key="privacyPolicyLink"
 									className="orejime-Modal-privacyPolicyLink"
-									onClick={(e) => {
-										onClose();
-									}}
+									{...(!privacyPolicyNewWindow
+										? {onClick: onClose}
+										: {})}
 									href={privacyPolicyUrl}
+									{...(privacyPolicyNewWindow
+										? {
+												target: '_blank',
+												rel: 'noopener noreferrer',
+												title: t.misc.newWindowTitle
+											}
+										: {})}
 								>
 									{t.modal.privacyPolicyLabel}
 								</a>

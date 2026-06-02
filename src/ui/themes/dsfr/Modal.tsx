@@ -8,6 +8,7 @@ const Modal: ModalComponent = ({
 	isForced,
 	needsUpdate,
 	privacyPolicyUrl,
+	privacyPolicyNewWindow,
 	onClose,
 	onSave,
 	children
@@ -55,17 +56,26 @@ const Modal: ModalComponent = ({
 								) : null}
 
 								<p>
-									{template(t.modal.description, {
-										privacyPolicy: (
-											<a
-												key="privacyPolicyLink"
-												href={privacyPolicyUrl}
-												onClick={onClose}
-											>
-												{t.modal.privacyPolicyLabel}
-											</a>
-										)
-									})}
+								{template(t.modal.description, {
+									privacyPolicy: (
+										<a
+											key="privacyPolicyLink"
+											href={privacyPolicyUrl}
+											{...(!privacyPolicyNewWindow
+												? {onClick: onClose}
+												: {})}
+											{...(privacyPolicyNewWindow
+											? {
+													target: '_blank',
+													rel: 'noopener noreferrer',
+													title: t.misc.newWindowTitle
+												}
+												: {})}
+										>
+											{t.modal.privacyPolicyLabel}
+										</a>
+									)
+								})}
 								</p>
 							</div>
 

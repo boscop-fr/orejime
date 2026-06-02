@@ -47,6 +47,7 @@ const ContextualNoticeContainer = ({
 					purpose={purpose}
 					data={data}
 					privacyPolicyUrl={config.privacyPolicyUrl}
+					privacyPolicyNewWindow={config.privacyPolicyNewWindow}
 					onAccept={() => {
 						manager.setConsent(purpose.id, true);
 						setIsBeingDisabled(true);

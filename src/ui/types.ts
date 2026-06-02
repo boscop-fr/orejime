@@ -96,5 +96,6 @@ export interface Config {
 	forceBanner: boolean;
 	forceModal: boolean;
 	privacyPolicyUrl: string;
+	privacyPolicyNewWindow?: boolean;
 	translations: Translations;
 }

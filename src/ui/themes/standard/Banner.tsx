@@ -9,6 +9,7 @@ const Banner: BannerComponent = ({
 	needsUpdate,
 	purposeTitles,
 	privacyPolicyUrl,
+	privacyPolicyNewWindow,
 	logo,
 	onAccept: onSaveRequest,
 	onDecline: onDeclineRequest,
@@ -61,6 +62,13 @@ const Banner: BannerComponent = ({
 									key="privacyPolicyLink"
 									className="orejime-Banner-privacyPolicyLink"
 									href={privacyPolicyUrl}
+									{...(privacyPolicyNewWindow
+										? {
+												target: '_blank',
+												rel: 'noopener noreferrer',
+												title: t.misc.newWindowTitle
+											}
+										: {})}
 								>
 									{t.banner.privacyPolicyLabel}
 								</a>

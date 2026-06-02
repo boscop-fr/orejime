@@ -8,6 +8,7 @@ const Banner: BannerComponent = ({
 	isHidden,
 	purposeTitles,
 	privacyPolicyUrl,
+	privacyPolicyNewWindow,
 	onAccept,
 	onDecline,
 	onConfigure
@@ -28,7 +29,17 @@ const Banner: BannerComponent = ({
 							<strong key="purposes">{purposeTitles.join(', ')}</strong>
 						),
 						privacyPolicy: (
-							<a key="privacyPolicyUrl" href={privacyPolicyUrl}>
+							<a
+								key="privacyPolicyUrl"
+								href={privacyPolicyUrl}
+								{...(privacyPolicyNewWindow
+								? {
+										target: '_blank',
+										rel: 'noopener noreferrer',
+										title: t.misc.newWindowTitle
+									}
+									: {})}
+							>
 								{t.banner.privacyPolicyLabel}
 							</a>
 						)
