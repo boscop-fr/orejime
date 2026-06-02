@@ -3,12 +3,14 @@ import {BannerComponent} from '../../components/types/Banner';
 import {imageAttributes} from '../../utils/config';
 import {useNonObscuringElement, useTranslations} from '../../utils/hooks';
 import {template} from '../../utils/template';
+import PrivacyPolicyLink from '../../components/PrivacyPolicyLink';
 
 const Banner: BannerComponent = ({
 	isHidden,
 	needsUpdate,
 	purposeTitles,
 	privacyPolicyUrl,
+	privacyPolicyLinkAttributes,
 	logo,
 	onAccept: onSaveRequest,
 	onDecline: onDeclineRequest,
@@ -57,13 +59,13 @@ const Banner: BannerComponent = ({
 								</strong>
 							),
 							privacyPolicy: (
-								<a
+								<PrivacyPolicyLink
+									{...privacyPolicyLinkAttributes}
 									key="privacyPolicyLink"
 									className="orejime-Banner-privacyPolicyLink"
 									href={privacyPolicyUrl}
-								>
-									{t.banner.privacyPolicyLabel}
-								</a>
+									label={t.banner.privacyPolicyLabel}
+								/>
 							)
 						})}
 					</p>

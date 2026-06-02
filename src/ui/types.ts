@@ -1,3 +1,4 @@
+import {AnchorHTMLAttributes} from 'preact';
 import {CookieOptions, Purpose as CorePurpose} from '../core/types';
 import {Theme} from './components/types/Theme';
 
@@ -96,5 +97,6 @@ export interface Config {
 	forceBanner: boolean;
 	forceModal: boolean;
 	privacyPolicyUrl: string;
+	privacyPolicyLinkAttributes?: AnchorHTMLAttributes;
 	translations: Translations;
 }

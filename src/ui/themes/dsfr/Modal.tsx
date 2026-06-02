@@ -3,11 +3,13 @@ import {template} from '../../utils/template';
 import Dialog from '../../components/Dialog';
 import PoweredByLink from '../../components/PoweredByLink';
 import type {ModalComponent} from '../../components/types/Modal';
+import PrivacyPolicyLink from '../../components/PrivacyPolicyLink';
 
 const Modal: ModalComponent = ({
 	isForced,
 	needsUpdate,
 	privacyPolicyUrl,
+	privacyPolicyLinkAttributes,
 	onClose,
 	onSave,
 	children
@@ -57,13 +59,13 @@ const Modal: ModalComponent = ({
 								<p>
 									{template(t.modal.description, {
 										privacyPolicy: (
-											<a
+											<PrivacyPolicyLink
+												{...privacyPolicyLinkAttributes}
 												key="privacyPolicyLink"
 												href={privacyPolicyUrl}
-												onClick={onClose}
-											>
-												{t.modal.privacyPolicyLabel}
-											</a>
+												label={t.modal.privacyPolicyLabel}
+												onExit={onClose}
+											/>
 										)
 									})}
 								</p>

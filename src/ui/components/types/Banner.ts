@@ -1,4 +1,4 @@
-import {FunctionComponent} from 'preact';
+import {AnchorHTMLAttributes, FunctionComponent} from 'preact';
 import {ImageDescriptor} from '../../types';
 
 export interface BannerProps {
@@ -6,6 +6,7 @@ export interface BannerProps {
 	needsUpdate: boolean;
 	purposeTitles: string[];
 	privacyPolicyUrl: string;
+	privacyPolicyLinkAttributes?: AnchorHTMLAttributes;
 	logo?: ImageDescriptor;
 	onAccept: () => void;
 	onDecline: () => void;

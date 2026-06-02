@@ -2,12 +2,14 @@ import {useRef} from 'preact/hooks';
 import type {BannerComponent} from '../../components/types/Banner';
 import {useNonObscuringElement, useTranslations} from '../../utils/hooks';
 import {template} from '../../utils/template';
+import PrivacyPolicyLink from '../../components/PrivacyPolicyLink';
 
 const Banner: BannerComponent = ({
 	needsUpdate,
 	isHidden,
 	purposeTitles,
 	privacyPolicyUrl,
+	privacyPolicyLinkAttributes,
 	onAccept,
 	onDecline,
 	onConfigure
@@ -28,9 +30,12 @@ const Banner: BannerComponent = ({
 							<strong key="purposes">{purposeTitles.join(', ')}</strong>
 						),
 						privacyPolicy: (
-							<a key="privacyPolicyUrl" href={privacyPolicyUrl}>
-								{t.banner.privacyPolicyLabel}
-							</a>
+							<PrivacyPolicyLink
+								{...privacyPolicyLinkAttributes}
+								key="privacyPolicyLink"
+								href={privacyPolicyUrl}
+								label={t.banner.privacyPolicyLabel}
+							/>
 						)
 					})}
 				</p>
