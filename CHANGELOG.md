@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## 3.2.0
+
+- feature: Trusted publishing on npm
+  (https://github.com/boscop-fr/orejime/pull/161)
+- feature: Improved contextual consent configuration
+  (https://github.com/boscop-fr/orejime/pull/162)
+- feature: Cookie patterns as strings
+  (https://github.com/boscop-fr/orejime/pull/169)
+- fix: Markup of global consent buttons
+  (https://github.com/boscop-fr/orejime/pull/150)
+- fix: Pointer cancellation on modal backgrounds
+  (https://github.com/boscop-fr/orejime/pull/163)
+
 ## 3.1.1
 
 - fix: Disappearing banner under modal
