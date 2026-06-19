@@ -106,14 +106,13 @@ var orejimeConfig = {
       cookies: [
         '_ga',
         '_gat',
-        '_gid',
-        '__utma',
-        '__utmb',
-        '__utmc',
-        '__utmt',
-        '__utmz',
-        '_gat_gtag_' + GTM_UA,
-        '_gat_' + GTM_UA
+        '_gat_' + GTM_UA,
+
+        // Regexes can be provided as strings or RegExp objects to match names
+        // more broadly.
+        '/^_gat_.+$/i',
+        /^_gat_.+$/i,
+        new RegExp('^_gat_.+$', 'i')
       ],
 
       // [optional]
@@ -148,6 +147,7 @@ var orejimeConfig = {
       description: 'Example of an inline tracking script',
       cookies: [
         'inline-tracker',
+
         // When deleting a cookie, Orejime will try to delete a cookie with the
         // given name, the "/" path, and multiple domains (the current domain
         // and `"." + current domain`).
