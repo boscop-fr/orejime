@@ -1,6 +1,6 @@
 import {PurposeCookie} from '../types';
 import {deleteCookie, getCookieNames} from './cookies';
-import escapeRegex from './escapeRegex';
+import {toRegex} from './regexes';
 
 export default (cookies: PurposeCookie[]) => {
 	const cookieNames = getCookieNames();
@@ -13,12 +13,10 @@ export default (cookies: PurposeCookie[]) => {
 			[pattern, path, domain] = pattern;
 		}
 
-		if (!(pattern instanceof RegExp)) {
-			pattern = new RegExp(`^${escapeRegex(pattern)}$`);
-		}
+		const regex = toRegex(pattern);
 
 		cookieNames
-			.filter((name) => (pattern as RegExp).test(name))
+			.filter((name) => regex.test(name))
 			.forEach((cookie) => {
 				deleteCookie(cookie, path, domain);
 			});
