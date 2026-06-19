@@ -86,6 +86,10 @@
 	gap: 0.5ch;
 }
 
+.orejime-ButtonList-item {
+	display: inline-block;
+}
+
 .orejime-Banner {
 	position: fixed;
 	z-index: 1000;
@@ -130,10 +134,6 @@
 
 .orejime-Banner-actions {
 	margin-top: var(--orejime-space-s);
-}
-
-.orejime-Banner-actionItem {
-	display: inline;
 }
 
 .orejime-Banner-learnMoreButton {

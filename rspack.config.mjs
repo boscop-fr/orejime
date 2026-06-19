@@ -1,14 +1,14 @@
-const path = require('path');
-const {rspack} = require('@rspack/core');
-const services = require('./site/services.json');
-const package = require('./package.json');
-const {standaloneEntries} = require('./build/entries');
-const {
+import path from 'path';
+import {rspack} from '@rspack/core';
+import {RsdoctorRspackPlugin} from '@rsdoctor/rspack-plugin';
+import services from './site/services.json';
+import {standaloneEntries} from './build/entries';
+import {
 	templatePlugin,
 	featureTemplatePlugin,
 	assetsPlugin,
 	matomoPlugin
-} = require('./build/site');
+} from './build/site';
 
 const fullPath = path.resolve.bind(path, __dirname);
 const isDev = process.env.NODE_ENV === 'development';
@@ -44,21 +44,16 @@ module.exports = {
 				use: {
 					loader: 'builtin:swc-loader',
 					options: {
-						env: {
-							// @see https://github.com/swc-project/swc-loader/issues/37#issuecomment-1233829398
-							targets: package.browserslist
-						},
+						detectSyntax: 'auto',
 						jsc: {
 							externalHelpers: true,
 							preserveAllComments: false,
-							parser: {
-								syntax: 'typescript',
-								tsx: true
-							},
 							transform: {
 								react: {
 									runtime: 'automatic',
-									importSource: 'preact'
+									importSource: 'preact',
+									throwIfNamespace: true,
+									useBuiltins: false
 								}
 							}
 						}
@@ -99,6 +94,7 @@ module.exports = {
 		splitChunks: false
 	},
 	plugins: [
+		process.env.RSDOCTOR && new RsdoctorRspackPlugin(),
 		new rspack.CssExtractRspackPlugin({
 			filename: 'orejime-standard.css'
 		}),

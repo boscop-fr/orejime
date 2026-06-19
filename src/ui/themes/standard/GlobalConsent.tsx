@@ -10,27 +10,31 @@ const GlobalConsent: GlobalConsentComponent = ({
 	const t = useTranslations();
 
 	return (
-		<div className="orejime-PurposeToggles orejime-ButtonList">
-			<button
-				type="button"
-				className="orejime-Button orejime-Button--info orejime-PurposeToggles-button orejime-PurposeToggles-enableAll"
-				aria-disabled={isEnabled}
-				onClick={acceptAll}
-				data-testid="orejime-modal-enable-all"
-			>
-				{t.modal.acceptAll}
-			</button>
+		<ul className="orejime-PurposeToggles orejime-ButtonList">
+			<li className="orejime-ButtonList-item">
+				<button
+					type="button"
+					className="orejime-Button orejime-Button--info orejime-PurposeToggles-button orejime-PurposeToggles-enableAll"
+					aria-disabled={isEnabled}
+					onClick={acceptAll}
+					data-testid="orejime-modal-enable-all"
+				>
+					{t.modal.acceptAll}
+				</button>
+			</li>
 
-			<button
-				type="button"
-				className="orejime-Button orejime-Button--info orejime-PurposeToggles-button orejime-PurposeToggles-disableAll"
-				aria-disabled={isDisabled}
-				onClick={declineAll}
-				data-testid="orejime-modal-disable-all"
-			>
-				{t.modal.declineAll}
-			</button>
-		</div>
+			<li className="orejime-ButtonList-item">
+				<button
+					type="button"
+					className="orejime-Button orejime-Button--info orejime-PurposeToggles-button orejime-PurposeToggles-disableAll"
+					aria-disabled={isDisabled}
+					onClick={declineAll}
+					data-testid="orejime-modal-disable-all"
+				>
+					{t.modal.declineAll}
+				</button>
+			</li>
+		</ul>
 	);
 };
 
