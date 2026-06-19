@@ -68,6 +68,10 @@ export class OrejimePage {
 		return this.page.getByTestId('orejime-contextual-notice');
 	}
 
+	get contextualNoticeTitle() {
+		return this.page.getByTestId('orejime-contextual-notice-title');
+	}
+
 	get contextualNoticePlaceholder() {
 		return this.page.getByTestId('orejime-contextual-notice-placeholder');
 	}

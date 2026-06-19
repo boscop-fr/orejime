@@ -254,6 +254,13 @@ var orejimeConfig = {
     // [optional]
     // You can provide a custom function to unserialize the cookie contents.
     parse: (cookie) => JSON.parse(cookie)
+  },
+
+  // [optional]
+  contextual: {
+    // [optional]
+    // The default level of the consent notice title.
+    defaultTitleLevel: 6
   }
 };
 ```
@@ -423,6 +430,24 @@ offering a way to consent in place.
       <iframe src="https://www.youtube.com/embed/toto"></iframe>
   </template>
 ```
+
+#### Customization
+
+The heading level of the notice's title can be configured via an attribute on
+the `template`:
+
+```diff
+  <template
+    data-purpose="youtube"
+    data-contextual
++   data-title-level="6"
+  >
+    ...
+  </template>
+```
+
+When not specified, it will default to `6`, or the level set within
+`orejimeConfig.contextual.defaultTitleLevel`.
 
 <details>
 <summary>Integration tips</summary>

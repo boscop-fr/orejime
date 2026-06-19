@@ -86,6 +86,12 @@ export type ImageAttributes = {
 
 export type ImageDescriptor = string | ImageAttributes;
 
+export type TitleLevel = 1 | 2 | 3 | 4 | 5 | 6;
+
+export interface ContextualConfig {
+	defaultTitleLevel?: TitleLevel;
+}
+
 export interface Config {
 	theme: Theme;
 	orejimeElement?: ElementReference;
@@ -96,5 +102,6 @@ export interface Config {
 	forceBanner: boolean;
 	forceModal: boolean;
 	privacyPolicyUrl: string;
+	contextual?: ContextualConfig;
 	translations: Translations;
 }
